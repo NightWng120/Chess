@@ -39,9 +39,14 @@ public abstract class Piece{
 	public double slope(int ar[], int next[]){
 		
 		double slope;
-		slope = ((double)next[1] - (double)ar[1])/((double)next[0] - (double)ar[0]);
-		
-		return slope;
+		try{
+			slope = ((double)next[1] - (double)ar[1])/((double)next[0] - (double)ar[0]);
+			return slope;
+		}//end try
+		catch(ArithmeticException ex){
+
+			return 3;
+		}//end catch
 
 	}//end slope
 	

@@ -36,11 +36,11 @@ public abstract class Piece{
 		return this.status;
 
 	}//end getStatus
-	public double slope(int ar[], int next[]){
+	public double slope(int next[]){
 		
 		double slope;
 		try{
-			slope = ((double)next[1] - (double)ar[1])/((double)next[0] - (double)ar[0]);
+			slope = ((double)next[1] - (double)this.position[1])/((double)next[0] - (double)this.position[0]);
 			return slope;
 		}//end try
 		catch(ArithmeticException ex){
@@ -50,11 +50,11 @@ public abstract class Piece{
 
 	}//end slope
 	
-	public double dist(int ar[], int next[]){
+	public double dist(int next[]){
 
 		double dist;
 
-		dist = Math.sqrt(((double)next[1] - (double)ar[1])/((double)next[0] - (double)ar[1]));
+		dist = Math.sqrt(((double)next[1] - (double)this.position[1])/((double)next[0] - (double)this.position[1]));
 
 		return dist;
 

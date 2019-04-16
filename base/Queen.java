@@ -9,8 +9,7 @@ class Queen extends Piece{
 
 	public boolean moveChoose(int[] next){
 
-		double slope = slope(this.position, next);
-		double dist = dist(this.position, next);
+		double slope = slope(next);
 		if(slope == 1){
 			if((this.position[0] - next[0]) > 0){
 

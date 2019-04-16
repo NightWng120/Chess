@@ -7,11 +7,41 @@ class Queen extends Piece{
 	}//end constructor
 	
 
-	public void moveChoose(int[] next){
+	public boolean moveChoose(int[] next){
 
 		float slope = slope(this.position, next);
 		float dist = dist(this.position, next);
+		if(slope == 1){
+			if((this.position[0] - next[0]) > 0){
 
+				moveDownX(false, (this.position[0] - next[0]));
+				return true;
+			}//end if
+			else if((next[0] - this.position) > 0){
+	
+				moveUpX(true, (next[0] - this.position[0]));
+				return true;
+
+			}//end else if
+								
+		}//end if
+
+		else if(slope == -1){
+
+			if((this.position[0] - next[0]) > 0){
+
+			
+				moveUpX(false, (this.position[0] - next[0]));
+				return true;
+			}//end if
+			else if((next[0] - this.position[0]) > 0){
+
+				moveUpX(true, (next[0] - this.position[0]));
+				return true;
+			}//end else if
+
+		}//end else if
+		else if(
 
 	}//end moveChoose
 

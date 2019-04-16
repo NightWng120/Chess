@@ -4,12 +4,13 @@ public abstract class Piece{
 	protected int position[];
 	protected boolean color;
 	protected String name;	
-
+	protected boolean status;
 	public Piece(){
 			
 		this.position = new int[2];
 		this.position[0] = 0;
 		this.position[1] = 0;
+		this.status = true;
 	}//end constructor
 	public int[] getPos(){
 
@@ -26,6 +27,15 @@ public abstract class Piece{
 	public void setColor(boolean color){
 		this.color = color;
 	}//end setColor
+	public void setStatus(boolean status){
+		
+		this.status = false;
+	}//end setStatus
+	public boolean getStatus(){
+
+		return this.status;
+
+	}//end getStatus
 	public double slope(int ar[], int next[]){
 		
 		double slope;

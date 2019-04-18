@@ -175,10 +175,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					knightB.setPos(-1,-1);
+					knightB.setPos(endW);
 				}//end if
 				else{
-					knightB.setPos(8,8);
+					knightB.setPos(endB);
 				}//end else
 				return true;
 
@@ -203,10 +203,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					knightW.setPos(-1,-1);
+					knightW.setPos(endW);
 				}//end if
 				else{
-					knightW.setPos(8,8);
+					knightW.setPos(endB);
 				}//end else
 				return true;
 
@@ -231,10 +231,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					rookB.setPos(-1,-1);
+					rookB.setPos(endW);
 				}//end if
 				else{
-					rookB.setPos(8,8);
+					rookB.setPos(endB);
 				}//end else
 				return true;
 
@@ -259,10 +259,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					rookW.setPos(-1,-1);
+					rookW.setPos(endW);
 				}//end if
 				else{
-					rookW.setPos(8,8);
+					rookW.setPos(endB);
 				}//end else
 				return true;
 
@@ -287,10 +287,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					bishopB.setPos(-1,-1);
+					bishopB.setPos(endW);
 				}//end if
 				else{
-					bishopB.setPos(8,8);
+					bishopB.setPos(endW);
 				}//end else
 				return true;
 
@@ -315,10 +315,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					bishopW.setPos(-1,-1);
+					bishopW.setPos(endW);
 				}//end if
 				else{
-					bishopW.setPos(8,8);
+					bishopW.setPos(endB);
 				}//end else
 				return true;
 
@@ -343,10 +343,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					king.setPos(-1,-1);
+					king.setPos(endW);
 				}//end if
 				else{
-					king.setPos(8,8);
+					king.setPos(endW);
 				}//end else
 				return true;
 
@@ -371,10 +371,10 @@ public abstract class Player{
 
 				obj.setPos(next);	
 				if(this.color){
-					queen.setPos(-1,-1);
+					queen.setPos(endW);
 				}//end if
 				else{
-					queen.setPos(8,8);
+					queen.setPos(endB);
 				}//end else
 				return true;
 
@@ -401,10 +401,10 @@ public abstract class Player{
 
 					obj.setPos(next);	
 					if(this.color){
-						vecPawn.get(i).setPos(-1,-1);
+						vecPawn.get(i).setPos(endW);
 					}//end if
 					else{
-						vecPawn.get(i).setPos(8,8);
+						vecPawn.get(i).setPos(endB);
 					}//end else
 					return true;
 

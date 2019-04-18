@@ -78,17 +78,22 @@ public abstract class Player{
         
 			if(pos[0] == arQ[0] && pos[1] == arQ[1]){
 
-
+				if(valid(queen, next)){
+					
+					return queen.moveChoose(next);
+					
+					
+				}//end if
 
 			}//end if
 			if(pos[0] == arK[0] && pos[1] == arK[1]){
-
+				
 
 
 			}//end if
 			if(pos[0] == arkB[0] && pos[1] == arkB[1]){
-
-
+					
+				
 
 			}//end if
 			if(pos[0] == arkW[0] && pos[1] == arkW[1]){
@@ -98,27 +103,43 @@ public abstract class Player{
 			}//end if
 			if(pos[0] == arbW[0] && pos[1] == arbW[1]){
 
-
+				if(valid(bishopW, next)){
+					return bishopW.moveChoose(next);
+				}//end if
 
 			}//end if
 			if(pos[0] == arbB[0] && pos[1] == arbB[1]){
-
-
+				
+				if(valid(bishopB, next)){
+					
+					return bishopB.moveChoose(next);
+					
+				}//end if
 
 			}//end if
 			if(pos[0] == arrW[0] && pos[1] == arrW[1]){
 
+				if(valid(rookW, next)){
 
-
+					return rookW.moveChoose(next);
+				}//end if
 			}//end if
 			if(pos[0] == arrB[0] && pos[1] == arrB[1]){
-
+				
+				
+				if(valid(rookB, next)){
+					
+					
+					
+					return rookW.moveChoosse(next);
+					
+				}//end if
 
 
 			}//end if
 			if(pos[0] == arp1[0] && pos[1] == arp1[1]){
 
-
+				
 
 			}//end if
 			if(pos[0] == arp2[0] && pos[1] == arp2[1]){
@@ -160,8 +181,102 @@ public abstract class Player{
 		}//end else
 		return false;
 	}//end movePiece
+	
+	public boolean validPawn(Vector<Pawn> pawn, int[] next, int iter){
+		
+		int i;
+		int[] endB = {8,8};
+		int[] endW = {-1,-1};
+		
+		if(pawn.slope(next) == 1 && pawn.dist(next) == sqrt(2)){
+					
+					if(pawn.getPosX() > next[0] || pawn.getPosY() > next[1]){
+							
+							return false;
+						
+					}//end if
+					
+					else if(next[0] == knightB.getPosX() && next[1] == knightB.getPosY()){
+						
+						if(
 
-	public <T extends Piece> boolean valid(T obj, int[] next, double slope, double dist){
+							return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+									
+					else if(next[0] == knightW.getPosX() && next[1] == knightW.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == rookB.getPosX() && next[1] == rookB.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == rookW.getPosX() && next[1] == rookW.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == bishopB.getPosX() && next[1] == bishopB.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == bishopW.getPosX() && next[1] == bishopW.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == queen.getPosX() && next[1] == queen.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					else if(next[0] == king.getPosX() && next[1] == king.getPosY()){
+						
+						return pawn.moveChoose(next);
+						
+					}//end else if
+					/*------------------------------------------------------------------*/
+					
+					for(i = 0; i < 8; i++){
+					
+						if(i == iter){
+							
+							continue;
+							
+						}//end if
+						if(next[0] == knightB.getPosX() && next[1] == knightB.getPosY()){
+						
+							return pawn.moveChoose(next);
+						
+						}//end else if
+					}//end for loop
+					/*------------------------------------------------------------------*/
+					
+					
+	
+		}//end if
+		
+		
+	}//end validPawn
+
+	public <T extends Piece> boolean valid(T obj, int[] next){
 
 		int[] pos = obj.getPos();
 		int i;

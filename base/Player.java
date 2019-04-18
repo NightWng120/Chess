@@ -165,19 +165,225 @@ public abstract class Player{
 
 		int[] pos = obj.getPos();
 	
-		if(
-			if(obj.slope(next) == knightB.slope(pos)){
+			
+			
+		
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
 				
-					
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
 
 			}//end if 
-			else if(obj.slope(next) == slope && obj.dist(next) < dist){
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
 
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
 				return true;
-			}//end else if
-			else if(obj.slope(next) == slope && obj.dist(next) > dist
 
-		
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+				
+
+				obj.setPos(next);	
+				if(this.color){
+					knightB.setPos(-1,-1);
+				}//end if
+				else{
+					knightB.setPos(8,8);
+				}//end else
+				return true;
+
+			}//end if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
 
 	}//end valid
 

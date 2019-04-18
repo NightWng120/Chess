@@ -21,6 +21,13 @@ public abstract class Piece{
 		this.position[0] = position[0];
 		this.position[1] = position[1];
 	}//end setPos
+	public int getPosX(){
+		return this.position[0];
+	}//end getPosX
+	public int getPosY(){
+
+		return this.position[1];
+	}//end getPosY
 	public boolean getColor(){
 		return this.color;
 	}//end getColor

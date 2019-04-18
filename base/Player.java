@@ -161,15 +161,16 @@ public abstract class Player{
 		return false;
 	}//end movePiece
 
-	public static <T> boolean valid(<? extends T> obj, int[] next, double slope, double dist){
+	public <T extends Piece> boolean valid(T obj, int[] next, double slope, double dist){
 
 		int[] pos = obj.getPos();
 		int i;
+		int[] endW = {-1, -1};
+		int[] endB = {8, 8};		
 			
-			
-		
+	
 
-			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]{
+			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -197,7 +198,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == knightW.slope(pos) && knightW.getPosX() == next[0] && knightW.getPosY() == next[1]{
+			else if(obj.slope(next) == knightW.slope(pos) && knightW.getPosX() == next[0] && knightW.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -225,7 +226,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == rookB.slope(pos) && rookB.getPosX() == next[0] && rookB.getPosY() == next[1]{
+			else if(obj.slope(next) == rookB.slope(pos) && rookB.getPosX() == next[0] && rookB.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -253,7 +254,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == rookW.slope(pos) && rookW.getPosX() == next[0] && rookW.getPosY() == next[1]{
+			else if(obj.slope(next) == rookW.slope(pos) && rookW.getPosX() == next[0] && rookW.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -281,7 +282,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == bishopB.slope(pos) && bishopB.getPosX() == next[0] && bishopB.getPosY() == next[1]{
+			else if(obj.slope(next) == bishopB.slope(pos) && bishopB.getPosX() == next[0] && bishopB.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -309,7 +310,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == bishopW.slope(pos) && bishopW.getPosX() == next[0] && bishopW.getPosY() == next[1]{
+			else if(obj.slope(next) == bishopW.slope(pos) && bishopW.getPosX() == next[0] && bishopW.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -337,7 +338,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == king.slope(pos) && king.getPosX() == next[0] && king.getPosY() == next[1]{
+			else if(obj.slope(next) == king.slope(pos) && king.getPosX() == next[0] && king.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -365,7 +366,7 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == queen.slope(pos) && queen.getPosX() == next[0] && queen.getPosY() == next[1]{
+			else if(obj.slope(next) == queen.slope(pos) && queen.getPosX() == next[0] && queen.getPosY() == next[1]){
 				
 
 				obj.setPos(next);	
@@ -395,7 +396,7 @@ public abstract class Player{
 			
 			for(i = 0; i < 8; i++){
 			
-				else if(obj.slope(next) == vecPawn.get(i).slope(pos) && knightB.getPosX() == next[0] && vecPawn.get(i).getPosY() == next[1]{
+				if(obj.slope(next) == vecPawn.get(i).slope(pos) && knightB.getPosX() == next[0] && vecPawn.get(i).getPosY() == next[1]){
 				
 
 					obj.setPos(next);	
@@ -423,9 +424,7 @@ public abstract class Player{
 				}//end else if
 				/*---------------------------------------------------------------------------------------------------------------------*/
 			}//end for loop
-			else{
 				return true;
-			}//end else
 	}//end valid
 
 }//end Player class

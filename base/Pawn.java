@@ -9,7 +9,11 @@ class Pawn extends Piece{
 	}//end Pawn
 	
 
-	public void moveChoose(
+	public void moveChoose(int[] next){
+
+		if(
+
+	}//end moveChoose
 
 	public void move(boolean move){
 		

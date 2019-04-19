@@ -431,6 +431,11 @@ public abstract class Player{
 					
 	
 		}//end if
+		else if(pawn.slope(next) == 3){
+
+			return 
+
+		}//end if
 		
 		
 	}//end validPawn

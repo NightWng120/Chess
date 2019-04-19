@@ -385,7 +385,7 @@ public abstract class Player{
 					
 			
 			}//end else if 
-			else if(obj.slope(next) == queen.slope(pos) && obj.dist(q.getPos()) > obj.dist(next)){
+			else if(obj.slope(next) == queen.slope(pos) && obj.dist(queen.getPos()) > obj.dist(next)){
 
 				
 				obj.setPos(next);

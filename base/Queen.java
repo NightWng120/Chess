@@ -10,7 +10,7 @@ class Queen extends Piece{
 	public boolean moveChoose(int[] next){
 
 		double slope = slope(next);
-		if(slope == 1){
+		(slope == 1){
 			if((this.position[0] - next[0]) > 0){
 
 				moveDownX(false, (this.position[0] - next[0]));

@@ -141,7 +141,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(0), next, 0)){
 					
-					revecPawn(0).moveChoose;move
+					return vecPawn(0).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -149,14 +149,14 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(1), next, 1)){
 					
-					vecPawn(1).moveChoose;move
+					return vecPawn(1).moveChoose(next);
 				}//end if
 			}//end if
 			if(pos[0] == arp3[0] && pos[1] == arp3[1]){
 
 				if(validPawn(vecPawn(2), next, 2)){
 					
-					vecPawn(2).moveChoose;move
+					return vecPawn(2).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -164,7 +164,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(3), next, 3)){
 					
-					vecPawn(3).moveChoose;move
+					return vecPawn(3).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -172,7 +172,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(4), next, 4)){
 					
-					vecPawn(4).moveChoose;move
+					return vecPawn(4).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -180,7 +180,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(5), next, 5)){
 					
-					vecPawn(5).moveChoose;move
+					return vecPawn(5).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -188,7 +188,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(6), next, 6)){
 					
-					vecPawn(6).moveChoose;move
+					return vecPawn(6).moveChoose(next);
 				}//end if
 
 			}//end if
@@ -196,7 +196,7 @@ public abstract class Player{
 				
 				if(validPawn(vecPawn(7), next, 7)){
 					
-					vecPawn(7).moveChoose;
+					return vecPawn(7).moveChoose(next);
 				}//end if
 			
 			}//end if

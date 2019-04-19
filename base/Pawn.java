@@ -7,6 +7,9 @@ class Pawn extends Piece{
 	public Pawn(){
 		this.start = true;
 	}//end Pawn
+	
+
+	public void moveChoose(
 
 	public void move(boolean move){
 		

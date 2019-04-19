@@ -141,7 +141,7 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(0), next, 0)){
 					
-					vecPawn(0).moveChoose;move
+					revecPawn(0).moveChoose;move
 				}//end if
 
 			}//end if
@@ -196,7 +196,7 @@ public abstract class Player{
 				
 				if(validPawn(vecPawn(7), next, 7)){
 					
-					vecPawn(7).moveChoose;move
+					vecPawn(7).moveChoose;
 				}//end if
 			
 			}//end if

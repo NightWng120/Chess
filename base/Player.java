@@ -227,12 +227,12 @@ public abstract class Player{
 						if(this.color && !knightB.getColor()){
 							
 							knightB.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && knightB.getColor()){
 							knightB.setPos(endB);
-							return pawn.moveChoose(next);
+							return true;
 							
 						}//end else if
 						else{
@@ -249,12 +249,12 @@ public abstract class Player{
 						if(this.color && !knightW.getColor()){
 							
 							knightW.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && knightW.getColor()){
 							knightW.setPos(endB);
-							return pawn.moveChoose(next);
+							return true;
 							
 						}//end else if
 						else{
@@ -271,12 +271,12 @@ public abstract class Player{
 						if(this.color && !rookB.getColor()){
 							
 							rookB.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && rookB.getColor()){
 							rookB.setPos(endB);
-							return pawn.moveChoose(next);
+							returntrue;
 							
 						}//end else if
 						else{
@@ -293,12 +293,12 @@ public abstract class Player{
 						if(this.color && !rookW.getColor()){
 							
 							rookW.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && rookW.getColor()){
 							rookW.setPos(endB);
-							return pawn.moveChoose(next);
+							return true;
 							
 						}//end else if
 						else{
@@ -315,12 +315,12 @@ public abstract class Player{
 						if(this.color && !bishopB.getColor()){
 							
 							bishopB.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && bishopB.getColor()){
 							bishopB.setPos(endB);
-							return pawn.moveChoose(next);
+							return true;
 							
 						}//end else if
 						else{
@@ -337,12 +337,12 @@ public abstract class Player{
 						if(this.color && !bishopW.getColor()){
 							
 							bishopW.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && bishopW.getColor()){
 							bishopW.setPos(endB);
-							return pawn.moveChoose(next);
+							return true;
 							
 						}//end else if
 						else{
@@ -359,12 +359,12 @@ public abstract class Player{
 						if(this.color && !queen.getColor()){
 							
 							queen.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && queen.getColor()){
 							queen.setPos(endB);
-							return pawn.moveChoose(next);
+							return true);
 							
 						}//end else if
 						else{
@@ -381,12 +381,12 @@ public abstract class Player{
 						if(this.color && !king.getColor()){
 							
 							king.setPos(endW);
-							return pawn.moveChoose(next);
+							return true;
 						}//end if
 						
 						else if(!this.color && king.getColor()){
 							king.setPos(endB);
-							return pawn.moveChoose(next);
+							return true);
 							
 						}//end else if
 						else{
@@ -410,21 +410,21 @@ public abstract class Player{
 							if(this.color && !vecPawn.get(i).getColor()){
 							
 							vecPawn.get(i).setPos(endW);
-							return pawn.moveChoose(next);
-						}//end if
+							return true;
+							}//end if
 						
-						else if(!this.color && vecPawn.get(i).getColor()){
+							else if(!this.color && vecPawn.get(i).getColor()){
 							vecPawn.get(i).setPos(endB);
-							return pawn.moveChoose(next);
+							return true);
 							
-						}//end else if
-						else{
+							}//end else if
+							else{
 							
-							return false;
+								return false;
 							
-						}//end else
+							}//end else
 						
-						}//end else if
+						}//end if
 					}//end for loop
 					/*------------------------------------------------------------------*/
 					
@@ -433,9 +433,13 @@ public abstract class Player{
 		}//end if
 		else if(pawn.slope(next) == 3){
 
-			return 
+			return true;
 
 		}//end if
+		else{
+			
+			return false;
+		}//end else
 		
 		
 	}//end validPawn

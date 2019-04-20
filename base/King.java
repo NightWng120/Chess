@@ -1,11 +1,25 @@
 class King extends Piece{
 
-	public King(){
+	public King(boolean name){
+		if(name){
 
-		this.name = "K";
+			this.name = "K";
+		}//end if
+		else if(!name){
 
+			this.name = "k";
+		}//end else if
 	}//end constructor
 	
+	public boolean moveChoose(int[] next){
+
+
+		if(slope(next) == 0 || slope(next) == 3){
+			
+			
+		}//end if
+	}//end moveChoose
+
 	public void moveUpX(boolean move){
 		
 		if(move && bound(this.position[0], 1,  8) && bound(this.position[1], 1,  8)){

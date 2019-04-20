@@ -80,9 +80,9 @@ public abstract class Player{
 
 				if(valid(queen, next)){
 					
-					return queen.moveChoose(next);
+					queen.moveChoose(next);
 					
-					
+					return true;
 				}//end if
 
 			}//end if
@@ -104,7 +104,9 @@ public abstract class Player{
 			if(pos[0] == arbW[0] && pos[1] == arbW[1]){
 
 				if(valid(bishopW, next)){
-					return bishopW.moveChoose(next);
+					bishopW.moveChoose(next);
+			
+					return true;
 				}//end if
 
 			}//end if
@@ -112,8 +114,9 @@ public abstract class Player{
 				
 				if(valid(bishopB, next)){
 					
-					return bishopB.moveChoose(next);
+					bishopB.moveChoose(next);
 					
+					return true;
 				}//end if
 
 			}//end if
@@ -121,7 +124,9 @@ public abstract class Player{
 
 				if(valid(rookW, next)){
 
-					return rookW.moveChoose(next);
+					rookW.moveChoose(next);
+
+					return true;
 				}//end if
 			}//end if
 			if(pos[0] == arrB[0] && pos[1] == arrB[1]){
@@ -131,8 +136,9 @@ public abstract class Player{
 					
 					
 					
-					return rookW.moveChoose(next);
+					rookW.moveChoose(next);
 					
+					return true;
 				}//end if
 
 
@@ -141,7 +147,9 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(0), next, 0)){
 					
-					return vecPawn(0).moveChoose(next);
+					vecPawn(0).moveChoose(next);
+		
+					return true;
 				}//end if
 
 			}//end if
@@ -149,14 +157,19 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(1), next, 1)){
 					
-					return vecPawn(1).moveChoose(next);
+					vecPawn(1).moveChoose(next);
+			
+
+					return true;
 				}//end if
 			}//end if
 			if(pos[0] == arp3[0] && pos[1] == arp3[1]){
 
 				if(validPawn(vecPawn(2), next, 2)){
 					
-					return vecPawn(2).moveChoose(next);
+					vecPawn(2).moveChoose(next);
+				
+					return true;
 				}//end if
 
 			}//end if
@@ -164,7 +177,9 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(3), next, 3)){
 					
-					return vecPawn(3).moveChoose(next);
+					vecPawn(3).moveChoose(next);
+				
+					return true;
 				}//end if
 
 			}//end if
@@ -172,7 +187,9 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(4), next, 4)){
 					
-					return vecPawn(4).moveChoose(next);
+					vecPawn(4).moveChoose(next);
+				
+					return true;
 				}//end if
 
 			}//end if
@@ -180,7 +197,9 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(5), next, 5)){
 					
-					return vecPawn(5).moveChoose(next);
+					vecPawn(5).moveChoose(next);
+			
+					return true;
 				}//end if
 
 			}//end if
@@ -188,7 +207,9 @@ public abstract class Player{
 
 				if(validPawn(vecPawn(6), next, 6)){
 					
-					return vecPawn(6).moveChoose(next);
+					vecPawn(6).moveChoose(next);
+				
+					return true;
 				}//end if
 
 			}//end if
@@ -196,7 +217,9 @@ public abstract class Player{
 				
 				if(validPawn(vecPawn(7), next, 7)){
 					
-					return vecPawn(7).moveChoose(next);
+					vecPawn(7).moveChoose(next);
+			
+					return true;
 				}//end if
 			
 			}//end if
@@ -386,7 +409,7 @@ public abstract class Player{
 						
 						else if(!this.color && king.getColor()){
 							king.setPos(endB);
-							return true);
+							return true;
 							
 						}//end else if
 						else{
@@ -415,7 +438,7 @@ public abstract class Player{
 						
 							else if(!this.color && vecPawn.get(i).getColor()){
 							vecPawn.get(i).setPos(endB);
-							return true);
+							return true;
 							
 							}//end else if
 							else{

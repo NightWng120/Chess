@@ -3,10 +3,17 @@ import java.util.*;
 class Knight extends Piece{
 
 
-	public Knight(){
+	public Knight(boolean name){
 		
-		this.name = "k";		
+		if(name){
+			
+			this.name = "N";
 
+		}//end if
+		else if(!name){
+
+			this.name = "n";
+		}//end else if
 	}//end constructor
 
 	public void moveUleft(boolean move){

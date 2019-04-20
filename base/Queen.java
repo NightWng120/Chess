@@ -1,9 +1,15 @@
 class Queen extends Piece{
 
-	public Queen(){
+	public Queen(boolean name){
 		
-		this.name = "Q";	
-	
+		if(name){
+
+			this.name = "Q";
+		}//end if	
+		else if(!name){
+
+			this.name = "q";
+		}//end else if
 	}//end constructor
 	
 
@@ -13,13 +19,11 @@ class Queen extends Piece{
 		(slope == 1){
 			if((this.position[0] - next[0]) > 0){
 
-				moveDownX(false, (this.position[0] - next[0]));
-				return true;
+				return moveDownX(false, (this.position[0] - next[0]));
 			}//end if
 			else if((next[0] - this.position[0]) > 0){
 	
-				moveUpX(true, (next[0] - this.position[0]));
-				return true;
+				return moveUpX(true, (next[0] - this.position[0]));
 
 			}//end else if
 								
@@ -30,13 +34,11 @@ class Queen extends Piece{
 			if((this.position[0] - next[0]) > 0){
 
 			
-				moveUpX(false, (this.position[0] - next[0]));
-				return true;
+				return moveUpX(false, (this.position[0] - next[0]));
 			}//end if
 			else if((next[0] - this.position[0]) > 0){
 
-				moveUpX(true, (next[0] - this.position[0]));
-				return true;
+				return moveUpX(true, (next[0] - this.position[0]));
 			}//end else if
 
 		}//end else if
@@ -44,13 +46,11 @@ class Queen extends Piece{
 			
 			if((this.position[0] - next[0]) > 0){
 
-				moveX(false, (this.position[0] - next[0]));
-				return true;				
+				return moveX(false, (this.position[0] - next[0]));
 			}//end if
 			else if((next[0] - this.position[0]) > 0){
 
-				moveX(true, (next[0] - this.position[0]));
-				return true;
+				return moveX(true, (next[0] - this.position[0]));
 			}//end else if
 
 		}//end else if
@@ -58,75 +58,78 @@ class Queen extends Piece{
 
 			if((this.position[1] - next[1]) > 0){
 
-				moveY(false, (this.position[1] - next[1]));
-				return true;				
+				return moveY(false, (this.position[1] - next[1]));
 
 			}//end if
 			else if((next[1] - this.position[1]) > 0){
 
-				moveY(true, (next[1] - this.position[1]));
-				return true;
+				return moveY(true, (next[1] - this.position[1]));
 
 			}//end else if
 
 		}//end else if
-		else{
-			return false;
-
-		}//end else
 		return false;
 	}//end moveChoose
 
 
-	public void moveUpX(boolean move, int dist){
+	public boolean moveUpX(boolean move, int dist){
 
 		if(move && bound(this.position[0], dist, 8) && bound(this.position[1], dist,  8)){
 			this.position[0] += dist;
-			this.position[1] += dist; 
+			this.position[1] += dist;
+			return true; 
 		}//end if	
 		
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], dist,  8)) {
 			this.position[0] -= dist;
 			this.position[1] += dist;
-		}//end else	
+			return true;
+		}//end else
+		return false;	
 	}//end moveUpX		
 
-	public void moveY(boolean move, int dist){
+	public boolean moveY(boolean move, int dist){
 		
 		if(move && bound(this.position[1], dist, 8)){
 			this.position[1] += dist;
-
+			return true;
 		}//end if
 		else if(!move && bound(this.position[1], -dist, -1)){
 			this.position[1] -= dist;
+			return true;
 		}//end if
 
-
+		return false;
 	}//end moveY
-	public void moveX(boolean move, int dist){
+	public boolean moveX(boolean move, int dist){
 
 		if(move && bound(this.position[0], dist, 8)){
 			this.position[0] += dist;
+			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1)){
 			this.position[0] -= dist;
+			return true;
 		}//end else if
+		return false;
 
 	}//end moveX
-	public void moveDownX(boolean move, int dist){
+	public boolean moveDownX(boolean move, int dist){
 
 
 		if(move && bound(this.position[0], 1, 8) && bound(this.position[1], -dist, -1)){
 			this.position[0] += dist;
 			this.position[1] -= dist;
+			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], dist, 8)){
 
 			this.position[0] -= dist;
 			this.position[1] += dist;
+			return true;
 		}//end else if
 
-
+		return false;
 	}//end moveDownX
 
 }//end Queen class

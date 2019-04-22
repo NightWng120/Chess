@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Knight extends Piece{
 
 
@@ -15,8 +13,66 @@ class Knight extends Piece{
 			this.name = "n";
 		}//end else if
 	}//end constructor
+	public boolean moveChoose(int[] next) {
+		
+		if(slope(next) == 2) {
+			if((this.position[0] - next[0]) > 0 && (this.position[1] - next[1]) > 0) {
+				
+				return moveDleft(true);
+				
+			}//end if
+			else if((this.position[0] - next[0]) > 0 && (next[1] - this.position[1]) > 0) {
+				
+				
+				return moveUleft(true);
+				
+			}//end else if
+			else if((next[0] - this.position[0]) > 0 && (this.position[1] - next[1]) > 0) {
+				
+				
+				return moveDright(true);
+					
+			}//end else if
+			else if((next[0] - this.position[0]) > 0 && (next[1] - this.position[1]) > 0) {
+				
+				
+				return moveUright(true);
+				
+			}//end else if
+			
+		}//end if
+		else if(slope(next) == .5) {
+		
+			if((this.position[0] - next[0]) > 0 && (this.position[1] - next[1]) > 0) {
+				
+				return moveDleft(false);
+				
+			}//end if
+			else if((this.position[0] - next[0]) > 0 && (next[1] - this.position[1]) > 0) {
+				
+				
+				return moveUleft(false);
+				
+			}//end else if
+			else if((next[0] - this.position[0]) > 0 && (this.position[1] - next[1]) > 0) {
+				
+				
+				return moveDright(false);
+					
+			}//end else if
+			else if((next[0] - this.position[0]) > 0 && (next[1] - this.position[1]) > 0) {
+				
+				
+				return moveUright(false);
+				
+			}//end else if
+		
+		}//end else if
+		return false;
+	
+	}//end moveChoose
 
-	public void moveUleft(boolean move){
+	public boolean moveUleft(boolean move){
 		if(move && bound(this.position[0], -1, -1) && bound(this.position[1], 2, 8)){
 			
 			return true;	
@@ -27,19 +83,19 @@ class Knight extends Piece{
 		}//end else if
 		return false;
 	}//end moveUleft
-	public void moveUright(boolean move){
+	public boolean moveUright(boolean move){
 	
-		if(move && bound(this.position[0], 2, 8) && bound(this.position[1], 1, 8)){
+		if(move && bound(this.position[0], 1, 8) && bound(this.position[1], 2, 8)){
 
 			return true;
 		}//end if
-		else if(!move && bound(this.position[0], 1, 8) && bound(this.position[1], 2, 8)){
+		else if(!move && bound(this.position[0], 2, 8) && bound(this.position[1], 1, 8)){
 
 			return true;
 		}//end else if
 		return false;
 	}//end moveUright	
-	public void moveDleft(boolean move){
+	public boolean moveDleft(boolean move){
 
 		if(move && bound(this.position[0], -1, -1) && bound(this.position[1], -2, -1)){
 			return true;
@@ -49,7 +105,7 @@ class Knight extends Piece{
 		}//end else if
 		return false;
 	}//end moveDleft
-	public void moveDright(boolean move){
+	public boolean moveDright(boolean move){
 		if(move && bound(this.position[0], 1, 8) && bound(this.position[1], -2, -1)){
 			return true;
 		}//end if

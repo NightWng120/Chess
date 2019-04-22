@@ -23,18 +23,18 @@ public abstract class Player{
 		
 		this.color = color;
 		this.points = 0;
-		this.queen.setColor(color);
-		this.king.setColor(color);
-		this.bishopW.setColor(color);
-		this.bishopB.setColor(color);
-		this.rookW.setColor(color);
-		this.rookB.setColor(color);
-		this.knightB.setColor(color);
-		this.knightW.setColor(color);
+		this.queen = new Queen(color);
+		this.king = new King(color);
+		this.bishopW = new Bishop(color);
+		this.bishopB = new Bishop(color);
+		this.rookW = new Rook(color);
+		this.rookB = new Rook(color);
+		this.knightB = new Knight(color);
+		this.knightW = new Knight(color);
 
 		for(i = 0; i < 8; i++){
 
-			this.vecPawn.add(new Pawn());
+			this.vecPawn.add(new Pawn(color));
 			this.vecPawn.lastElement().setColor(color);
 		}//end for loop
 
@@ -42,7 +42,7 @@ public abstract class Player{
 
 	}//end constructor
 	
-	public boolean movePiece(int[] pos, int[] next){
+	public <J extends Player>boolean movePiece(J player, int[] pos, int[] next){
 
 
 		
@@ -62,7 +62,6 @@ public abstract class Player{
 		int[] arp6 = this.vecPawn.get(5).getPos();
 		int[] arp7 = this.vecPawn.get(6).getPos();
 		int[] arp8 = this.vecPawn.get(7).getPos();
-		int i;	
 			
 			
 
@@ -80,396 +79,264 @@ public abstract class Player{
 
 				if(queen.moveChoose(next)){
 					
-					return valid(queen, next);
+					return valid(queen,player, next);
 				}//end if
 				return false;
 
 			}//end if
 			if(pos[0] == arK[0] && pos[1] == arK[1]){
-				
+				if(king.moveChoose(next)) {
+					
+					return valid(king, player,next);
+					
+				}
 
 
 			}//end if
 			if(pos[0] == arkB[0] && pos[1] == arkB[1]){
-				if(knightB.moveChoose){
 
-					return valid(
-				}//end if	
+					if(knightB.moveChoose(next)){
+						
+						return validKnight(knightB,player, next);
+					}//end if
+					return false;	
 				
 
 			}//end if
 			if(pos[0] == arkW[0] && pos[1] == arkW[1]){
 
+					if(knightW.moveChoose(next)){
+						
+						return validKnight(knightW, player,next);
+					}//end if
+					return false;
 
 
 			}//end if
 			if(pos[0] == arbW[0] && pos[1] == arbW[1]){
 
-				if(valid(bishopW, next)){
-					bishopW.moveChoose(next);
-			
-					return true;
-				}//end if
 
+					if(bishopW.moveChoose(next)){
+						
+						return valid(bishopW,player, next);
+					}//end if
+					return false;
 			}//end if
 			if(pos[0] == arbB[0] && pos[1] == arbB[1]){
-				
-				if(valid(bishopB, next)){
-					
-					bishopB.moveChoose(next);
-					
-					return true;
-				}//end if
+
+					if(bishopB.moveChoose(next)){
+						
+						return valid(bishopB,player, next);
+					}//end if
+					return false;
 
 			}//end if
 			if(pos[0] == arrW[0] && pos[1] == arrW[1]){
 
-				if(valid(rookW, next)){
 
-					rookW.moveChoose(next);
-
-					return true;
-				}//end if
+					if(rookW.moveChoose(next)){
+						
+						return valid(rookW,player, next);
+					}//end if
+					return false;
 			}//end if
 			if(pos[0] == arrB[0] && pos[1] == arrB[1]){
 				
-				
-				if(valid(rookB, next)){
-					
-					
-					
-					rookW.moveChoose(next);
-					
-					return true;
-				}//end if
 
+					if(rookB.moveChoose(next)){
+						
+						return valid(rookB, player,next);
+					}//end if
+					return false;
 
 			}//end if
 			if(pos[0] == arp1[0] && pos[1] == arp1[1]){
 
-				if(validPawn(vecPawn(0), next, 0)){
+				if(validPawn(vecPawn.get(0), player, next)){
 					
-					vecPawn(0).moveChoose(next);
+					return vecPawn.get(0).moveChoose(next, true);
 		
-					return true;
+				
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(0), player,next)) {
+					
+					
+					return vecPawn.get(0).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp2[0] && pos[1] == arp2[1]){
 
-				if(validPawn(vecPawn(1), next, 1)){
+				if(validPawn(vecPawn.get(1), player,next)){
 					
-					vecPawn(1).moveChoose(next);
-			
-
-					return true;
+					return vecPawn.get(1).moveChoose(next, true);
+		
+				
 				}//end if
+				
+				else if(!validPawn(vecPawn.get(1), player,next)) {
+					
+					
+					return vecPawn.get(1).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp3[0] && pos[1] == arp3[1]){
-
-				if(validPawn(vecPawn(2), next, 2)){
+				if(validPawn(vecPawn.get(2), player,next)){
 					
-					vecPawn(2).moveChoose(next);
+					return vecPawn.get(2).moveChoose(next, true);
+		
 				
-					return true;
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(2), player,next)) {
+					
+					
+					return vecPawn.get(2).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp4[0] && pos[1] == arp4[1]){
 
-				if(validPawn(vecPawn(3), next, 3)){
+				if(validPawn(vecPawn.get(3), player,next)){
 					
-					vecPawn(3).moveChoose(next);
+					return vecPawn.get(3).moveChoose(next, true);
+		
 				
-					return true;
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(3), player,next)) {
+					
+					
+					return vecPawn.get(3).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp5[0] && pos[1] == arp5[1]){
-
-				if(validPawn(vecPawn(4), next, 4)){
+				if(validPawn(vecPawn.get(4), player,next)){
 					
-					vecPawn(4).moveChoose(next);
+					return vecPawn.get(4).moveChoose(next, true);
+		
 				
-					return true;
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(4), player,next)) {
+					
+					
+					return vecPawn.get(4).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp6[0] && pos[1] == arp6[1]){
 
-				if(validPawn(vecPawn(5), next, 5)){
+				if(validPawn(vecPawn.get(5), player,next)){
 					
-					vecPawn(5).moveChoose(next);
-			
-					return true;
+					return vecPawn.get(5).moveChoose(next, true);
+		
+				
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(5), player,next)) {
+					
+					
+					return vecPawn.get(5).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp7[0] && pos[1] == arp7[1]){
 
-				if(validPawn(vecPawn(6), next, 6)){
+				if(validPawn(vecPawn.get(6), player,next)){
 					
-					vecPawn(6).moveChoose(next);
+					return vecPawn.get(6).moveChoose(next, true);
+		
 				
-					return true;
 				}//end if
-
+				
+				else if(!validPawn(vecPawn.get(6), player,next)) {
+					
+					
+					return vecPawn.get(6).moveChoose(next, false);
+				}//end else if
 			}//end if
 			if(pos[0] == arp8[0] && pos[1] == arp8[1]){
 				
-				if(validPawn(vecPawn(7), next, 7)){
+				if(validPawn(vecPawn.get(7), player,next)){
 					
-					vecPawn(7).moveChoose(next);
-			
-					return true;
+					return vecPawn.get(7).moveChoose(next, true);
+		
+				
 				}//end if
+			
+				else if(!validPawn(vecPawn.get(7), player,next)) {
+					
+					
+					return vecPawn.get(7).moveChoose(next, false);
+				}//end else if
 			
 			}//end if
 			
-        
-		}//end else
-		return false;
-	}//end movePiece
-	
-	public boolean validPawn(Pawn pawn, int[] next, int iter){
-		
-		int i;
-		int[] endB = {8,8};
-		int[] endW = {-1,-1};
-		
-		if(pawn.slope(next) == 1 && pawn.dist(next) == sqrt(2)){
-					
-					if(pawn.getPosX() > next[0] || pawn.getPosY() > next[1]){
-							
-							return false;
-						
-					}//end if
-					
-					else if(next[0] == knightB.getPosX() && next[1] == knightB.getPosY()){
-						
-						
-						
-						if(this.color && !knightB.getColor()){
-							
-							knightB.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && knightB.getColor()){
-							knightB.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-									
-					else if(next[0] == knightW.getPosX() && next[1] == knightW.getPosY()){
-						
-						if(this.color && !knightW.getColor()){
-							
-							knightW.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && knightW.getColor()){
-							knightW.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == rookB.getPosX() && next[1] == rookB.getPosY()){
-						
-						if(this.color && !rookB.getColor()){
-							
-							rookB.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && rookB.getColor()){
-							rookB.setPos(endB);
-							returntrue;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == rookW.getPosX() && next[1] == rookW.getPosY()){
-						
-						if(this.color && !rookW.getColor()){
-							
-							rookW.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && rookW.getColor()){
-							rookW.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == bishopB.getPosX() && next[1] == bishopB.getPosY()){
-						
-						if(this.color && !bishopB.getColor()){
-							
-							bishopB.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && bishopB.getColor()){
-							bishopB.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == bishopW.getPosX() && next[1] == bishopW.getPosY()){
-						
-						if(this.color && !bishopW.getColor()){
-							
-							bishopW.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && bishopW.getColor()){
-							bishopW.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == queen.getPosX() && next[1] == queen.getPosY()){
-						
-						if(this.color && !queen.getColor()){
-							
-							queen.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && queen.getColor()){
-							queen.setPos(endB);
-							return true);
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					else if(next[0] == king.getPosX() && next[1] == king.getPosY()){
-						
-						if(this.color && !king.getColor()){
-							
-							king.setPos(endW);
-							return true;
-						}//end if
-						
-						else if(!this.color && king.getColor()){
-							king.setPos(endB);
-							return true;
-							
-						}//end else if
-						else{
-							
-							return false;
-							
-						}//end else
-						
-					}//end else if
-					/*------------------------------------------------------------------*/
-					
-					for(i = 0; i < 8; i++){
-					
-						if(i == iter){
-							
-							continue;
-							
-						}//end if
-						if(next[0] == vecPawn.get(i).getPosX() && next[1] == vecPawn.get(i).getPosY()){
-						
-							if(this.color && !vecPawn.get(i).getColor()){
-							
-							vecPawn.get(i).setPos(endW);
-							return true;
-							}//end if
-						
-							else if(!this.color && vecPawn.get(i).getColor()){
-							vecPawn.get(i).setPos(endB);
-							return true;
-							
-							}//end else if
-							else{
-							
-								return false;
-							
-							}//end else
-						
-						}//end if
-					}//end for loop
-					/*------------------------------------------------------------------*/
-					
-					
-	
-		}//end if
-		else if(pawn.slope(next) == 3){
-
-			return true;
-
-		}//end if
-		else{
-			
 			return false;
 		}//end else
+	
+	}//end movePiece
+	public <T extends Piece, J extends Player> boolean validPawn(T obj, J player, int[] next) {
+		int[] pos = obj.getPos();
+		int i;
 		
 		
-	}//end validPawn
+			
+			if(next[0] == player.knightW.getPosX() && next[1] == player.knightW.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.knightB.getPosX() && next[1] == player.knightB.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.rookW.getPosX() && next[1] == player.rookW.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.rookB.getPosX() && next[1] == player.rookB.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.bishopB.getPosX() && next[1] == player.bishopB.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.bishopW.getPosX() && next[1] == player.bishopW.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.queen.getPosX() && next[1] == player.queen.getPosY()) {
+				
+				return true;
+			}//end if
+			
+			if(next[0] == player.king.getPosX() && next[1] == player.king.getPosY()) {
+				
+				return false;
+			}//end if
+			
+			for(i = 0; i < 8 ;i ++) {
+				
+				if(pos[0] == player.vecPawn.get(i).getPosX() && pos[1] == player.vecPawn.get(i).getPosY()) {
+					
+					
+					continue;
+				}//end if
+				if(next[0] == player.vecPawn.get(i).getPosX() && next[1] == player.vecPawn.get(i).getPosY()) {
+				
+					return true;
+				}//end if
 
-	public <T extends Piece> boolean valid(T obj, int[] next){
+			}//end for loop
+		return false;
+	}//end validPawn
+	
+	public <T extends Piece, J extends Player> boolean validKnight(T obj, J player, int[] next){
 
 		int[] pos = obj.getPos();
 		int i;
@@ -486,18 +353,18 @@ public abstract class Player{
 				return true;
 			}//end if
 
-			if(obj.slope(next) == knightB.slope(pos) && knightB.getPosX() == next[0] && knightB.getPosY() == next[1]){
+			if(obj.slope(next) == player.knightB.slope(pos) && player.knightB.getPosX() == next[0] && player.knightB.getPosY() == next[1]){
 				
 
 					
-				if(this.color && !knightB.getColor()){
+				if(this.color && !player.knightB.getColor()){
 					obj.setPos(next);
-					knightB.setPos(endW);
+					player.knightB.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && knightB.getColor()){
+				else if(!this.color && player.knightB.getColor()){
 					obj.setPos(next);
-					knightB.setPos(endB);
+					player.knightB.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -505,33 +372,22 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) < obj.dist(next)){
-
-				return false;
-					
 			
-			}//end else if 
-			else if(obj.slope(next) == knightB.slope(pos) && obj.dist(knightB.getPos()) > obj.dist(next)){
-
-				
-				obj.setPos(next);
-				return true;
-
-			}//end else if
+			
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == knightW.slope(pos) && knightW.getPosX() == next[0] && knightW.getPosY() == next[1]){
+			else if(obj.slope(next) == player.knightW.slope(pos) && player.knightW.getPosX() == next[0] && player.knightW.getPosY() == next[1]){
 				
 
 									
-				if(this.color && !knightW.getColor()){
+				if(this.color && !player.knightW.getColor()){
 					obj.setPos(next);
-					knightW.setPos(endW);
+					player.knightW.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && knightW.getColor()){
+				else if(!this.color && player.knightW.getColor()){
 					obj.setPos(next);
-					knightW.setPos(endB);
+					player.knightW.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -539,33 +395,21 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == knightW.slope(pos) && obj.dist(knightW.getPos()) < obj.dist(next)){
-
-				return false;
-					
 			
-			}//end else if 
-			else if(obj.slope(next) == knightW.slope(pos) && obj.dist(knightW.getPos()) > obj.dist(next)){
-
-				
-				obj.setPos(next);
-				return true;
-
-			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == rookB.slope(pos) && rookB.getPosX() == next[0] && rookB.getPosY() == next[1]){
+			else if(obj.slope(next) == player.rookB.slope(pos) && player.rookB.getPosX() == next[0] && player.rookB.getPosY() == next[1]){
 				
 
 								
-				if(this.color && !rookB.getColor()){
+				if(this.color && !player.rookB.getColor()){
 					obj.setPos(next);
-					rookB.setPos(endW);
+					player.rookB.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && rookB.getColor()){
+				else if(!this.color && player.rookB.getColor()){
 					obj.setPos(next);
-					rookB.setPos(endB);
+					player.rookB.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -573,33 +417,21 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == rookB.slope(pos) && obj.dist(rookB.getPos()) < obj.dist(next)){
-
-				return false;
-					
 			
-			}//end else if 
-			else if(obj.slope(next) == rookB.slope(pos) && obj.dist(rookB.getPos()) > obj.dist(next)){
-
-				
-				obj.setPos(next);
-				return true;
-
-			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == rookW.slope(pos) && rookW.getPosX() == next[0] && rookW.getPosY() == next[1]){
+			else if(obj.slope(next) == player.rookW.slope(pos) && player.rookW.getPosX() == next[0] && player.rookW.getPosY() == next[1]){
 				
 
 									
-				if(this.color && !rookW.getColor()){
+				if(this.color && !player.rookW.getColor()){
 					obj.setPos(next);
-					rookW.setPos(endW);
+					player.rookW.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && rookW.getColor()){
+				else if(!this.color && player.rookW.getColor()){
 					obj.setPos(next);
-					rookW.setPos(endB);
+					player.rookW.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -607,32 +439,20 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == rookW.slope(pos) && obj.dist(rookW.getPos()) < obj.dist(next)){
-
-				return false;
-					
 			
-			}//end else if 
-			else if(obj.slope(next) == rookW.slope(pos) && obj.dist(rookW.getPos()) > obj.dist(next)){
-
-				
-				obj.setPos(next);
-				return true;
-
-			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == bishopB.slope(pos) && bishopB.getPosX() == next[0] && bishopB.getPosY() == next[1]){
+			else if(obj.slope(next) == player.bishopB.slope(pos) && player.bishopB.getPosX() == next[0] && player.bishopB.getPosY() == next[1]){
 				
 					
-				if(this.color && !bishopB.getColor()){
+				if(this.color && !player.bishopB.getColor()){
 					obj.setPos(next);
-					bishopB.setPos(endW);
+					player.bishopB.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && bishopB.getColor()){
+				else if(!this.color && player.bishopB.getColor()){
 					obj.setPos(next);
-					bishopB.setPos(endB);
+					player.bishopB.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -640,33 +460,21 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == bishopB.slope(pos) && obj.dist(bishopB.getPos()) < obj.dist(next)){
-
-				return false;
-					
 			
-			}//end else if 
-			else if(obj.slope(next) == bishopB.slope(pos) && obj.dist(bishopB.getPos()) > obj.dist(next)){
-
-				
-				obj.setPos(next);
-				return true;
-
-			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == bishopW.slope(pos) && bishopW.getPosX() == next[0] && bishopW.getPosY() == next[1]){
+			else if(obj.slope(next) == player.bishopW.slope(pos) && player.bishopW.getPosX() == next[0] && player.bishopW.getPosY() == next[1]){
 				
 
 									
-				if(this.color && !bishopW.getColor()){
+				if(this.color && !player.bishopW.getColor()){
 					obj.setPos(next);
-					bishopW.setPos(endW);
+					player.bishopW.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && bishopW.getColor()){
+				else if(!this.color && player.bishopW.getColor()){
 					obj.setPos(next);
-					bishopW.setPos(endB);
+					player.bishopW.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -674,13 +482,114 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == bishopW.slope(pos) && obj.dist(bishopW.getPos()) < obj.dist(next)){
+			
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.king.slope(pos) && player.king.getPosX() == next[0] && player.king.getPosY() == next[1]){
+				
+
+				return false;
+
+			}//end if 
+			
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.queen.slope(pos) && player.queen.getPosX() == next[0] && player.queen.getPosY() == next[1]){
+				
+
+									
+				if(this.color && !player.queen.getColor()){
+					obj.setPos(next);
+					player.queen.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.queen.getColor()){
+					obj.setPos(next);
+					player.queen.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			for(i = 0; i < 8; i++){
+			
+				
+				
+				if(obj.slope(next) == player.vecPawn.get(i).slope(pos) && player.vecPawn.get(i).getPosX() == next[0] && player.vecPawn.get(i).getPosY() == next[1]){
+				
+
+										
+					if(this.color && !player.vecPawn.get(i).getColor()){
+						obj.setPos(next);
+						vecPawn.get(i).setPos(endW);
+						return true;
+					}//end if
+					else if(!this.color && player.vecPawn.get(i).getColor()){
+						obj.setPos(next);
+						player.vecPawn.get(i).setPos(endB);
+						return true;
+					}//end else
+					else{
+						return false;
+					}
+
+					}//end if 
+				
+				/*---------------------------------------------------------------------------------------------------------------------*/
+			}//end for loop
+				return false;
+	}//end validKnight
+
+	
+	
+	public <T extends Piece, J extends Player> boolean valid(T obj, J player, int[] next){
+
+		int[] pos = obj.getPos();
+		int i;
+		int[] endW = {-1, -1};
+		int[] endB = {8, 8};		
+			
+	
+	
+	
+	
+	
+			if(next[0] == pos[0] && next[1] == pos[1]){
+
+				return true;
+			}//end if
+
+			if(obj.slope(next) == player.knightB.slope(pos) && player.knightB.getPosX() == next[0] && player.knightB.getPosY() == next[1]){
+				
+
+					
+				if(this.color && !player.knightB.getColor()){
+					obj.setPos(next);
+					player.knightB.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.knightB.getColor()){
+					obj.setPos(next);
+					player.knightB.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			else if(obj.slope(next) == player.knightB.slope(pos) && obj.dist(player.knightB.getPos()) < obj.dist(next)){
 
 				return false;
 					
 			
 			}//end else if 
-			else if(obj.slope(next) == bishopW.slope(pos) && obj.dist(bishopW.getPos()) > obj.dist(next)){
+			else if(obj.slope(next) == player.knightB.slope(pos) && obj.dist(player.knightB.getPos()) > obj.dist(next)){
 
 				
 				obj.setPos(next);
@@ -689,18 +598,18 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == king.slope(pos) && king.getPosX() == next[0] && king.getPosY() == next[1]){
+			else if(obj.slope(next) == player.knightW.slope(pos) && player.knightW.getPosX() == next[0] && player.knightW.getPosY() == next[1]){
 				
 
 									
-				if(this.color && !king.getColor()){
+				if(this.color && !player.knightW.getColor()){
 					obj.setPos(next);
-					king.setPos(endW);
+					player.knightW.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && king.getColor()){
+				else if(!this.color && player.knightW.getColor()){
 					obj.setPos(next);
-					king.setPos(endB);
+					player.knightW.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -708,13 +617,13 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == king.slope(pos) && obj.dist(king.getPos()) < obj.dist(next)){
+			else if(obj.slope(next) == player.knightW.slope(pos) && obj.dist(player.knightW.getPos()) < obj.dist(next)){
 
 				return false;
 					
 			
 			}//end else if 
-			else if(obj.slope(next) == king.slope(pos) && obj.dist(king.getPos()) > obj.dist(next)){
+			else if(obj.slope(next) == player.knightW.slope(pos) && obj.dist(player.knightW.getPos()) > obj.dist(next)){
 
 				
 				obj.setPos(next);
@@ -723,18 +632,18 @@ public abstract class Player{
 			}//end else if
 			/*---------------------------------------------------------------------------------------------------------------------*/
 			
-			else if(obj.slope(next) == queen.slope(pos) && queen.getPosX() == next[0] && queen.getPosY() == next[1]){
+			else if(obj.slope(next) == player.rookB.slope(pos) && player.rookB.getPosX() == next[0] && player.rookB.getPosY() == next[1]){
 				
 
-									
-				if(this.color && !queen.getColor()){
+								
+				if(this.color && !player.rookB.getColor()){
 					obj.setPos(next);
-					queen.setPos(endW);
+					player.rookB.setPos(endW);
 					return true;
 				}//end if
-				else if(!this.color && queen.getColor()){
+				else if(!this.color && player.rookB.getColor()){
 					obj.setPos(next);
-					queen.setPos(endB);
+					player.rookB.setPos(endB);
 					return true;
 				}//end else
 				else{
@@ -742,13 +651,169 @@ public abstract class Player{
 				}
 
 			}//end if 
-			else if(obj.slope(next) == queen.slope(pos) && obj.dist(queen.getPos()) < obj.dist(next)){
+			else if(obj.slope(next) == player.rookB.slope(pos) && obj.dist(player.rookB.getPos()) < obj.dist(next)){
 
 				return false;
 					
 			
 			}//end else if 
-			else if(obj.slope(next) == queen.slope(pos) && obj.dist(queen.getPos()) > obj.dist(next)){
+			else if(obj.slope(next) == player.rookB.slope(pos) && obj.dist(player.rookB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.rookW.slope(pos) && player.rookW.getPosX() == next[0] && player.rookW.getPosY() == next[1]){
+				
+
+									
+				if(this.color && !player.rookW.getColor()){
+					obj.setPos(next);
+					player.rookW.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.rookW.getColor()){
+					obj.setPos(next);
+					player.rookW.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			else if(obj.slope(next) == player.rookW.slope(pos) && obj.dist(player.rookW.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == player.rookW.slope(pos) && obj.dist(player.rookW.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.bishopB.slope(pos) && player.bishopB.getPosX() == next[0] && player.bishopB.getPosY() == next[1]){
+				
+					
+				if(this.color && !player.bishopB.getColor()){
+					obj.setPos(next);
+					player.bishopB.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.bishopB.getColor()){
+					obj.setPos(next);
+					player.bishopB.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			else if(obj.slope(next) == player.bishopB.slope(pos) && obj.dist(player.bishopB.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == player.bishopB.slope(pos) && obj.dist(player.bishopB.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.bishopW.slope(pos) && player.bishopW.getPosX() == next[0] && player.bishopW.getPosY() == next[1]){
+				
+
+									
+				if(this.color && !player.bishopW.getColor()){
+					obj.setPos(next);
+					player.bishopW.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.bishopW.getColor()){
+					obj.setPos(next);
+					player.bishopW.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			else if(obj.slope(next) == player.bishopW.slope(pos) && obj.dist(player.bishopW.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == player.bishopW.slope(pos) && obj.dist(player.bishopW.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.king.slope(pos) && player.king.getPosX() == next[0] && player.king.getPosY() == next[1]){
+				
+
+				return false;
+
+			}//end if 
+			else if(obj.slope(next) == player.king.slope(pos) && obj.dist(player.king.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == player.king.slope(pos) && obj.dist(player.king.getPos()) > obj.dist(next)){
+
+				
+				obj.setPos(next);
+				return true;
+
+			}//end else if
+			/*---------------------------------------------------------------------------------------------------------------------*/
+			
+			else if(obj.slope(next) == player.queen.slope(pos) && player.queen.getPosX() == next[0] && player.queen.getPosY() == next[1]){
+				
+
+									
+				if(this.color && !player.queen.getColor()){
+					obj.setPos(next);
+					player.queen.setPos(endW);
+					return true;
+				}//end if
+				else if(!this.color && player.queen.getColor()){
+					obj.setPos(next);
+					player.queen.setPos(endB);
+					return true;
+				}//end else
+				else{
+					return false;
+				}
+
+			}//end if 
+			else if(obj.slope(next) == player.queen.slope(pos) && obj.dist(player.queen.getPos()) < obj.dist(next)){
+
+				return false;
+					
+			
+			}//end else if 
+			else if(obj.slope(next) == player.queen.slope(pos) && obj.dist(player.queen.getPos()) > obj.dist(next)){
 
 				
 				obj.setPos(next);
@@ -759,18 +824,20 @@ public abstract class Player{
 			
 			for(i = 0; i < 8; i++){
 			
-				if(obj.slope(next) == vecPawn.get(i).slope(pos) && knightB.getPosX() == next[0] && vecPawn.get(i).getPosY() == next[1]){
+				
+				
+				if(obj.slope(next) == player.vecPawn.get(i).slope(pos) && player.vecPawn.get(i).getPosX() == next[0] && player.vecPawn.get(i).getPosY() == next[1]){
 				
 
 										
-					if(this.color && !vecPawn.get(i).getColor()){
+					if(this.color && !player.vecPawn.get(i).getColor()){
 						obj.setPos(next);
 						vecPawn.get(i).setPos(endW);
 						return true;
 					}//end if
-					else if(!this.color && vecPawn.get(i).getColor()){
+					else if(!this.color && player.vecPawn.get(i).getColor()){
 						obj.setPos(next);
-						vecPawn.get(i).setPos(endB);
+						player.vecPawn.get(i).setPos(endB);
 						return true;
 					}//end else
 					else{
@@ -778,13 +845,13 @@ public abstract class Player{
 					}
 
 					}//end if 
-				else if(obj.slope(next) == vecPawn.get(i).slope(pos) && obj.dist(vecPawn.get(i).getPos()) < obj.dist(next)){
+				else if(obj.slope(next) == player.vecPawn.get(i).slope(pos) && obj.dist(player.vecPawn.get(i).getPos()) < obj.dist(next)){
 
 					return false;
 					
 			
 				}//end else if 
-				else if(obj.slope(next) == vecPawn.get(i).slope(pos) && obj.dist(vecPawn.get(i).getPos()) > obj.dist(next)){
+				else if(obj.slope(next) == player.vecPawn.get(i).slope(pos) && obj.dist(player.vecPawn.get(i).getPos()) > obj.dist(next)){
 	
 				
 					obj.setPos(next);
@@ -793,7 +860,7 @@ public abstract class Player{
 				}//end else if
 				/*---------------------------------------------------------------------------------------------------------------------*/
 			}//end for loop
-				return true;
+				return false;
 	}//end valid
 
 }//end Player class

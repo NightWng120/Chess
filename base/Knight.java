@@ -19,54 +19,44 @@ class Knight extends Piece{
 	public void moveUleft(boolean move){
 		if(move && bound(this.position[0], -1, -1) && bound(this.position[1], 2, 8)){
 			
-			this.position[0] -= 1;
-			this.position[1] += 2;
-	
+			return true;	
 		}//end if
 		else if(!move && bound(this.position[0], -2, -1) && bound(this.position[1], 1, 8)){
 
-			this.position[0] -= 2;
-			this.position[1] += 1;
-
+			return true;
 		}//end else if
+		return false;
 	}//end moveUleft
 	public void moveUright(boolean move){
 	
 		if(move && bound(this.position[0], 2, 8) && bound(this.position[1], 1, 8)){
 
-			this.position[0] += 1;
-			this.position[1] += 2;
-
+			return true;
 		}//end if
 		else if(!move && bound(this.position[0], 1, 8) && bound(this.position[1], 2, 8)){
 
-			this.position[0] += 2;
-			this.position[1] += 1;
-
+			return true;
 		}//end else if
-
-	}//end moveUright
+		return false;
+	}//end moveUright	
 	public void moveDleft(boolean move){
 
 		if(move && bound(this.position[0], -1, -1) && bound(this.position[1], -2, -1)){
-			this.position[0] -= 1;
-			this.position[1] -= 2;
+			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -2, -1) && bound(this.position[1], -1, -1)){
-			this.position[0] -= 2;
-			this.position[1] -= 1;
+			return true;
 		}//end else if
+		return false;
 	}//end moveDleft
 	public void moveDright(boolean move){
 		if(move && bound(this.position[0], 1, 8) && bound(this.position[1], -2, -1)){
-			this.position[0] += 1;
-			this.position[1] -= 2;
+			return true;
 		}//end if
 		else if(!move && bound(this.position[0], 2, 8) && bound(this.position[1], -1, -1)){
-			this.position[0] += 2;
-			this.position[1] -= 1;
+			return true;
 		}//end else if
-
+		return false;
 
 	}//end moveDright
 

@@ -48,6 +48,7 @@ public abstract class Piece{
 		double slope;
 		try{
 			slope = ((double)next[1] - (double)this.position[1])/((double)next[0] - (double)this.position[0]);
+			
 			return slope;
 		}//end try
 		catch(ArithmeticException ex){

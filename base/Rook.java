@@ -49,12 +49,10 @@ class Rook extends Piece{
 
 		if(move && bound(this.position[0], dist, 8)){
 
-			this.position[0] += dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1)){
 
-			this.position[0] -= dist;
 			return true;
 		}//end else if
 
@@ -65,12 +63,10 @@ class Rook extends Piece{
 
 		if(move && bound(this.position[1], dist, 8)){
 
-			this.position[1] += dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[1], -dist, -1)){
 
-			this.position[1] -= dist;
 			return true;
 		}//end else if
 

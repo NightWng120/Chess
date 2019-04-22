@@ -25,24 +25,28 @@ class Pawn extends Piece{
 				return false;
 			}//end if
 			if((next[1] - this.position[1]) == 1 || (next[1] - this.position[1]) == 2){
-				setPos(next);
 				return true;
 			}//end if
 			
 			
 		}//end if
+		else if(slope(next) == 1){
 
+			return moveX(next);
+
+
+		}//end else if
+		return false;
 	}//end moveChoose
 
 	
-	public void moveX(int[] next){
+	public boolean moveX(int[] next){
 		
 		boolean move;
 		if(slope(next) == 1 && (next[0] - this.position[0]) == 1 && (next[1] - this.position[1]) == 1){
-
-			setPos(next);
+			return true;
 		}//end if		
-
+		return false;
 
 	}//end moveX
 	

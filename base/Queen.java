@@ -75,14 +75,10 @@ class Queen extends Piece{
 	public boolean moveUpX(boolean move, int dist){
 
 		if(move && bound(this.position[0], dist, 8) && bound(this.position[1], dist,  8)){
-			this.position[0] += dist;
-			this.position[1] += dist;
 			return true; 
 		}//end if	
 		
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], dist,  8)) {
-			this.position[0] -= dist;
-			this.position[1] += dist;
 			return true;
 		}//end else
 		return false;	
@@ -91,11 +87,9 @@ class Queen extends Piece{
 	public boolean moveY(boolean move, int dist){
 		
 		if(move && bound(this.position[1], dist, 8)){
-			this.position[1] += dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[1], -dist, -1)){
-			this.position[1] -= dist;
 			return true;
 		}//end if
 
@@ -104,11 +98,9 @@ class Queen extends Piece{
 	public boolean moveX(boolean move, int dist){
 
 		if(move && bound(this.position[0], dist, 8)){
-			this.position[0] += dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1)){
-			this.position[0] -= dist;
 			return true;
 		}//end else if
 		return false;
@@ -118,14 +110,10 @@ class Queen extends Piece{
 
 
 		if(move && bound(this.position[0], 1, 8) && bound(this.position[1], -dist, -1)){
-			this.position[0] += dist;
-			this.position[1] -= dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], dist, 8)){
 
-			this.position[0] -= dist;
-			this.position[1] += dist;
 			return true;
 		}//end else if
 

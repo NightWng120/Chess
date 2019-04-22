@@ -78,12 +78,11 @@ public abstract class Player{
         
 			if(pos[0] == arQ[0] && pos[1] == arQ[1]){
 
-				if(valid(queen, next)){
+				if(queen.moveChoose(next)){
 					
-					queen.moveChoose(next);
-					
-					return true;
+					return valid(queen, next);
 				}//end if
+				return false;
 
 			}//end if
 			if(pos[0] == arK[0] && pos[1] == arK[1]){
@@ -92,7 +91,10 @@ public abstract class Player{
 
 			}//end if
 			if(pos[0] == arkB[0] && pos[1] == arkB[1]){
-					
+				if(knightB.moveChoose){
+
+					return valid(
+				}//end if	
 				
 
 			}//end if

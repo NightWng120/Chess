@@ -56,14 +56,10 @@ class Bishop extends Piece{
 
 		if(move && bound(this.position[0], dist, 8) && bound(this.position[1], dist, 8)){
 
-			this.position[0] += dist;
-			this.position[1] += dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], dist, 8)){
 
-			this.position[0] -= dist;
-			this.position[1] += dist;
 			return true;
 		}//end else if
 		return false;
@@ -72,14 +68,10 @@ class Bishop extends Piece{
 
 		if(move && bound(this.position[0], dist, 8) && bound(this.position[1], -dist, -1)){
 
-			this.position[0] += dist;
-			this.position[1] -= dist;
 			return true;
 		}//end if
 		else if(!move && bound(this.position[0], -dist, -1) && bound(this.position[1], -dist, -1)){
 
-			this.position[0] -= dist;
-			this.position[1] -= dist;
 			return true;
 		}//end else if
 

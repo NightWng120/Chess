@@ -47,7 +47,6 @@ class Player1 extends Player{
 		Scanner input = new Scanner(System.in);
 		int next[] = new int[2];
 		int temp[] = new int[2];
-		int buffer;
 		boolean loop = true;
 		boolean loop2 = true;
 		while(loop) {
@@ -121,7 +120,6 @@ class Player1 extends Player{
 			}//end while loop
 			
 		}//end while loop
-		input.close();
 		return false;
 	}//end menuPlayer\
 	public void posFill(String ar[][], Player2 player2 ) {

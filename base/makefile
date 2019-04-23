@@ -14,7 +14,7 @@ Queen.class: Queen.java Piece.java
 Pawn.class: Pawn.java Piece.java
 	javac Pawn.java
 Player1.class: Player1.java Player.java
-	javac Player1
+	javac Player1.java
 Player2.class: Player2.java Player.java
 	javac Player2.java
 run: Game.class

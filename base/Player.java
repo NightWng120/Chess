@@ -352,7 +352,7 @@ public abstract class Player{
 	
 			if(next[0] == pos[0] && next[1] == pos[1]){
 
-				return true;
+				return false;
 			}//end if
 
 			if(obj.slope(next) == player.knightB.slope(pos) && player.knightB.getPosX() == next[0] && player.knightB.getPosY() == next[1]){
@@ -545,7 +545,8 @@ public abstract class Player{
 				
 				/*---------------------------------------------------------------------------------------------------------------------*/
 			}//end for loop
-				return false;
+			obj.setPos(next);
+			return true;		
 	}//end validKnight
 
 	

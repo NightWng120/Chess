@@ -121,7 +121,6 @@ class Player2 extends Player{
 			}//end while loop
 			
 		}//end while loop
-		input.close();
 		return false;
 	}//end menuPlayer
 	public void posFill(String ar[][], Player1 player1) {

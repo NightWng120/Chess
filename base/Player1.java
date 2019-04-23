@@ -2,10 +2,42 @@ import java.util.Scanner;
 
 class Player1 extends Player{
 
+	private int[] arQ;
+	private int[] arK;
+	private int[] arkW;
+	private int[] arkB;
+	private int[] arbB;
+	private int[] arbW;
+	private int[] arrB;
+	private int[] arrW;
+	private int[] arp1;
+	private int[] arp2;
+	private int[] arp3;
+	private int[] arp4;
+	private int[] arp5;
+	private int[] arp6;
+	private int[] arp7;
+	private int[] arp8;
 
 	public Player1(boolean color){
 		
 		super(color);
+		this.arQ = new int[2];
+		this.arK = new int[2];
+		this.arkW = new int[2];
+		this.arkB = new int[2];
+		this.arbB = new int[2];
+		this.arbW = new int[2];
+		this.arrB = new int[2];
+		this.arrW = new int[2];
+		this.arp1 = new int[2];
+		this.arp2 = new int[2];
+		this.arp3 = new int[2];
+		this.arp4 = new int[2];
+		this.arp5 = new int[2];
+		this.arp6 = new int[2];
+		this.arp7 = new int[2];
+		this.arp8 = new int[2];
 		PrePosFill();
 	}//end constructor
 		
@@ -15,6 +47,7 @@ class Player1 extends Player{
 		Scanner input = new Scanner(System.in);
 		int next[] = new int[2];
 		int temp[] = new int[2];
+		int buffer;
 		boolean loop = true;
 		boolean loop2 = true;
 		while(loop) {
@@ -64,7 +97,8 @@ class Player1 extends Player{
 					System.out.println("|-------------------------|");
 					System.out.printf("\n\n");
 					System.out.printf(": ");
-					temp[0] = input.nextInt();
+					input.nextInt();
+					
 					temp[1] = input.nextInt();
 					System.out.printf("\n\n");
 					System.out.printf(": ");
@@ -91,21 +125,228 @@ class Player1 extends Player{
 		return false;
 	}//end menuPlayer\
 	public void posFill(String ar[][], Player2 player2 ) {
-		int i;
-		ar[this.king.getPosX()][this.king.getPosY()] = this.king.getName(); 
-		ar[this.queen.getPosX()][this.queen.getPosY()] = this.queen.getName();
-		ar[this.knightW.getPosX()][this.knightW.getPosY()] = this.knightW.getName();		
-		ar[this.knightB.getPosX()][this.knightB.getPosY()] = this.knightB.getName();		
-		ar[this.bishopW.getPosX()][this.bishopW.getPosY()] = this.bishopW.getName();		
-		ar[this.bishopB.getPosX()][this.bishopB.getPosY()] = this.bishopB.getName();	
-		ar[this.rookW.getPosX()][this.rookW.getPosY()] = this.rookW.getName();
-		ar[this.rookB.getPosX()][this.rookB.getPosY()] = this.rookB.getName();
+	int i;
 		
-		for(i = 0; i < 8; i ++) {
+		if(arK[0] != this.king.getPosX() && arK[1] != this.king.getPosY()) {
 			
-			ar[this.vecPawn.get(i).getPosX()][this.vecPawn.get(i).getPosY()] = this.vecPawn.get(i).getName();
 			
-		}//end for loop
+			ar[arK[0]][arK[1]] = " ";
+		}//end if
+		else if(arK[0] == this.king.getPosX() && arK[1] == this.king.getPosY()) {
+		
+			ar[this.king.getPosX()][this.king.getPosY()] = this.king.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arQ[0] != this.queen.getPosX() && arQ[1] != this.queen.getPosY()) {
+			
+			
+			ar[arQ[0]][arQ[1]] = " ";
+		}//end if
+		else if(arQ[0] == this.queen.getPosX() && arQ[1] == this.queen.getPosY()) {
+		
+			ar[this.queen.getPosX()][this.queen.getPosY()] = this.queen.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arrB[0] != this.rookB.getPosX() && arrB[1] != this.rookB.getPosY()) {
+			
+			
+			ar[arrB[0]][arrB[1]] = " ";
+		}//end if
+		else if(arrB[0] == this.rookB.getPosX() && arrB[1] == this.rookB.getPosY()) {
+		
+			ar[this.rookB.getPosX()][this.rookB.getPosY()] = this.rookB.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arrW[0] != this.rookW.getPosX() && arrW[1] != this.rookW.getPosY()) {
+			
+			
+			ar[arrW[0]][arrW[1]] = " ";
+		}//end if
+		else if(arrW[0] == this.rookW.getPosX() && arrW[1] == this.rookW.getPosY()) {
+		
+			ar[this.rookW.getPosX()][this.rookW.getPosY()] = this.rookW.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arbB[0] != this.bishopB.getPosX() && arbB[1] != this.bishopB.getPosY()) {
+			
+			
+			ar[arbB[0]][arbB[1]] = " ";
+		}//end if
+		else if(arbB[0] == this.bishopB.getPosX() && arbB[1] == this.bishopB.getPosY()) {
+		
+			ar[this.bishopB.getPosX()][this.bishopB.getPosY()] = this.bishopB.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arbW[0] != this.bishopW.getPosX() && arbW[1] != this.bishopW.getPosY()) {
+			
+			
+			ar[arbW[0]][arbW[1]] = " ";
+		}//end if
+		else if(arbW[0] == this.bishopW.getPosX() && arbW[1] == this.bishopW.getPosY()) {
+		
+			ar[this.bishopW.getPosX()][this.bishopW.getPosY()] = this.bishopW.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arkW[0] != this.knightW.getPosX() && arkW[1] != this.knightW.getPosY()) {
+			
+			
+			ar[arkW[0]][arkW[1]] = " ";
+		}//end if
+		else if(arkW[0] == this.knightW.getPosX() && arkW[1] == this.knightW.getPosY()) {
+		
+			ar[this.knightW.getPosX()][this.knightW.getPosY()] = this.knightW.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arkB[0] != this.knightB.getPosX() && arkB[1] != this.knightB.getPosY()) {
+			
+			
+			ar[arkB[0]][arkB[1]] = " ";
+		}//end if
+		else if(arkB[0] == this.knightB.getPosX() && arkB[1] == this.knightB.getPosY()) {
+		
+			ar[this.knightB.getPosX()][this.knightB.getPosY()] = this.knightB.getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arp1[0] != this.vecPawn.get(0).getPosX() && arp1[1] != this.vecPawn.get(0).getPosY()) {
+			
+			
+			ar[arp1[0]][arp1[1]] = " ";
+		}//end if
+		else if(arp1[0] == this.vecPawn.get(0).getPosX() && arp1[1] == this.vecPawn.get(0).getPosY()) {
+		
+			ar[this.vecPawn.get(0).getPosX()][this.vecPawn.get(0).getPosY()] = this.vecPawn.get(0).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		if(arp2[0] != this.vecPawn.get(1).getPosX() && arp2[1] != this.vecPawn.get(1).getPosY()) {
+			
+			
+			ar[arp2[0]][arp2[1]] = " ";
+		}//end if
+		else if(arp2[0] == this.vecPawn.get(1).getPosX() && arp2[1] == this.vecPawn.get(1).getPosY()) {
+		
+			ar[this.vecPawn.get(1).getPosX()][this.vecPawn.get(1).getPosY()] = this.vecPawn.get(1).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp3[0] != this.vecPawn.get(2).getPosX() && arp3[1] != this.vecPawn.get(2).getPosY()) {
+			
+			
+			ar[arp3[0]][arp3[1]] = " ";
+		}//end if
+		else if(arp3[0] == this.vecPawn.get(2).getPosX() && arp3[1] == this.vecPawn.get(2).getPosY()) {
+		
+			ar[this.vecPawn.get(2).getPosX()][this.vecPawn.get(2).getPosY()] = this.vecPawn.get(2).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp4[0] != this.vecPawn.get(3).getPosX() && arp4[1] != this.vecPawn.get(3).getPosY()) {
+			
+			
+			ar[arp4[0]][arp4[1]] = " ";
+		}//end if
+		else if(arp4[0] == this.vecPawn.get(3).getPosX() && arp4[1] == this.vecPawn.get(3).getPosY()) {
+		
+			ar[this.vecPawn.get(3).getPosX()][this.vecPawn.get(3).getPosY()] = this.vecPawn.get(3).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp5[0] != this.vecPawn.get(4).getPosX() && arp5[1] != this.vecPawn.get(4).getPosY()) {
+			
+			
+			ar[arp5[0]][arp5[1]] = " ";
+		}//end if
+		else if(arp5[0] == this.vecPawn.get(4).getPosX() && arp5[1] == this.vecPawn.get(4).getPosY()) {
+		
+			ar[this.vecPawn.get(4).getPosX()][this.vecPawn.get(4).getPosY()] = this.vecPawn.get(4).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp6[0] != this.vecPawn.get(5).getPosX() && arp6[1] != this.vecPawn.get(5).getPosY()) {
+			
+			
+			ar[arp6[0]][arp6[1]] = " ";
+		}//end if
+		else if(arp6[0] == this.vecPawn.get(5).getPosX() && arp6[1] == this.vecPawn.get(5).getPosY()) {
+		
+			ar[this.vecPawn.get(5).getPosX()][this.vecPawn.get(5).getPosY()] = this.vecPawn.get(5).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp7[0] != this.vecPawn.get(6).getPosX() && arp7[1] != this.vecPawn.get(6).getPosY()) {
+			
+			
+			ar[arp7[0]][arp7[1]] = " ";
+		}//end if
+		else if(arp7[0] == this.vecPawn.get(6).getPosX() && arp7[1] == this.vecPawn.get(6).getPosY()) {
+		
+			ar[this.vecPawn.get(6).getPosX()][this.vecPawn.get(6).getPosY()] = this.vecPawn.get(6).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/		
+		if(arp8[0] != this.vecPawn.get(7).getPosX() && arp8[1] != this.vecPawn.get(7).getPosY()) {
+			
+			
+			ar[arp8[0]][arp8[1]] = " ";
+		}//end if
+		else if(arp8[0] == this.vecPawn.get(7).getPosX() && arp8[1] == this.vecPawn.get(7).getPosY()) {
+		
+			ar[this.vecPawn.get(7).getPosX()][this.vecPawn.get(7).getPosY()] = this.vecPawn.get(7).getName(); 
+		}//end else if
+		/*----------------------------------------------------------------------*/
+		
+		 this.arQ[0] = this.queen.getPosX();
+		 this.arQ[1] = this.queen.getPosX();
+
+		 this.arK[0] = this.king.getPosX();
+		 this.arK[1] = this.king.getPosY();
+
+		 this.arkW[0] = this.knightW.getPosX();
+		 this.arkW[1] = this.knightW.getPosY();
+
+		 this.arkB[0] = this.knightB.getPosX();
+		 this.arkB[1] = this.knightB.getPosY();
+
+		 this.arbB[0] = this.bishopB.getPosX();
+		 this.arbB[1] = this.bishopB.getPosY();
+
+		 this.arbW[0] = this.bishopW.getPosX();
+		 this.arbW[1] = this.bishopW.getPosY();
+
+		 this.arrB[0] = this.rookB.getPosX();
+		 this.arrB[1] = this.rookB.getPosY();
+
+		 this.arrW[0] = this.rookW.getPosX();
+		 this.arrW[1] = this.rookW.getPosY();
+
+		 this.arp1[0] = this.vecPawn.get(0).getPosX();
+		 this.arp1[1] = this.vecPawn.get(0).getPosY();
+
+		 this.arp2[0] = this.vecPawn.get(1).getPosX();
+		 this.arp2[1] = this.vecPawn.get(1).getPosY();
+
+		 this.arp3[0] = this.vecPawn.get(2).getPosX();
+		 this.arp3[1] = this.vecPawn.get(2).getPosY();
+
+		 this.arp4[0] = this.vecPawn.get(3).getPosX();
+		 this.arp4[1] = this.vecPawn.get(3).getPosY();
+		 
+
+		 this.arp5[0] = this.vecPawn.get(4).getPosX();
+		 this.arp5[1] = this.vecPawn.get(4).getPosY();
+
+		 this.arp6[0] = this.vecPawn.get(5).getPosX();
+		 this.arp6[1] = this.vecPawn.get(5).getPosY();
+
+		 this.arp7[0] = this.vecPawn.get(6).getPosX();
+		 this.arp7[1] = this.vecPawn.get(6).getPosY();
+
+		 this.arp8[0] = this.vecPawn.get(7).getPosX();
+		 this.arp8[1] = this.vecPawn.get(7).getPosY();
+			
+		
 		/*-------------------------------------------------------------------------------------*/
 		ar[player2.king.getPosX()][player2.king.getPosY()] = player2.king.getName(); 
 		ar[player2.queen.getPosX()][player2.queen.getPosY()] = player2.queen.getName();
@@ -129,25 +370,69 @@ class Player1 extends Player{
 		,{{0,6},{1,6},{2,6},{3,6},{4,6},{5,6},{6,6},{7,6}},{{0,7},{1,7},{2,7},{3,7},{4,7},{5,7},{6,7},{7,7}}};
 		
 		this.rookW.setPos(ar[7][0]);
+		this.arrW[0] = 0;
+		this.arrW[1] = 7;
 		this.knightB.setPos(ar[7][1]);
+		this.arkB[0] = 1;
+		this.arkB[1] = 7;
 		this.bishopW.setPos(ar[7][2]);
+		this.arbW[0] = 2;
+		this.arbW[1] = 7;
 		if(!this.color) {
 			
 			this.queen.setPos(ar[7][3]);
+			this.arQ[0] = 3;
+			this.arQ[1] = 7;
 			this.king.setPos(ar[7][4]);
+			this.arK[0] = 4;
+			this.arK[1] = 7;
 		}//end if
 		else {
 			this.king.setPos(ar[7][3]);
+			this.arK[0] = 3;
+			this.arK[1] = 7;
 			this.queen.setPos(ar[7][4]);
+			this.arQ[0] = 4;
+			this.arQ[1] = 7;
 		}//end else
 		this.bishopB.setPos(ar[7][5]);
+		this.arbB[0] = 5;
+		this.arbB[1] = 7;
 		this.knightW.setPos(ar[7][6]);
+		this.arkW[0] = 6;
+		this.arkB[1] = 7;
 		this.rookB.setPos(ar[7][7]);
+		this.arrB[0] = 7;
+		this.arrB[1] = 7;
 		for(i = 0; i < 8; i++) {
 			
 			this.vecPawn.get(i).setPos(ar[6][i]);
 			
 		}//end for loop
+		this.arp1[0] = 0;
+		this.arp1[1] = 6;
+		
+		this.arp2[0] = 1;
+		this.arp2[1] = 6;
+		
+		this.arp3[0] = 2;
+		this.arp3[1] = 6;
+		
+		this.arp4[0] = 3;
+		this.arp4[1] = 6;
+		
+		this.arp5[0] = 4;
+		this.arp5[1] = 6;
+		
+		
+		this.arp6[0] = 5;
+		this.arp6[1] = 6;
+		
+		this.arp7[0] = 6;
+		this.arp7[1] = 6;
+		
+		this.arp8[0] = 7;
+		this.arp8[1] = 6;
 	}//end PrePosFill
 
 }//end Player1 class

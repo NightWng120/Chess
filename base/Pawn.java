@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 
 class Pawn extends Piece{
@@ -43,7 +43,7 @@ class Pawn extends Piece{
 	
 	public boolean moveX(int[] next){
 		
-		boolean move;
+		
 		if(slope(next) == 1 && (next[0] - this.position[0]) == 1 && (next[1] - this.position[1]) == 1){
 			setPos(next);
 			return true;
@@ -52,7 +52,7 @@ class Pawn extends Piece{
 
 	}//end moveX
 	
-}//end Pawn clas
+}//end Pawn class
 
 
 

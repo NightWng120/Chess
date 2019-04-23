@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.io.*;
 
 
 class Game{
@@ -16,14 +16,15 @@ class Game{
 	}//end main
 
 	public Game(){
-
+		
 		menuGame();
 	}//end constructor
 
-	public menuGame(){
+	public void menuGame(){
 
 		Random random = new Random();
 		int rand;
+		
 		Scanner input = new Scanner(System.in);
 		String userin;
 		boolean loop = true;
@@ -35,7 +36,6 @@ class Game{
 			Scanner infile = new Scanner(file);	
 			int i;
 			while(loop){
-                
 				rand = random.nextInt(2);
 				System.out.println("|-------------------------|");
 				System.out.println("|   Welcome to GameBro's  |");
@@ -49,7 +49,7 @@ class Game{
 				System.out.printf("\n\n");
 				System.out.printf(": ");
 				userin = input.nextLine();
-				if(userin.equals("1"){
+				if(userin.equals("1")){
 					System.out.println("|-------------------------|");
 					System.out.println("| What color would you    |");
 					System.out.println("| like to be?             |");
@@ -65,8 +65,8 @@ class Game{
                 
 						System.out.println("Your color is White");
 						System.out.printf("\n\n");
-						player1.setColor(true);
-						player2.setColor(false);
+						Player1 player1 = new Player1(true);
+						Player2 player2 = new Player2(false);
 						while(loop2){
 							p1 = player1.menuPlayer(player2);
 							p2 = player2.menuPlayer(player1);
@@ -93,41 +93,138 @@ class Game{
 									}//end if
 									System.out.println(infile.nextLine());
 								}//end for loop
+								loop2 = false;
 							}//end else if
                 
-						}//end whlie loop
+						}//end while loop
 						continue;
 					}//end if
 					else if(userin.equals("2")){
                 
 						System.out.println("Your color is Black");
 						System.out.printf("\n\n");
-						player1.setColor(false);
-						player2.setColor(true);
+						Player1 player1= new Player1(false);
+						Player2 player2= new Player2(true);
+						while(loop2){
+							
+							p2 = player2.menuPlayer(player1);
+							p1 = player1.menuPlayer(player2);
+							if(p1){
+								for(i = 0; i < 28; i++){								
+									
+									if(i == 17){
+										System.out.println("Player 1 Wins!!");
+										infile.nextLine();
+									}//end if
+									System.out.println(infile.nextLine());
+                
+								}//end for loop
+								loop2 = false;
+							}//end if
+							else if(p2){
+                
+								for(i = 0; i < 28; i++){
+                
+									if(i == 17){
+                
+										System.out.println("Player 2 Wins!!");
+										infile.nextLine();
+									}//end if
+									System.out.println(infile.nextLine());
+								}//end for loop
+								loop2 = false;
+							}//end else if
+								
+						}//end while loop
 						continue;
 					}//end else if
 					else if(userin.equals("3")){
                 
-						if(rand){
+						if(rand == 1){
 							
 							System.out.println("Your color is White");
 							System.out.printf("\n\n");
-							player1.setColor(true);
-							player2.setColor(false);
+							Player1 player1 = new Player1(true);
+							Player2 player2 = new Player2(false);
+							
+							while(loop2){
+								p1 = player1.menuPlayer(player2);
+								p2 = player2.menuPlayer(player1);
+								if(p1){
+									for(i = 0; i < 28; i++){								
+										
+										if(i == 17){
+											System.out.println("Player 1 Wins!!");
+											infile.nextLine();
+										}//end if
+										System.out.println(infile.nextLine());
+	                
+									}//end for loop
+									loop2 = false;
+								}//end if
+								else if(p2){
+	                
+									for(i = 0; i < 28; i++){
+	                
+										if(i == 17){
+	                
+											System.out.println("Player 2 Wins!!");
+											infile.nextLine();
+										}//end if
+										System.out.println(infile.nextLine());
+									}//end for loop
+									loop2 = false;
+								}//end else if
+	                
+							}//end while loop
 						}//end if
-						else if(!rand){
+						else if(rand == 0){
                 
 							System.out.println("Your color is black");
 							System.out.printf("\n\n");	
-							player1.setColor(false);
-							player2.setColr(true); 
+							
+							Player2 player2 = new Player2(true); 
+							Player1 player1 = new Player1(false);
+							
+							while(loop2){
+								p1 = player1.menuPlayer(player2);
+								p2 = player2.menuPlayer(player1);
+								if(p1){
+									for(i = 0; i < 28; i++){								
+										
+										if(i == 17){
+											System.out.println("Player 1 Wins!!");
+											infile.nextLine();
+										}//end if
+										System.out.println(infile.nextLine());
+	                
+									}//end for loop
+									loop2 = false;
+								}//end if
+								else if(p2){
+	                
+									for(i = 0; i < 28; i++){
+	                
+										if(i == 17){
+	                
+											System.out.println("Player 2 Wins!!");
+											infile.nextLine();
+										}//end if
+										System.out.println(infile.nextLine());
+									}//end for loop
+									loop2 = false;
+								}//end else if
+	                
+							}//end while loop
 						}//end else if
-						
+						continue;
 					}//end else if
 				}//end if
                 
                 
 			}//end while loop
+			input.close();
+			infile.close();
 		}//end try
 		catch(FileNotFoundException ex){
 

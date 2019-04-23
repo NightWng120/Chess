@@ -30,16 +30,17 @@ public abstract class Player{
 		this.rookB = new Rook(this.color);
 		this.knightB = new Knight(this.color);
 		this.knightW = new Knight(this.color);
-
+		this.vecPawn = new Vector<Pawn>();
 		for(i = 0; i < 8; i++){
 
 			this.vecPawn.add(new Pawn(this.color));
-			this.vecPawn.lastElement().setColor(color);
 		}//end for loop
 
 
 
 	}//end constructor
+	
+	
 	
 	public <J extends Player>boolean movePiece(J player, int[] pos, int[] next){
 
@@ -278,60 +279,62 @@ public abstract class Player{
 		int i;
 		
 		
-			
-			if(next[0] == player.knightW.getPosX() && next[1] == player.knightW.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.knightB.getPosX() && next[1] == player.knightB.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.rookW.getPosX() && next[1] == player.rookW.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.rookB.getPosX() && next[1] == player.rookB.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.bishopB.getPosX() && next[1] == player.bishopB.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.bishopW.getPosX() && next[1] == player.bishopW.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.queen.getPosX() && next[1] == player.queen.getPosY()) {
-				
-				return true;
-			}//end if
-			
-			if(next[0] == player.king.getPosX() && next[1] == player.king.getPosY()) {
-				
-				return false;
-			}//end if
-			
-			for(i = 0; i < 8 ;i ++) {
-				
-				if(pos[0] == player.vecPawn.get(i).getPosX() && pos[1] == player.vecPawn.get(i).getPosY()) {
+			if(obj.slope(next) == 1) {
+				if(next[0] == player.knightW.getPosX() && next[1] == player.knightW.getPosY()) {
 					
-					
-					continue;
-				}//end if
-				if(next[0] == player.vecPawn.get(i).getPosX() && next[1] == player.vecPawn.get(i).getPosY()) {
-				
 					return true;
 				}//end if
-
-			}//end for loop
+				
+				if(next[0] == player.knightB.getPosX() && next[1] == player.knightB.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.rookW.getPosX() && next[1] == player.rookW.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.rookB.getPosX() && next[1] == player.rookB.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.bishopB.getPosX() && next[1] == player.bishopB.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.bishopW.getPosX() && next[1] == player.bishopW.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.queen.getPosX() && next[1] == player.queen.getPosY()) {
+					
+					return true;
+				}//end if
+				
+				if(next[0] == player.king.getPosX() && next[1] == player.king.getPosY()) {
+					
+					return false;
+				}//end if
+				
+				for(i = 0; i < 8 ;i ++) {
+					
+					if(pos[0] == player.vecPawn.get(i).getPosX() && pos[1] == player.vecPawn.get(i).getPosY()) {
+						
+						
+						continue;
+					}//end if
+					if(next[0] == player.vecPawn.get(i).getPosX() && next[1] == player.vecPawn.get(i).getPosY()) {
+					
+						return true;
+					}//end if
+	
+				}//end for loop
+			}//end if
+			
 		return false;
 	}//end validPawn
 	
@@ -357,6 +360,7 @@ public abstract class Player{
 
 					
 				if(this.color && !player.knightB.getColor()){
+					
 					obj.setPos(next);
 					player.knightB.setPos(endW);
 					return true;

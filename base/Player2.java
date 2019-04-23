@@ -23,22 +23,22 @@ class Player2 extends Player{
 		
 		super(color);
 		
-		int[] arQ = new int[2];
-		int[] arK = new int[2];
-		int[] arkW = new int[2];
-		int[] arkB = new int[2];
-		int[] arbB = new int[2];
-		int[] arbW = new int[2];
-		int[] arrB = new int[2];
-		int[] arrW = new int[2];
-		int[] arp1 = new int[2];
-		int[] arp2 = new int[2];
-		int[] arp3 = new int[2];
-		int[] arp4 = new int[2];
-		int[] arp5 = new int[2];
-		int[] arp6 = new int[2];
-		int[] arp7 = new int[2];
-		int[] arp8 = new int[2];
+		this.arQ = new int[2];
+		this.arK = new int[2];
+		this.arkW = new int[2];
+		this.arkB = new int[2];
+		this.arbB = new int[2];
+		this.arbW = new int[2];
+		this.arrB = new int[2];
+		this.arrW = new int[2];
+		this.arp1 = new int[2];
+		this.arp2 = new int[2];
+		this.arp3 = new int[2];
+		this.arp4 = new int[2];
+		this.arp5 = new int[2];
+		this.arp6 = new int[2];
+		this.arp7 = new int[2];
+		this.arp8 = new int[2];
 		PrePosFill(); 
 		
 		

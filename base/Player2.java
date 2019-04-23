@@ -71,7 +71,7 @@ class Player2 extends Player{
 					next[0] = input.nextInt();
 					next[1] = input.nextInt();
 					if(movePiece(player1, temp, next)) {
-						
+						loop = false;
 						loop2 = false;
 						
 					}//end if

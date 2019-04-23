@@ -15,8 +15,7 @@ class Queen extends Piece{
 
 	public boolean moveChoose(int[] next){
 
-		double slope = slope(next);
-		(slope == 1){
+		if(slope(next) == 1){
 			if((this.position[0] - next[0]) > 0){
 
 				return moveDownX(false, (this.position[0] - next[0]));
@@ -29,7 +28,7 @@ class Queen extends Piece{
 								
 		}//end if
 
-		else if(slope == -1){
+		else if(slope(next) == -1){
 
 			if((this.position[0] - next[0]) > 0){
 
@@ -42,7 +41,7 @@ class Queen extends Piece{
 			}//end else if
 
 		}//end else if
-		else if(slope == 0){
+		else if(slope(next) == 0){
 			
 			if((this.position[0] - next[0]) > 0){
 
@@ -54,7 +53,7 @@ class Queen extends Piece{
 			}//end else if
 
 		}//end else if
-		else if(slope == 3){
+		else if(slope(next) == 3){
 
 			if((this.position[1] - next[1]) > 0){
 

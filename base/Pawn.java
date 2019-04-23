@@ -17,25 +17,26 @@ class Pawn extends Piece{
 	}//end Pawn
 	
 
-	public boolean moveChoose(int[] next){
-
+	public boolean moveChoose(int[] next, boolean move){
+		
+		if(move){
+	
+			return moveX(next);
+		}//end if
 		if(this.start){
-			if((next[1] - this.position[1]) <= 0){
-
-				return false;
-			}//end if
+				
 			if((next[1] - this.position[1]) == 1 || (next[1] - this.position[1]) == 2){
+				setPos(next);	
 				return true;
 			}//end if
-			
+			else if((next[1] - this.position[1]) < 1 || (next[1] - this.position[1]) > 2){
+
+				return false;
+			}//end else if
 			
 		}//end if
-		else if(slope(next) == 1){
-
-			return moveX(next);
 
 
-		}//end else if
 		return false;
 	}//end moveChoose
 
@@ -44,6 +45,7 @@ class Pawn extends Piece{
 		
 		boolean move;
 		if(slope(next) == 1 && (next[0] - this.position[0]) == 1 && (next[1] - this.position[1]) == 1){
+			setPos(next);
 			return true;
 		}//end if		
 		return false;

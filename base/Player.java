@@ -20,21 +20,20 @@ public abstract class Player{
 	public Player(boolean color){
 		
 		int i;
-		
 		this.color = color;
 		this.points = 0;
-		this.queen = new Queen(color);
-		this.king = new King(color);
-		this.bishopW = new Bishop(color);
-		this.bishopB = new Bishop(color);
-		this.rookW = new Rook(color);
-		this.rookB = new Rook(color);
-		this.knightB = new Knight(color);
-		this.knightW = new Knight(color);
+		this.queen = new Queen(this.color);
+		this.king = new King(this.color);
+		this.bishopW = new Bishop(this.color);
+		this.bishopB = new Bishop(this.color);
+		this.rookW = new Rook(this.color);
+		this.rookB = new Rook(this.color);
+		this.knightB = new Knight(this.color);
+		this.knightW = new Knight(this.color);
 
 		for(i = 0; i < 8; i++){
 
-			this.vecPawn.add(new Pawn(color));
+			this.vecPawn.add(new Pawn(this.color));
 			this.vecPawn.lastElement().setColor(color);
 		}//end for loop
 

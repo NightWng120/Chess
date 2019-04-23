@@ -16,11 +16,11 @@ class King extends Piece{
 
 		if(slope(next) == 0){
 				
-			if(this.position[0] - next[0]){
+			if((this.position[0] - next[0]) > 0){
 
 				return moveX(false);
 			}//end if
-			else if(next[0] - this.position[0]){
+			else if((next[0] - this.position[0]) > 0){
 
 				return moveX(true);
 
@@ -28,39 +28,40 @@ class King extends Piece{
 			return false;
 		}//end if
 		else if(slope(next) == 3){
-			if(this.position[1] - next[1]){
+			if((this.position[1] - next[1]) > 0){
 				
 				return moveY(false);
 
 			}//end if
-			else if(next[1] - this.position[1]){
+			else if((next[1] - this.position[1]) > 0){
 
 				return moveY(true);
 			}//end else if
 			return false;
 		}//end else if
 		else if(slope(next) == 1){
-			if(this.position[0] - next[0]){
+			if((this.position[0] - next[0]) > 0){
 
 				return moveDownX(false);
 			}//end if
-			else if(next[0] - this.position[0]){
+			else if((next[0] - this.position[0]) > 0){
 
 				return moveUpX(true);
 			}//end else if
 			return false;
 		}//end else if
 		else if(slope(next) == -1){
-			if(this.position[0] - next[0]){
+			if((this.position[0] - next[0]) > 0){
 
 				return moveDownX(true);
 			}//end if
-			else if(next[0] - this.position[0]){
+			else if((next[0] - this.position[0]) > 0){
 
 				return moveUpX(false);
 			}//end else if
-			return false
+			return false;
 		}//end else if
+		return false;
 	}//end moveChoose
 
 	public boolean moveUpX(boolean move){

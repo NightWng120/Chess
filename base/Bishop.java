@@ -50,7 +50,7 @@ class Bishop extends Piece{
 
 		}//end if
 
-
+		return false;
 	}//end moveChoose
 	public boolean moveUp(boolean move, int dist){
 
@@ -64,7 +64,7 @@ class Bishop extends Piece{
 		}//end else if
 		return false;
 	}//end moveUp
-	public void moveDown(boolean move, int dist){
+	public boolean moveDown(boolean move, int dist){
 
 		if(move && bound(this.position[0], dist, 8) && bound(this.position[1], -dist, -1)){
 

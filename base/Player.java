@@ -285,37 +285,37 @@ public abstract class Player{
 					return true;
 				}//end if
 				
-				if(next[0] == player.knightB.getPosX() && next[1] == player.knightB.getPosY()) {
+				else if(next[0] == player.knightB.getPosX() && next[1] == player.knightB.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.rookW.getPosX() && next[1] == player.rookW.getPosY()) {
+				else if(next[0] == player.rookW.getPosX() && next[1] == player.rookW.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.rookB.getPosX() && next[1] == player.rookB.getPosY()) {
+				else if(next[0] == player.rookB.getPosX() && next[1] == player.rookB.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.bishopB.getPosX() && next[1] == player.bishopB.getPosY()) {
+				else if(next[0] == player.bishopB.getPosX() && next[1] == player.bishopB.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.bishopW.getPosX() && next[1] == player.bishopW.getPosY()) {
+				else if(next[0] == player.bishopW.getPosX() && next[1] == player.bishopW.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.queen.getPosX() && next[1] == player.queen.getPosY()) {
+				else if(next[0] == player.queen.getPosX() && next[1] == player.queen.getPosY()) {
 					
 					return true;
 				}//end if
 				
-				if(next[0] == player.king.getPosX() && next[1] == player.king.getPosY()) {
+				else if(next[0] == player.king.getPosX() && next[1] == player.king.getPosY()) {
 					
 					return false;
 				}//end if
@@ -333,6 +333,8 @@ public abstract class Player{
 					}//end if
 	
 				}//end for loop
+				obj.setPos(next);
+				return true;
 			}//end if
 			
 		return false;

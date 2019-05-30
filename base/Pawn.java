@@ -23,17 +23,27 @@ class Pawn extends Piece{
 	
 			return moveX(next);
 		}//end if
-		if(this.start){
-				
-			if((next[1] - this.position[1]) == 1 || (next[1] - this.position[1]) == 2){
-				setPos(next);	
-				return true;
-			}//end if
-			else if((next[1] - this.position[1]) < 1 || (next[1] - this.position[1]) > 2){
-
-				return false;
-			}//end else if
+		if(!move){
 			
+
+			if(this.start){
+
+				if((next[1] - this.position[1]) == 1){
+					setPos(next);	
+					return true;
+				}//end if
+				if((next[1] - this.position[1]) == 2){
+					
+					setPos(next);	
+					return true;		
+				}//end if{
+                               return false; 
+			}//end if
+			else if((next[1] - this.position[1])){
+				
+
+
+			}//end 
 		}//end if
 
 

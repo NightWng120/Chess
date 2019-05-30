@@ -1,4 +1,4 @@
-public abstract class Piece.java{
+public abstract class Piece{
 
 	protected boolean color; //This is the color of the piece where 'true' is white and 'false' is black
 	protected int[] position; //This is the position of the piece on the chess board
@@ -17,6 +17,12 @@ public abstract class Piece.java{
 
 		return this.position;
 	}//end getPos
+	public int getPosX(){
+		return this.position[0];
+	}//end getPosX
+	public int getPosY(){
+		return this.position[1];
+	}//end getPosY
 	public void setColor(boolean colour){
 		color = colour;
 	}//end setColor
@@ -24,6 +30,10 @@ public abstract class Piece.java{
 	public boolean getColor(){
 		return color;
 	}//end getColor
+	public String getName(){
+		return this.name;
+
+	}//end getName
 
 	
 	//This method determines and returns the slope of the current position and next move

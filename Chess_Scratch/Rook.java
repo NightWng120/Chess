@@ -18,7 +18,7 @@ class Rook extends Piece{
 	public boolean MoveChoose(int[] next){
 		
 		double slope = slope(position, next);
-		if(bound){
+		if(bound(next)){
 			if(slope == 0 || slope == 100){
 				return true;
 			}//end if

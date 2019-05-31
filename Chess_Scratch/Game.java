@@ -32,7 +32,7 @@ class Game{
 		while(loop){
 			
 			posFill(ar);
-			print();
+			print(ar);
 			System.out.println("|-------------------------|");
 			System.out.println("| Enter the Coords of your|");			
 			System.out.println("| next move               |");			
@@ -62,7 +62,7 @@ class Game{
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n\n");
 
-				print();
+				print(ar);
 				continue;
 			}//end else if
 
@@ -70,7 +70,7 @@ class Game{
 		
 	}//end constructor
 	
-	public void print(){
+	public void print(String[][] ar){
 		System.out.println(" ---------------------------------");
 				System.out.printf("7| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][7], ar[1][7], ar[2][7], ar[3][7], ar[4][7], ar[5][7], ar[6][7], ar[7][7]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");

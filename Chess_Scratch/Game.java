@@ -49,9 +49,88 @@ class Game{
 					break;
 				}//end if
                 		/*Statements end program when input is 'quit'*/
-                
-				next[0] = Integer.parseInt("" + userin.charAt(0));
-				next[1] = Integer.parseInt("" + userin.charAt(2));
+        			        
+				if(userin.charAt(0) >= 'a' || userin.charAt(0) <= 'h' || userin.charAt(0) >= 'A' || userin.charAt(0) <= 'H'){
+				/*If statement determines if inputed letter is valid for board and switch converts letter to integer*/
+
+					switch(userin.charAt(0)){
+						
+						case 'a':
+							next[0] = 0;
+							break;
+
+						case 'b':
+							next[0] = 1;
+							break;
+
+						case 'c':
+							next[0] = 2;
+							break;
+
+						case 'd':
+							next[0] = 3;
+							break;
+
+						case 'e':
+							next[0] = 4;
+							break;
+
+						case 'f':
+							next[0] = 5;
+							break;
+
+						case 'g':
+							next[0] = 6;
+							break;
+
+						case 'h':
+							next[0] = 7;
+							break;
+
+						case 'A':
+							next[0] = 0;
+							break;
+
+						case 'B':
+							next[0] = 1;
+							break;
+
+						case 'C':
+							next[0] = 2;
+							break;
+
+						case 'D':
+							next[0] = 3;
+							break;
+
+						case 'E':
+							next[0] = 4;
+							break;
+
+						case 'F':
+							next[0] = 5;
+							break;
+
+						case 'G':
+							next[0] = 6;
+							break;
+
+						case 'H':
+							next[0] = 7;
+							break;
+
+
+
+
+
+					}//end switch
+					next[1] = (Integer.parseInt("" + userin.charAt(2)) - 1);
+				}//end if
+				else{
+					System.out.println("***Invalid Input***");
+					continue;
+
+				}//end else
 				/*Setting of converted string to 'next' position array*/
 			}//end try
 			catch(NumberFormatException | StringIndexOutOfBoundsException ex){
@@ -76,23 +155,23 @@ class Game{
 	
 	public void print(String[][] ar){//Board print function body
 		System.out.println(" ---------------------------------");
-				System.out.printf("7| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][7], ar[1][7], ar[2][7], ar[3][7], ar[4][7], ar[5][7], ar[6][7], ar[7][7]);
+				System.out.printf("8| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][7], ar[1][7], ar[2][7], ar[3][7], ar[4][7], ar[5][7], ar[6][7], ar[7][7]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("6| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][6], ar[1][6], ar[2][6], ar[3][6], ar[4][6], ar[5][6], ar[6][6], ar[7][6]);
+				System.out.printf("7| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][6], ar[1][6], ar[2][6], ar[3][6], ar[4][6], ar[5][6], ar[6][6], ar[7][6]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("5| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][5], ar[1][5], ar[2][5], ar[3][5], ar[4][5], ar[5][5], ar[6][5], ar[7][5]);
+				System.out.printf("6| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][5], ar[1][5], ar[2][5], ar[3][5], ar[4][5], ar[5][5], ar[6][5], ar[7][5]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("4| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][4], ar[1][4], ar[2][4], ar[3][4], ar[4][4], ar[5][4], ar[6][4], ar[7][4]);
+				System.out.printf("5| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][4], ar[1][4], ar[2][4], ar[3][4], ar[4][4], ar[5][4], ar[6][4], ar[7][4]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("3| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][3], ar[1][3],ar[2][3], ar[3][3], ar[4][3], ar[5][3], ar[6][3], ar[7][3]);
+				System.out.printf("4| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][3], ar[1][3],ar[2][3], ar[3][3], ar[4][3], ar[5][3], ar[6][3], ar[7][3]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("2| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][2], ar[1][2], ar[2][2], ar[3][2], ar[4][2], ar[5][2], ar[6][2], ar[7][2]);
+				System.out.printf("3| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][2], ar[1][2], ar[2][2], ar[3][2], ar[4][2], ar[5][2], ar[6][2], ar[7][2]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("1| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][1], ar[1][1], ar[2][1], ar[3][1], ar[4][1], ar[5][1], ar[6][1], ar[7][1]);
+				System.out.printf("2| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][1], ar[1][1], ar[2][1], ar[3][1], ar[4][1], ar[5][1], ar[6][1], ar[7][1]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
-				System.out.printf("0| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][0], ar[1][0], ar[2][0], ar[3][0], ar[4][0], ar[5][0], ar[6][0], ar[7][0]);
+				System.out.printf("1| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][0], ar[1][0], ar[2][0], ar[3][0], ar[4][0], ar[5][0], ar[6][0], ar[7][0]);
 				System.out.println(" ---------------------------------");
-				System.out.println("   0   1   2   3   4   5   6   7  ");
+				System.out.println("   A   B   C   D   E   F   G   H  ");
 				System.out.printf("\n\n");
 				/*Board 2D array*/
 	}//end print

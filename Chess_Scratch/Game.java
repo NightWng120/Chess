@@ -12,9 +12,11 @@ class Game{
 	public Game(){
 		this.rook = new Rook();
 		this.rook.setColor(false);
-		prePosfill(rook);
+		prePosfill(rook);//Function that sets initial position of piece call
+
 		String ar[][] = {{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},
-				{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "}};;
+		/*Blank Board Array*/{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "}};;
+		
 		boolean loop = true;
 		int[] next = new int[2];		
 		
@@ -31,8 +33,9 @@ class Game{
 		
 		while(loop){
 			
-			posFill(ar);
-			print(ar);
+			posFill(ar);//Function that sets updated position of piece call
+			print(ar);//Board print function
+
 			System.out.println("|-------------------------|");
 			System.out.println("| Enter the Coords of your|");			
 			System.out.println("| next move               |");			
@@ -45,24 +48,25 @@ class Game{
 					loop = false;
 					break;
 				}//end if
-                
+                		/*Statements end program when input is 'quit'*/
                 
 				next[0] = Integer.parseInt("" + userin.charAt(0));
 				next[1] = Integer.parseInt("" + userin.charAt(2));
+				/*Setting of converted string to 'next' position array*/
 			}//end try
 			catch(NumberFormatException | StringIndexOutOfBoundsException ex){
 				System.out.println("***Invalid Input***");
 				continue;
 			}//end catch
 
-			if(this.rook.MoveChoose(next)){
+			if(this.rook.MoveChoose(next)){//If statement call of function that determines validity of inputed next position
 				this.rook.setPos(next);
 			}//end if
 			else if(!this.rook.MoveChoose(next)){
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n\n");
 
-				print(ar);
+				
 				continue;
 			}//end else if
 
@@ -70,7 +74,7 @@ class Game{
 		
 	}//end constructor
 	
-	public void print(String[][] ar){
+	public void print(String[][] ar){//Board print function body
 		System.out.println(" ---------------------------------");
 				System.out.printf("7| %s | %s | %s | %s | %s | %s | %s | %s |\n", ar[0][7], ar[1][7], ar[2][7], ar[3][7], ar[4][7], ar[5][7], ar[6][7], ar[7][7]);
 				System.out.println(" |---|---|---|---|---|---|---|---|");
@@ -90,25 +94,31 @@ class Game{
 				System.out.println(" ---------------------------------");
 				System.out.println("   0   1   2   3   4   5   6   7  ");
 				System.out.printf("\n\n");
-		
+				/*Board 2D array*/
 	}//end print
 	
-	public void prePosfill(Rook rook){
+	public void prePosfill(Rook rook){//Function body for function that sets intial position of piece and previous position variable
+		
 		int[] ar[][] = {{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0}},{{0,1},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1}},{{0,2},{1,2},{2,2},{3,2},{4,2},{5,2},{6,2},{7,2}}
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
 		,{{0,6},{1,6},{2,6},{3,6},{4,6},{5,6},{6,6},{7,6}},{{0,7},{1,7},{2,7},{3,7},{4,7},{5,7},{6,7},{7,7}}};
-		this.rook.setPos(ar[0][7]);
-		this.arR = this.rook.getPos();	
+		/*Array of position arrays for every position on the board*/		
+	
+		this.rook.setPos(ar[0][7]);//Piece position setting
+		this.arR = this.rook.getPos();//Previous position assignment	
 	}//end prePosfill
-	public void posFill(String[][] arr){
-		if(this.arR[0] != this.rook.getPosX() || this.arR[1] != this.rook.getPosY()){
+	public void posFill(String[][] arr){/*Function body for function that determines whether piece has moved or not; 
+							updates position variable and board array accordingly*/
+
+		if(this.arR[0] != this.rook.getPosX() || this.arR[1] != this.rook.getPosY()){//If checks if position has changed
 			arr[this.arR[0]][this.arR[1]] = " ";
-			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();	
+			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
+			this.arR = this.rook.getPos();
+			/*Updates board and previous variable if it has*/
 		}//end if
 		else{
-			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
+			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
-
 
 	}//end posFill
 

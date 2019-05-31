@@ -11,11 +11,11 @@ public abstract class Piece{
 
 	}//end constructor		
 	public void setPos(int[] pos){
-		this.position = pos;
+		this.position = pos.clone();
 	}//end setPos 
 	public int[] getPos(){
 
-		return this.position;
+		return this.position.clone();
 	}//end getPos
 	public int getPosX(){
 		return this.position[0];
@@ -41,17 +41,26 @@ public abstract class Piece{
 		try{
 			double slope;
 			
-			slope = (pos[1] - next[1]) / (pos[0] - next[0]);
+			slope = ((double)next[1] - (double)pos[1]) / ((double)next[0] - (double)pos[0]);
+			
+			if(slope == Double.POSITIVE_INFINITY || slope == Double.NEGATIVE_INFINITY) {
+				
+				slope = 100;
+				
+			}//end if
+			
+			
 			return slope;
 
 		}//end try
 		catch(ArithmeticException ex){
-			return 100;
+			
+			System.out.println("Number Error");
+			return 0;
 		}//end catch
 
-		/*Using try catch because a vertical slope throws an ArtithmeticException, and we can use this to
-			show that a certain slope is vertical with the catch statement*/	
-
+		
+		
 	}//end slope
 
 	//The bound method determines whether or not the piece is on the board

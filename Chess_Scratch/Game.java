@@ -124,7 +124,7 @@ class Game{
 
 
 					}//end switch
-					next[1] = (Integer.parseInt("" + userin.charAt(2)) - 1);
+					next[1] = (Integer.parseInt("" + userin.charAt(1)) - 1);
 				}//end if
 				else{
 					System.out.println("***Invalid Input***");

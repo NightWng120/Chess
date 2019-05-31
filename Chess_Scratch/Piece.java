@@ -72,4 +72,13 @@ public abstract class Piece{
 			return true;
 		}//end else
 	}//end bound
+	public double dist(int[] pos, int[] next){
+
+		double dist = Math.sqrt(((next[1] * next[1]) - (pos[1] * pos[1])) + ((next[0] * next[0]) - (pos[1] * pos[1])));
+		
+		return dist;
+
+
+	}//end dist
+
 }//end Piece abstract class

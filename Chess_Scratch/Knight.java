@@ -3,6 +3,9 @@ class Knight extends Piece{
 	
 
 	public Knight(boolean color){
+		
+		this.color = color;
+
 		if(color){
 			this.name = "N";
 		}//end if

@@ -3,6 +3,9 @@ class Rook extends Piece{
 
 	
 	public Rook(boolean color){
+			
+		this.color = color;	
+	
 		if(color){
 			name = "R";			
 		}//end if	

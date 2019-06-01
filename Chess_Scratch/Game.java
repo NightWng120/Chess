@@ -35,7 +35,8 @@ class Game extends Player{
 	
 	public Game(boolean color){
 
-		super(color);
+		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
+		
 		prePosfill();//Function that sets initial position of piece call
 
 		String ar[][] = {{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},
@@ -77,9 +78,9 @@ class Game extends Player{
         			        
         			        
 				if(userin.charAt(0) >= 'a' || userin.charAt(0) <= 'h' || userin.charAt(0) >= 'A' || userin.charAt(0) <= 'H'){
-				/*If statement determines if inputed letter is valid for board and switch converts letter to integer*/
+				/*If statement determines if inputted letter is valid for board and switch converts letter to integer*/
         
-					switch(userin.charAt(3)){
+					switch(userin.charAt(0)){
 						
 						case 'a':
 							pos[0]= 0;
@@ -98,7 +99,7 @@ class Game extends Player{
 							break;
         
 						case 'e':
-							next[3] = 4;
+							pos[0] = 4;
 							break;
         
 						case 'f':
@@ -163,67 +164,67 @@ class Game extends Player{
 					switch(userin.charAt(3)){
 						
 						case 'a':
-							next[3] = 0;
+							next[0] = 0;
 							break;
         
 						case 'b':
-							next[3] = 1;
+							next[0] = 1;
 							break;
         
 						case 'c':
-							next[3] = 2;
+							next[0] = 2;
 							break;
         
 						case 'd':
-							next[3] = 3;
+							next[0] = 3;
 							break;
         
 						case 'e':
-							next[3] = 4;
+							next[0] = 4;
 							break;
         
 						case 'f':
-							next[3] = 5;
+							next[0] = 5;
 							break;
         
 						case 'g':
-							next[3] = 6;
+							next[0] = 6;
 							break;
         
 						case 'h':
-							next[3] = 7;
+							next[0] = 7;
 							break;
         
 						case 'A':
-							next[3] = 0;
+							next[0] = 0;
 							break;
         
 						case 'B':
-							next[3] = 1;
+							next[0] = 1;
 							break;
         
 						case 'C':
-							next[3] = 2;
+							next[0] = 2;
 							break;
         
 						case 'D':
-							next[3] = 3;
+							next[0] = 3;
 							break;
         
 						case 'E':
-							next[3] = 4;
+							next[0] = 4;
 							break;
         
 						case 'F':
-							next[3] = 5;
+							next[0] = 5;
 							break;
         
 						case 'G':
-							next[3] = 6;
+							next[0] = 6;
 							break;
         
 						case 'H':
-							next[3] = 7;
+							next[0] = 7;
 							break;
         
         
@@ -231,7 +232,7 @@ class Game extends Player{
         
         
 					}//end switch
-					next[4] = (Integer.parseInt("" + userin.charAt(4)) - 1);
+					next[1] = (Integer.parseInt("" + userin.charAt(4)) - 1);
 
 				}//end if
 				else{
@@ -299,11 +300,13 @@ class Game extends Player{
 	public void posFill(String[][] arr){/*Function body for function that determines whether piece has moved or not; 
 							updates position variable and board array accordingly*/
 
+		int[] arR = this.rook.getPos();
+		int[] arK = this.knight.getPos();
+		
 
 
 
-
-		if(Arrays.equals(arR, this.rook.getPos())){//If checks if position has changed
+		if(Arrays.equals(arR, arR)){//If checks if position has changed
 			arr[this.arR[0]][this.arR[1]] = " ";
 			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
 			this.arR = this.rook.getPos();
@@ -316,7 +319,7 @@ class Game extends Player{
 
 
 
-		if(Arrays.equals(arK, this.knight.getPos())){//If checks if position has changed
+		if(Arrays.equals(arK, arK)){//If checks if position has changed
 			arr[this.arK[0]][this.arK[1]] = " ";
 			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();
 			this.arK = this.knight.getPos();

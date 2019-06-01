@@ -23,9 +23,7 @@ public abstract class Piece{
 	public int getPosY(){
 		return this.position[1];
 	}//end getPosY
-	public void setColor(boolean colour){
-		color = colour;
-	}//end setColor
+	
 
 	public boolean getColor(){
 		return color;
@@ -74,7 +72,7 @@ public abstract class Piece{
 	}//end bound
 	public double dist(int[] pos, int[] next){
 
-		double dist = Math.sqrt(((next[1] * next[1]) - (pos[1] * pos[1])) + ((next[0] * next[0]) - (pos[1] * pos[1])));
+		double dist = Math.sqrt(((next[1] - pos[1]) * (next[1] - pos[1])) + ((next[0] - pos[0]) * (next[0] - pos[0])));
 		
 		return dist;
 

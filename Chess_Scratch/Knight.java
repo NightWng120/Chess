@@ -2,11 +2,11 @@ class Knight extends Piece{
 
 	
 
-	public Knight(){
-		if(this.color){
+	public Knight(boolean color){
+		if(color){
 			this.name = "N";
 		}//end if
-		else if(!this.color){
+		else if(!color){
 			this.name = "n";
 		}//end else if
 
@@ -17,7 +17,7 @@ class Knight extends Piece{
 		double dist = dist(this.position, next);
 		double slope = slope(this.position, next);
 		if(slope == .5 || slope == -.5 || slope == 2 || slope == -2){
-			if(dist > 3.5 && dist < 3.7){
+			if(dist > 2.1 && dist < 2.3){
 				return true;
 			}//end if
 			else{

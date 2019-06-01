@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Test{
-
+/*
 
 	public static void main(String[] args){
 		int[] k = {1,2};
@@ -45,11 +45,11 @@ class Test{
 			}//end catch
 				
 		}//end while loop
-		*/
+		
 
 
 
 	}//end main
 
-
+*/
 }//end class

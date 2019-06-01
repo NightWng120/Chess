@@ -1,14 +1,12 @@
 class Rook extends Piece{
 
 
-	public static void main(String[] args){
-		new Rook();
-	}//end main
-	public Rook(){
-		if(this.color){
+	
+	public Rook(boolean color){
+		if(color){
 			name = "R";			
 		}//end if	
-		else if(!this.color){
+		else if(!color){
 			name = "r";
 		}//end else if		
 		

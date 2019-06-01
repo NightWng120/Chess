@@ -5,10 +5,10 @@ class Rook extends Piece{
 		new Rook();
 	}//end main
 	public Rook(){
-		if(color){
+		if(this.color){
 			name = "R";			
 		}//end if	
-		else if(!color){
+		else if(!this.color){
 			name = "r";
 		}//end else if		
 		

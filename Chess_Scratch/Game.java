@@ -1,24 +1,49 @@
 import java.util.*;
 
 
-class Game{
+class Game extends Player{
+	
 
-	public Rook rook;
-	public int[] arR;
+
+	private int[] arR;
+	private int[] arK;
+
 	public static void main(String[] args){
-		new Game();
+		Scanner input = new Scanner(System.in);
+		String userin;
+		boolean loop = true;
+		while(loop){
+			System.out.println("What color do you want?: (White/Black)");
+			userin = input.nextLine();
+			if(userin.equals("white") || userin.equals("White")){
+				new Game(true);
+                
+			}//end if
+			else if(userin.equals("black") || userin.equals("Black")){
+				new Game(false);
+			}//end else if
+			else if(userin.equals("quit")){
+				loop = false;
+			}//end else if
+			else{
+				System.out.println("***Invalid Input***");
+				continue;
+			}//end else
+
+		}//end while loop
 	}//end main
 	
-	public Game(){
-		this.rook = new Rook();
-		this.rook.setColor(false);
-		prePosfill(rook);//Function that sets initial position of piece call
+	public Game(boolean color){
+
+		super(color);
+		prePosfill();//Function that sets initial position of piece call
 
 		String ar[][] = {{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},
 		/*Blank Board Array*/{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "},{" "," "," "," "," "," "," "," "}};;
 		
 		boolean loop = true;
-		int[] next = new int[2];		
+		int[] next = new int[2];
+		int[] pos = new int[2];		
 		
 		Scanner input = new Scanner(System.in);
 		String userin;
@@ -50,81 +75,164 @@ class Game{
 				}//end if
                 		/*Statements end program when input is 'quit'*/
         			        
+        			        
 				if(userin.charAt(0) >= 'a' || userin.charAt(0) <= 'h' || userin.charAt(0) >= 'A' || userin.charAt(0) <= 'H'){
 				/*If statement determines if inputed letter is valid for board and switch converts letter to integer*/
-
-					switch(userin.charAt(0)){
+        
+					switch(userin.charAt(3)){
 						
 						case 'a':
-							next[0] = 0;
+							pos[0]= 0;
 							break;
-
+        
 						case 'b':
-							next[0] = 1;
+							pos[0] = 1;
 							break;
-
+        
 						case 'c':
-							next[0] = 2;
+							pos[0] = 2;
 							break;
-
+        
 						case 'd':
-							next[0] = 3;
+							pos[0] = 3;
 							break;
-
+        
 						case 'e':
-							next[0] = 4;
+							next[3] = 4;
 							break;
-
+        
 						case 'f':
-							next[0] = 5;
+							pos[0] = 5;
 							break;
-
+        
 						case 'g':
-							next[0] = 6;
+							pos[0] = 6;
 							break;
-
+        
 						case 'h':
-							next[0] = 7;
+							pos[0] = 7;
 							break;
-
+        
 						case 'A':
-							next[0] = 0;
+							pos[0] = 0;
 							break;
-
+        
 						case 'B':
-							next[0] = 1;
+							pos[0] = 1;
 							break;
-
+        
 						case 'C':
-							next[0] = 2;
+							pos[0] = 2;
 							break;
-
+        
 						case 'D':
-							next[0] = 3;
+							pos[0] = 3;
 							break;
-
+        
 						case 'E':
-							next[0] = 4;
+							pos[0] = 4;
 							break;
-
+        
 						case 'F':
-							next[0] = 5;
+							pos[0] = 5;
 							break;
-
+        
 						case 'G':
-							next[0] = 6;
+							pos[0] = 6;
 							break;
-
+        
 						case 'H':
-							next[0] = 7;
+							pos[0] = 7;
 							break;
-
-
-
-
-
+        
+        
+        
+        
+        
 					}//end switch
-					next[1] = (Integer.parseInt("" + userin.charAt(1)) - 1);
+					pos[1] = (Integer.parseInt("" + userin.charAt(1)) - 1);
+				}//end if
+				else{
+					System.out.println("***Invalid Input***");
+					continue;
+        
+				}//end else
+				if(userin.charAt(3) >= 'a' || userin.charAt(3) <= 'h' || userin.charAt(3) >= 'A' || userin.charAt(3) <= 'H'){
+				/*If statement determines if inputed letter is valid for board and switch converts letter to integer*/
+        
+					switch(userin.charAt(3)){
+						
+						case 'a':
+							next[3] = 0;
+							break;
+        
+						case 'b':
+							next[3] = 1;
+							break;
+        
+						case 'c':
+							next[3] = 2;
+							break;
+        
+						case 'd':
+							next[3] = 3;
+							break;
+        
+						case 'e':
+							next[3] = 4;
+							break;
+        
+						case 'f':
+							next[3] = 5;
+							break;
+        
+						case 'g':
+							next[3] = 6;
+							break;
+        
+						case 'h':
+							next[3] = 7;
+							break;
+        
+						case 'A':
+							next[3] = 0;
+							break;
+        
+						case 'B':
+							next[3] = 1;
+							break;
+        
+						case 'C':
+							next[3] = 2;
+							break;
+        
+						case 'D':
+							next[3] = 3;
+							break;
+        
+						case 'E':
+							next[3] = 4;
+							break;
+        
+						case 'F':
+							next[3] = 5;
+							break;
+        
+						case 'G':
+							next[3] = 6;
+							break;
+        
+						case 'H':
+							next[3] = 7;
+							break;
+        
+        
+        
+        
+        
+					}//end switch
+					next[4] = (Integer.parseInt("" + userin.charAt(4)) - 1);
+
 				}//end if
 				else{
 					System.out.println("***Invalid Input***");
@@ -137,17 +245,17 @@ class Game{
 				System.out.println("***Invalid Input***");
 				continue;
 			}//end catch
+			if(MoveCheck(pos, next)){
 
-			if(this.rook.MoveChoose(next)){//If statement call of function that determines validity of inputed next position
-				this.rook.setPos(next);
-			}//end if
-			else if(!this.rook.MoveChoose(next)){
-				System.out.println("***Invalid Move***");
-				System.out.printf("\n\n\n");
-
-				
 				continue;
-			}//end else if
+			}//end if	
+			else{
+				System.out.println("***Invalid Move***");
+				System.out.printf("\n\n");
+				continue;
+			}//end else
+			
+				
 
 		}//end while loop
 		
@@ -176,7 +284,7 @@ class Game{
 				/*Board 2D array*/
 	}//end print
 	
-	public void prePosfill(Rook rook){//Function body for function that sets intial position of piece and previous position variable
+	public void prePosfill(){//Function body for function that sets intial position of piece and previous position variable
 		
 		int[] ar[][] = {{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0}},{{0,1},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1}},{{0,2},{1,2},{2,2},{3,2},{4,2},{5,2},{6,2},{7,2}}
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
@@ -184,12 +292,18 @@ class Game{
 		/*Array of position arrays for every position on the board*/		
 	
 		this.rook.setPos(ar[0][7]);//Piece position setting
-		this.arR = this.rook.getPos();//Previous position assignment	
+		this.arR = this.rook.getPos();//Previous position assignment
+		this.knight.setPos(ar[0][6]);
+		this.arK = this.knight.getPos();	
 	}//end prePosfill
 	public void posFill(String[][] arr){/*Function body for function that determines whether piece has moved or not; 
 							updates position variable and board array accordingly*/
 
-		if(this.arR[0] != this.rook.getPosX() || this.arR[1] != this.rook.getPosY()){//If checks if position has changed
+
+
+
+
+		if(Arrays.equals(arR, this.rook.getPos())){//If checks if position has changed
 			arr[this.arR[0]][this.arR[1]] = " ";
 			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
 			this.arR = this.rook.getPos();
@@ -198,6 +312,22 @@ class Game{
 		else{
 			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
+
+
+
+
+		if(Arrays.equals(arK, this.knight.getPos())){//If checks if position has changed
+			arr[this.arK[0]][this.arK[1]] = " ";
+			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();
+			this.arK = this.knight.getPos();
+			/*Updates board and previous variable if it has*/
+		}//end if
+		else{
+			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();//Updates board when game starts and no change to previous has been made
+		}//end else
+
+
+
 
 	}//end posFill
 

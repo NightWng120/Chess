@@ -7,6 +7,7 @@ class Game extends Player{
 
 	private int[] arR;
 	private int[] arK;
+	private int[] arP;
 
 	public static void main(String[] args){
 		Scanner input = new Scanner(System.in);
@@ -291,22 +292,42 @@ class Game extends Player{
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
 		,{{0,6},{1,6},{2,6},{3,6},{4,6},{5,6},{6,6},{7,6}},{{0,7},{1,7},{2,7},{3,7},{4,7},{5,7},{6,7},{7,7}}};
 		/*Array of position arrays for every position on the board*/		
-	
-		this.rook.setPos(ar[0][7]);//Piece position setting
-		this.arR = this.rook.getPos();//Previous position assignment
-		this.knight.setPos(ar[0][6]);
-		this.arK = this.knight.getPos();	
+			
+		if(this.color){
+
+			this.rook.setPos(ar[0][7]);//Piece position setting
+			this.arR = this.rook.getPos();//Previous position assignment
+			this.knight.setPos(ar[0][6]);
+			this.arK = this.knight.getPos();
+			this.pawn.setPos(ar[1][3]);
+			this.arP = this.pawn.getPos();
+		}//end if
+
+		else if(!this.color){
+			this.rook.setPos(ar[7][0]);
+			this.arR = this.rook.getPos();
+			this.knight.setPos(ar[7][1]);
+			this.arK = this.knight.getPos();
+			this.pawn.setPos(ar[6][4]);
+			this.arP = this.pawn.getPos();
+
+		}//end else if
 	}//end prePosfill
 	public void posFill(String[][] arr){/*Function body for function that determines whether piece has moved or not; 
 							updates position variable and board array accordingly*/
 
 		int[] arR = this.rook.getPos();
 		int[] arK = this.knight.getPos();
+		int[] arP = this.knight.getPos();
 		
 
 
 
+<<<<<<< HEAD
 		if(!Arrays.equals(this.arR, arR)){//If checks if position has changed
+=======
+		if(Arrays.equals(this.arR, arR)){//If checks if position has changed
+>>>>>>> 0e5a4ab8309c6e647e00548c7e6a048efc414b42
 			arr[this.arR[0]][this.arR[1]] = " ";
 			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
 			this.arR = this.rook.getPos();
@@ -319,7 +340,11 @@ class Game extends Player{
 
 
 
+<<<<<<< HEAD
 		if(!Arrays.equals(this.arK, arK)){//If checks if position has changed
+=======
+		if(Arrays.equals(this.arK, arK)){//If checks if position has changed
+>>>>>>> 0e5a4ab8309c6e647e00548c7e6a048efc414b42
 			arr[this.arK[0]][this.arK[1]] = " ";
 			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();
 			this.arK = this.knight.getPos();
@@ -329,6 +354,17 @@ class Game extends Player{
 			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
 
+
+
+		if(Arrays.equals(this.arP, arP)){//If checks if position has changed
+			arr[this.arP[0]][this.arP[1]] = " ";
+			arr[this.pawn.getPosX()][this.pawn.getPosY()] = this.pawn.getName();
+			this.arP = this.pawn.getPos();
+			/*Updates board and previous variable if it has*/
+		}//end if
+		else{
+			arr[this.pawn.getPosX()][this.pawn.getPosY()] = this.pawn.getName();//Updates board when game starts and no change to previous has been made
+		}//end else
 
 
 

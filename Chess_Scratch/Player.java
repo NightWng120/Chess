@@ -51,11 +51,11 @@ public abstract class Player{
 			}//end else
 		}//end else if
 		
-		else if(Arrays.equals(pos, arR)){
+		else if(Arrays.equals(pos, arP)){
 
 			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.MoveChoose(next, false)){
 
-				this.rook.setPos(next);
+				this.pawn.setPos(next);
 				return true;
 
 			}//end if

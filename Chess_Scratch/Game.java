@@ -306,7 +306,7 @@ class Game extends Player{
 
 
 
-		if(Arrays.equals(arR, arR)){//If checks if position has changed
+		if(!Arrays.equals(this.arR, arR)){//If checks if position has changed
 			arr[this.arR[0]][this.arR[1]] = " ";
 			arr[this.rook.getPosX()][this.rook.getPosY()] = this.rook.getName();
 			this.arR = this.rook.getPos();
@@ -319,7 +319,7 @@ class Game extends Player{
 
 
 
-		if(Arrays.equals(arK, arK)){//If checks if position has changed
+		if(!Arrays.equals(this.arK, arK)){//If checks if position has changed
 			arr[this.arK[0]][this.arK[1]] = " ";
 			arr[this.knight.getPosX()][this.knight.getPosY()] = this.knight.getName();
 			this.arK = this.knight.getPos();

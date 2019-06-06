@@ -5,7 +5,7 @@ public abstract class Player{
 	protected Rook rook;
 	protected Knight knight;
 	protected boolean color;
-	
+	protected Vector<int[]> vecpos;
 /* ***NOTE***
 	You can make the array of piece positions by
 	using a 2d array and getPos() methods.
@@ -16,13 +16,14 @@ public abstract class Player{
 	
 */
 	public Player(boolean color){
+		this.vecpos = new Vector<int[]>();
 		this.color = color;
 		this.rook = new Rook(this.color);
 		this.knight = new Knight(this.color);
 		this.pawn = new Pawn(this.color);
 	}//end constructor
 		
-	public boolean MoveCheck(int[] pos, int[] next){
+	public boolean MoveCheck(int[] pos, int[] next, boolean take){
 		int[] arK = this.knight.getPos();
 		int[] arR = this.rook.getPos();
 		int[] arP = this.pawn.getPos();
@@ -53,7 +54,7 @@ public abstract class Player{
 		
 		else if(Arrays.equals(pos, arP)){
 
-			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.MoveChoose(next, false)){
+			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.MoveChoose(next, take)){
 
 				this.pawn.setPos(next);
 				return true;

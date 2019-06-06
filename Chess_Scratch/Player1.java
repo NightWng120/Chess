@@ -14,6 +14,11 @@ class Player1 extends Player{
 		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
 		
 		prePosfill();//Function that sets initial position of piece call
+		if(!color) {
+			this.vecpos.add(this.rook.getPos());
+			this.vecpos.add(this.knight.getPos());
+			this.vecpos.add(this.pawn.getPos());
+		}//end if
 	}//end constructor
 
 
@@ -24,14 +29,24 @@ class Player1 extends Player{
 		boolean loop = true;
 		int[] next = new int[2];
 		int[] pos = new int[2];
-		int i, j;
+		int j;
+		int x = 0;
 		boolean take;		
+		String color = "NULLL";
+		if(this.color){
+
+			color = "White";
+		}//end if
+		else if(!this.color){
+
+			color = "Black";
+		}//end else if
 		
 		Scanner input = new Scanner(System.in);
 		String userin;
 		
 		System.out.println("|-------------------------|");
-		System.out.println("| Welcome to Piece Mover! |");
+		System.out.println("|        Player 1         |");
 		System.out.println("|-------------------------|");
 		System.out.println("| Press Enter to Continue |");
 		System.out.println("|-------------------------|");
@@ -40,14 +55,21 @@ class Player1 extends Player{
 		
 		while(loop){
 			take = false;
-			this.vecpos.add(this.rook.getPos());
-			this.vecpos.add(this.knight.getPos());
-			this.vecpos.add(this.pawn.getPos());
+			
 			 
 			posFill(ar, player2);//Function that sets updated position of piece call
+		
+			if(x == 0) {
+				this.vecpos.add(this.rook.getPos());
+				this.vecpos.add(this.knight.getPos());
+				this.vecpos.add(this.pawn.getPos());
+				
+			}//end if
+			
+			
 			print(ar);//Board print function
 			System.out.println("|-------------------------|");
-			System.out.println("|        Player 1         |");
+			System.out.println("|   Player 1 - " + color + "      |");
 			System.out.println("|-------------------------|");
 			System.out.println("| Enter the Coords of your|");			
 			System.out.println("| next move               |");			
@@ -232,32 +254,37 @@ class Player1 extends Player{
 				continue;
 			}//end catch
 			
-			for(i = 0; i < this.vecpos.size(); i++ ){
+			
 	
-				for(j = 0; j < player2.vecpos.size(); j++){
+			for(j = 0; j < player2.vecpos.size(); j++){
 
-					if(Arrays.equals(this.vecpos.get(i), player2.vecpos.get(j))){
+				if(Arrays.equals(next, player2.vecpos.get(j))){
 
 
-						take = true;
-						j = player2.vecpos.size();
-						i = this.vecpos.size();
+					take = true;
+					j = player2.vecpos.size();
 
-					}//end if
+				}//end if
+			}//end for loop	
 
-				}//end for loop	
-
-			}//end for loop
-
+		
 			
 			if(MoveCheck(pos, next, take)){
 				
 				take(next, player2);
+				this.vecpos.clear();
+				this.vecpos.add(this.rook.getPos());
+				this.vecpos.add(this.knight.getPos());
+				this.vecpos.add(this.pawn.getPos());
+				
+				player2.vecpos.clear();
+				x = 0;
 				return true;
 			}//end if	
 			else{
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n");
+				x++;
 				continue;
 			}//end else
 			

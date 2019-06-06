@@ -14,6 +14,12 @@ class Player2 extends Player{
 		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
 		
 		prePosfill();//Function that sets initial position of piece call
+		
+		if(!color) {
+			this.vecpos.add(this.rook.getPos());
+			this.vecpos.add(this.knight.getPos());
+			this.vecpos.add(this.pawn.getPos());
+		}//end if
 	}//end constructor
 
 
@@ -25,14 +31,25 @@ class Player2 extends Player{
 		boolean loop = true;
 		int[] next = new int[2];
 		int[] pos = new int[2];
-		int i, j;
+		int j;
+		int x = 0;
 		boolean take;		
+		String color = "NULLL";
 		
+		if(this.color){
+
+			color = "White";
+		}//end if
+		else if(!this.color){
+
+			color = "Black";
+		}//end if
+
 		Scanner input = new Scanner(System.in);
 		String userin;
 		
 		System.out.println("|-------------------------|");
-		System.out.println("| Welcome to Piece Mover! |");
+		System.out.println("|        Player 2         |");
 		System.out.println("|-------------------------|");
 		System.out.println("| Press Enter to Continue |");
 		System.out.println("|-------------------------|");
@@ -41,14 +58,20 @@ class Player2 extends Player{
 		
 		while(loop){
 			take = false;
-			this.vecpos.add(this.rook.getPos());
-			this.vecpos.add(this.knight.getPos());
-			this.vecpos.add(this.pawn.getPos());
+			
 			 
 			posFill(ar, player1);//Function that sets updated position of piece call
+			
+			if(x == 0) {
+				this.vecpos.add(this.rook.getPos());
+				this.vecpos.add(this.knight.getPos());
+				this.vecpos.add(this.pawn.getPos());
+				
+			}//end if
+			
 			print(ar);//Board print function
 			System.out.println("|-------------------------|");
-			System.out.println("|        Player 2         |");
+			System.out.println("|   Player 2 - " + color + "      |");
 			System.out.println("|-------------------------|");
 			System.out.println("| Enter the Coords of your|");			
 			System.out.println("| next move               |");			
@@ -233,32 +256,34 @@ class Player2 extends Player{
 				continue;
 			}//end catch
 			
-			for(i = 0; i < this.vecpos.size(); i++ ){
-	
-				for(j = 0; j < player1.vecpos.size(); j++){
+			for(j = 0; j < player1.vecpos.size(); j++){
 
-					if(Arrays.equals(this.vecpos.get(i), player1.vecpos.get(j))){
+				if(Arrays.equals(next, player1.vecpos.get(j))){
 
 
-						take = true;
-						j = player1.vecpos.size();
-						i = this.vecpos.size();
+					take = true;
+					j = player1.vecpos.size();
 
-					}//end if
-
-				}//end for loop	
-
-			}//end for loop
+				}//end if
+			}//end for loop	
 
 			
 			if(MoveCheck(pos, next, take)){
 				
 				take(next, player1);
+				this.vecpos.clear();
+				this.vecpos.add(this.rook.getPos());
+				this.vecpos.add(this.knight.getPos());
+				this.vecpos.add(this.pawn.getPos());
+				
+				player1.vecpos.clear();
+				x = 0;
 				return true;
 			}//end if	
 			else{
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n");
+				x++;
 				continue;
 			}//end else
 			
@@ -269,7 +294,7 @@ class Player2 extends Player{
 
 
 
-
+		return false;
 
 
 	}//end move	
@@ -296,7 +321,7 @@ class Player2 extends Player{
 				/*Board 2D array*/
 	}//end print
 	
-	public void prePosfill(){//Function body for function that sets intial position of piece and previous position variable
+	public void prePosfill(){//Function body for function that sets initial position of piece and previous position variable
 		
 		int[] ar[][] = {{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0}},{{0,1},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1}},{{0,2},{1,2},{2,2},{3,2},{4,2},{5,2},{6,2},{7,2}}
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
@@ -340,7 +365,7 @@ class Player2 extends Player{
 		}//end else if
 
 	}//end take
-	public void posFill(String[][] arr, Player2 player2){/*Function body for function that determines whether piece has moved or not; 
+	public void posFill(String[][] arr, Player1 player1){/*Function body for function that determines whether piece has moved or not; 
 							updates position variable and board array accordingly*/
 
 		int[] arR = this.rook.getPos();

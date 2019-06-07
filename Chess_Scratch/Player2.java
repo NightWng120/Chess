@@ -32,9 +32,12 @@ class Player2 extends Player{
 		int[] next = new int[2];
 		int[] pos = new int[2];
 		int j;
-		int x = 0;
-		boolean take;		
-		String color = "NULLL";
+		int x = 0;/*Variable for determining if the loop has already been ran because of
+				a move that was inputted incorrectly*/
+
+		boolean take;//Boolean that is true or false when a piece is or isn't taken		
+		
+		String color = "NULLL"; //Stores color of player as a string
 		
 		if(this.color){
 
@@ -62,7 +65,7 @@ class Player2 extends Player{
 			 
 			posFill(ar, player1);//Function that sets updated position of piece call
 			
-			if(x == 0) {
+			if(x == 0) {//If loop hasn't been ran before add positions to position vector
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
@@ -249,16 +252,15 @@ class Player2 extends Player{
 					continue;
 
 				}//end else
-				/*Setting of converted string to 'next' position array*/
 			}//end try
 			catch(NumberFormatException | StringIndexOutOfBoundsException ex){
 				System.out.println("***Invalid Input***");
 				continue;
 			}//end catch
 			
-			for(j = 0; j < player1.vecpos.size(); j++){
+			for(j = 0; j < player1.vecpos.size(); j++){//For loop runs for size of player1 position vector
 
-				if(Arrays.equals(next, player1.vecpos.get(j))){
+				if(Arrays.equals(next, player1.vecpos.get(j))){//If statement is true when jth player1 vector position is equal to inputted position
 
 
 					take = true;

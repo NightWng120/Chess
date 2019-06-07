@@ -349,7 +349,7 @@ class Player1 extends Player{
 
 		}//end else if
 	}//end prePosfill
-	public void take(int[] next, Player2 player2){
+	public void take(int[] next, Player2 player2){//Function determines if chosen next space is the same space as a player2 piece
 
 		if(Arrays.equals(next, player2.rook.getPos())){
 			int r[] = {7,9};
@@ -415,6 +415,9 @@ class Player1 extends Player{
 		arr[player2.rook.getPosX()][player2.rook.getPosY()] = player2.rook.getName();
 		arr[player2.knight.getPosX()][player2.knight.getPosY()] = player2.knight.getName();
 		arr[player2.pawn.getPosX()][player2.pawn.getPosY()] = player2.pawn.getName();
+		
+		/*Setting player2 positions on board*/
+
 	}//end posFill
 
 }//end Player1 class

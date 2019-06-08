@@ -125,7 +125,7 @@ class Pawn extends Piece{
 
 			if(this.color){	
 		
-				if(slope == 1 && this.position[1] < next[1]){
+				if(Math.abs(slope) == 1 && this.position[1] < next[1]){
 					
 					if(dist > 1.3 && dist < 1.5){
 						

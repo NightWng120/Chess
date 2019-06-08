@@ -32,6 +32,7 @@ class Game{
 							p1 = player1.move(player2);
 							p2 = player2.move(player1);
 						}//end while loop
+						
 	        		}//end if
 	        		else if(userin.equals("black") || userin.equals("Black")){
 	                	player1 = new Player1(false);
@@ -86,7 +87,8 @@ class Game{
 
         			loop = false;
         		}//end else if
-			
+			p1 = true;
+			p2 = true;
 		}//end while loop
 	}//end constructor
 

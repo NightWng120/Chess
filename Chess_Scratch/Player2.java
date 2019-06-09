@@ -258,6 +258,8 @@ class Player2 extends Player{
 				continue;
 			}//end catch
 			
+			System.out.println(player1.vecpos.get(0));
+			
 			for(j = 0; j < player1.vecpos.size(); j++){//For loop runs for size of player1 position vector
 
 				if(Arrays.equals(next, player1.vecpos.get(j))){//If statement is true when jth player1 vector position is equal to inputted position
@@ -283,6 +285,7 @@ class Player2 extends Player{
 				return true;
 			}//end if	
 			else{
+				
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n");
 				x++;
@@ -351,7 +354,12 @@ class Player2 extends Player{
 		}//end else if
 	}//end prePosfill
 	public void take(int[] next, Player1 player1){
-
+		
+		/*Function determines what opposing piece the selected piece is taking
+	 	 *when the inputed next position is the same as the position as an
+	 	 *opposing piece. It then sets the position of the opposing piece 
+	 	 *to a space outside of the board*/
+		
 		if(Arrays.equals(next, player1.rook.getPos())){
 			int r[] = {7,8};
 			player1.rook.setPos(r);

@@ -258,7 +258,6 @@ class Player2 extends Player{
 				continue;
 			}//end catch
 			
-			System.out.println(player1.vecpos.get(0));
 			
 			for(j = 0; j < player1.vecpos.size(); j++){//For loop runs for size of player1 position vector
 

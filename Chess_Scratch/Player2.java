@@ -32,9 +32,12 @@ class Player2 extends Player{
 		int[] next = new int[2];
 		int[] pos = new int[2];
 		int j;
-		int x = 0;
-		boolean take;		
-		String color = "NULLL";
+		int x = 0;/*Variable for determining if the loop has already been ran because of
+				a move that was inputted incorrectly*/
+
+		boolean take;//Boolean that is true or false when a piece is or isn't taken		
+		
+		String color = "NULLL"; //Stores color of player as a string
 		
 		if(this.color){
 
@@ -62,7 +65,7 @@ class Player2 extends Player{
 			 
 			posFill(ar, player1);//Function that sets updated position of piece call
 			
-			if(x == 0) {
+			if(x == 0) {//If loop hasn't been ran before add positions to position vector
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
@@ -249,16 +252,17 @@ class Player2 extends Player{
 					continue;
 
 				}//end else
-				/*Setting of converted string to 'next' position array*/
 			}//end try
 			catch(NumberFormatException | StringIndexOutOfBoundsException ex){
 				System.out.println("***Invalid Input***");
 				continue;
 			}//end catch
 			
-			for(j = 0; j < player1.vecpos.size(); j++){
+			System.out.println(player1.vecpos.get(0));
+			
+			for(j = 0; j < player1.vecpos.size(); j++){//For loop runs for size of player1 position vector
 
-				if(Arrays.equals(next, player1.vecpos.get(j))){
+				if(Arrays.equals(next, player1.vecpos.get(j))){//If statement is true when jth player1 vector position is equal to inputted position
 
 
 					take = true;
@@ -281,6 +285,7 @@ class Player2 extends Player{
 				return true;
 			}//end if	
 			else{
+				
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n");
 				x++;
@@ -349,7 +354,12 @@ class Player2 extends Player{
 		}//end else if
 	}//end prePosfill
 	public void take(int[] next, Player1 player1){
-
+		
+		/*Function determines what opposing piece the selected piece is taking
+	 	 *when the inputed next position is the same as the position as an
+	 	 *opposing piece. It then sets the position of the opposing piece 
+	 	 *to a space outside of the board*/
+		
 		if(Arrays.equals(next, player1.rook.getPos())){
 			int r[] = {7,8};
 			player1.rook.setPos(r);

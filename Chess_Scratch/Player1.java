@@ -30,9 +30,13 @@ class Player1 extends Player{
 		int[] next = new int[2];
 		int[] pos = new int[2];
 		int j;
-		int x = 0;
-		boolean take;		
-		String color = "NULLL";
+		int x = 0;/*Variable for determining if the loop has already been ran because of
+		a move that was inputted incorrectly*/
+
+		boolean take;//Boolean that is true or false when a piece is or isn't taken		
+
+		String color = "NULLL"; //Stores color of player as a string
+		
 		if(this.color){
 
 			color = "White";
@@ -58,8 +62,8 @@ class Player1 extends Player{
 			
 			 
 			posFill(ar, player2);//Function that sets updated position of piece call
-		
-			if(x == 0) {
+			
+			if(x == 0) {//If loop hasn't been ran before add positions to position vector
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
@@ -85,7 +89,7 @@ class Player1 extends Player{
         			        
         			        
 				if(userin.charAt(0) >= 'a' || userin.charAt(0) <= 'h' || userin.charAt(0) >= 'A' || userin.charAt(0) <= 'H'){
-				/*If statement determines if inputted letter is valid for board and switch converts letter to integer*/
+				/*If statement determines if inputed letter is valid for board and switch converts letter to integer*/
         
 					switch(userin.charAt(0)){
 						
@@ -282,6 +286,7 @@ class Player1 extends Player{
 				return true;
 			}//end if	
 			else{
+				
 				System.out.println("***Invalid Move***");
 				System.out.printf("\n\n");
 				x++;
@@ -349,7 +354,11 @@ class Player1 extends Player{
 
 		}//end else if
 	}//end prePosfill
-	public void take(int[] next, Player2 player2){//Function determines if chosen next space is the same space as a player2 piece
+	public void take(int[] next, Player2 player2){
+		/*Function determines what opposing piece the selected piece is taking
+	 	 *when the inputed next position is the same as the position as an
+	 	 *opposing piece. It then sets the position of the opposing piece 
+	 	 *to a space outside of the board*/
 
 		if(Arrays.equals(next, player2.rook.getPos())){
 			int r[] = {7,9};

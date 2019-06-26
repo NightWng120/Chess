@@ -32,10 +32,7 @@ public abstract class Player{
 			
 			if(!Arrays.equals(next, arR) && !Arrays.equals(next, arP) && this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 					
-
-
-	
-				if(collision(player,arK,next)){
+				if(collision(player,arK,next)){//collision method call
 					
 					this.knight.setPos(next);
 					return true;
@@ -91,6 +88,11 @@ public abstract class Player{
 	}//end MoveCheck
 	
 	public <J extends Player> boolean collision(J player, int[] pos, int[] next){
+	/*This method determines if the selected piece has a slope that is the same as another piece on
+	  the board and the selected move position. If the slope is the same and the distance between the
+	  other piece on the board is and the selected piece is less than the distance between the selected 
+	  next position and the next piece, then the method returns false. Otherwise, it returns true
+	*/
 		
 		int[] arK = this.knight.getPos();
 		int[] arR = this.rook.getPos();
@@ -102,13 +104,20 @@ public abstract class Player{
 
 
 		boolean state = true;
-		if(Arrays.equals(pos, this.rook.getPos())){
+		/*I used a boolean variable here as a catch all
+		  so that I can check every piece for collision
+		  in case of a situation where there are multiple cases
+		  meeting the criteria for a false method return 
+		*/
+
+		/*----------------------------------Rook if--------------------------*/
+		if(Arrays.equals(pos, this.rook.getPos())){//If determines which piece has been selected
 			
 
 
 
-			if(this.rook.slope(arR, arK) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){
+			if(this.rook.slope(arR, arK) == this.rook.slope(arR, next)){//if determines if slopes are the same between other piece and next
+				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){//if determines if distance between piece is less than next
 					state = false;
 				}//end if
 				else{
@@ -160,8 +169,8 @@ public abstract class Player{
 
 		}//end if
 
-
-		else if(Arrays.equals(pos, this.knight.getPos())){
+		/*----------------------Knight if--------------------------------*/
+		else if(Arrays.equals(pos, this.knight.getPos())){//No arguments for knight piece because of its moveset
 
 			state = true;
 
@@ -169,7 +178,7 @@ public abstract class Player{
 
 		}//end if
 
-
+		/*----------------------Pawn if----------------------------------*/
 		else if(Arrays.equals(pos, this.pawn.getPos())){
 
 

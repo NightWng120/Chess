@@ -23,7 +23,7 @@ public abstract class Player{
 		this.pawn = new Pawn(this.color);
 	}//end constructor
 		
-	public boolean MoveCheck(int[] pos, int[] next, boolean take){
+	public <J extends Player> boolean MoveCheck(J player, int[] pos, int[] next, boolean take){
 		int[] arK = this.knight.getPos();
 		int[] arR = this.rook.getPos();
 		int[] arP = this.pawn.getPos();
@@ -31,8 +31,11 @@ public abstract class Player{
 		if(Arrays.equals(pos, arK)){
 			
 			if(!Arrays.equals(next, arR) && !Arrays.equals(next, arP) && this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
-				this.knight.setPos(next);
-				return true;
+						
+				if(collision(player,arK,next)){
+					
+					this.knight.setPos(next);
+					return true;
 
 			}//end if
 			else{
@@ -70,7 +73,139 @@ public abstract class Player{
 
 		return false;
 	}//end MoveCheck
+	
+	public <J extends Player> boolean collision(J player, int[] pos, int[] next){
 
+		boolean state = true;
+		if(Arrays.equals(pos, this.rook.getPos())){
+			
+
+
+
+			if(this.rook.slope(this.knight.getpos()) == this.rook.slope(next)){
+				if(this.rook.dist(this.knight.getPos()) < this.rook.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(this.pawn.getpos()) == this.rook.slope(next)){
+				if(this.rook.dist(this.pawn.getPos()) < this.rook.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(player.knight.getpos()) == this.rook.slope(next)){
+				if(this.rook.dist(player.knight.getPos()) < this.rook.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(player.rook.getpos()) == this.rook.slope(next)){
+			
+				if(this.rook.dist(player.rook.getPos()) < this.rook.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(player.pawn.getPos()) == this.rook.slope(next)){
+				if(this.rook.dist(player.pawn.getPos()) < this.rook.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+		}//end if
+
+
+		else if(Arrays.equals(pos, this.knight.getPos())){
+
+			state = true;
+
+
+
+		}//end if
+
+
+		else if(Arrays.equals(pos, this.pawn.getPos())){
+
+
+
+			if(this.pawn.slope(this.knight.getpos()) == this.pawn.slope(next)){
+				if(this.pawn.dist(this.knight.getPos()) < this.pawn.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.pawn.slope(this.rook.getpos()) == this.pawn.slope(next)){
+				if(this.pawn.dist(this.rook.getPos()) < this.pawn.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.pawn.slope(player.knight.getpos()) == this.pawn.slope(next)){
+				if(this.pawn.dist(player.knight.getPos()) < this.pawn.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.pawn.slope(player.knight.getpos()) == this.pawn.slope(next)){
+			
+				if(this.pawn.dist(player.pawn.getPos()) < this.pawn.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.pawn.slope(player.pawn.getPos()) == this.pawn.slope(next)){
+				if(this.pawn.dist(player.knight.getPos()) < this.pawn.dist(next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+
+		}//end if
+		
+
+		return state;
+	}//end Collision
 
 
 }//end Player abstract class

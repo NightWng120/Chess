@@ -31,11 +31,15 @@ public abstract class Player{
 		if(Arrays.equals(pos, arK)){
 			
 			if(!Arrays.equals(next, arR) && !Arrays.equals(next, arP) && this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
-						
+					
+
+
+	
 				if(collision(player,arK,next)){
 					
 					this.knight.setPos(next);
 					return true;
+				}//end if
 
 			}//end if
 			else{
@@ -46,8 +50,14 @@ public abstract class Player{
 		else if(Arrays.equals(pos, arR)){
 
 			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arP) && this.rook.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
-				this.rook.setPos(next);
-				return true;				
+
+
+	
+				if(collision(player,arR,next)){
+					
+					this.rook.setPos(next);
+					return true;
+				}//end if
 
 			}//end if
 			else{
@@ -59,8 +69,14 @@ public abstract class Player{
 
 			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.MoveChoose(next, take)){
 
-				this.pawn.setPos(next);
-				return true;
+
+
+	
+				if(collision(player,arP,next)){
+					
+					this.pawn.setPos(next);
+					return true;
+				}//end if
 
 			}//end if
 			else{
@@ -75,6 +91,15 @@ public abstract class Player{
 	}//end MoveCheck
 	
 	public <J extends Player> boolean collision(J player, int[] pos, int[] next){
+		
+		int[] arK = this.knight.getPos();
+		int[] arR = this.rook.getPos();
+		int[] arP = this.pawn.getPos();
+		int[] pArP = player.pawn.getPos();
+		int[] pArK = player.knight.getPos();
+		int[] pArR = player.rook.getPos();
+		/*Debugger's Corner*/
+
 
 		boolean state = true;
 		if(Arrays.equals(pos, this.rook.getPos())){
@@ -82,8 +107,8 @@ public abstract class Player{
 
 
 
-			if(this.rook.slope(this.knight.getpos()) == this.rook.slope(next)){
-				if(this.rook.dist(this.knight.getPos()) < this.rook.dist(next)){
+			if(this.rook.slope(arR, arK) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){
 					state = false;
 				}//end if
 				else{
@@ -92,8 +117,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(this.pawn.getpos()) == this.rook.slope(next)){
-				if(this.rook.dist(this.pawn.getPos()) < this.rook.dist(next)){
+			if(this.rook.slope(arR, arP) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, arP) < this.rook.dist(arR, next)){
 					state = false;
 				}//end if
 				else{
@@ -102,8 +127,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(player.knight.getpos()) == this.rook.slope(next)){
-				if(this.rook.dist(player.knight.getPos()) < this.rook.dist(next)){
+			if(this.rook.slope(arR, pArK) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, pArK) < this.rook.dist(arR, next)){
 					state = false;
 				}//end if
 				else{
@@ -112,9 +137,9 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(player.rook.getpos()) == this.rook.slope(next)){
+			if(this.rook.slope(arR, pArR) == this.rook.slope(arR, next)){
 			
-				if(this.rook.dist(player.rook.getPos()) < this.rook.dist(next)){
+				if(this.rook.dist(this.rook.getPos(), pArR) < this.rook.dist(arR, next)){
 					state = false;
 				}//end if
 				else{
@@ -123,8 +148,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(player.pawn.getPos()) == this.rook.slope(next)){
-				if(this.rook.dist(player.pawn.getPos()) < this.rook.dist(next)){
+			if(this.rook.slope(arR, pArP) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, pArP) < this.rook.dist(arR, next)){
 					state = false;
 				}//end if
 				else{
@@ -149,8 +174,8 @@ public abstract class Player{
 
 
 
-			if(this.pawn.slope(this.knight.getpos()) == this.pawn.slope(next)){
-				if(this.pawn.dist(this.knight.getPos()) < this.pawn.dist(next)){
+			if(this.pawn.slope(arP, arK) == this.pawn.slope(arP, next)){
+				if(this.pawn.dist(arP, arK) < this.pawn.dist(arP, next)){
 					state = false;
 				}//end if
 				else{
@@ -159,8 +184,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.pawn.slope(this.rook.getpos()) == this.pawn.slope(next)){
-				if(this.pawn.dist(this.rook.getPos()) < this.pawn.dist(next)){
+			if(this.pawn.slope(arP, arR) == this.pawn.slope(arP, next)){
+				if(this.pawn.dist(arP, arR) < this.pawn.dist(arP, next)){
 					state = false;
 				}//end if
 				else{
@@ -169,8 +194,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.pawn.slope(player.knight.getpos()) == this.pawn.slope(next)){
-				if(this.pawn.dist(player.knight.getPos()) < this.pawn.dist(next)){
+			if(this.pawn.slope(arP, pArK) == this.pawn.slope(arP, next)){
+				if(this.pawn.dist(arP, pArK) < this.pawn.dist(arP, next)){
 					state = false;
 				}//end if
 				else{
@@ -179,9 +204,9 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.pawn.slope(player.knight.getpos()) == this.pawn.slope(next)){
+			if(this.pawn.slope(arP, pArR) == this.pawn.slope(arP, next)){
 			
-				if(this.pawn.dist(player.pawn.getPos()) < this.pawn.dist(next)){
+				if(this.pawn.dist(arP, pArR) < this.pawn.dist(arP, next)){
 					state = false;
 				}//end if
 				else{
@@ -190,8 +215,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.pawn.slope(player.pawn.getPos()) == this.pawn.slope(next)){
-				if(this.pawn.dist(player.knight.getPos()) < this.pawn.dist(next)){
+			if(this.pawn.slope(arP, pArP) == this.pawn.slope(arP, next)){
+				if(this.pawn.dist(arP, pArP) < this.pawn.dist(arP, next)){
 					state = false;
 				}//end if
 				else{

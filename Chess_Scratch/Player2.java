@@ -272,7 +272,7 @@ class Player2 extends Player{
 			}//end for loop	
 
 			
-			if(MoveCheck(pos, next, take)){
+			if(MoveCheck(player1, pos, next, take)){
 				
 				take(next, player1);
 				this.vecpos.clear();

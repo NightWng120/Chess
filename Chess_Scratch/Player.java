@@ -64,7 +64,7 @@ public abstract class Player{
 		
 		else if(Arrays.equals(pos, arP)){
 
-			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.MoveChoose(next, take)){
+			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.moveChoose(next, take)){
 
 
 
@@ -102,13 +102,22 @@ public abstract class Player{
 		int[] pArR = player.rook.getPos();
 		/*Debugger's Corner*/
 
-
 		boolean state = true;
 		/*I used a boolean variable here as a catch all
 		  so that I can check every piece for collision
 		  in case of a situation where there are multiple cases
 		  meeting the criteria for a false method return 
 		*/
+
+
+		if(Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos())){
+			return false;
+		}//end if
+
+
+
+
+
 
 		/*----------------------------------Rook if--------------------------*/
 		if(Arrays.equals(pos, this.rook.getPos())){//If determines which piece has been selected
@@ -240,6 +249,58 @@ public abstract class Player{
 
 		return state;
 	}//end Collision
+	public <J extends Player> Vector<int[]> redFilt(J player){
+		
+		Vector<int[]> vecred;
+		Vector<int[]> vecall = new Vector<int[]>();
+		int i;
+
+		vecred = this.knight.redSpot();
+		for(i = 0; i < vecred.size(); i++){
+			if(collision(player, this.knight.getPos(), vecred.get(i))){
+				vecall.add(vecred.get(i));
+			}//end if
+			
+
+		}//end for loop
+		vecred.clear();
+		vecred = this.rook.redSpot();
+		
+		for(i = 0; i < vecred.size(); i++){
+			if(collision(player, this.rook.getPos(), vecred.get(i))){
+
+				vecall.add(vecred.get(i));
+			}//end if
+		}//end for loop
+		vecred.clear();
+		vecred = this.pawn.RedSpot();
+		
+		for(i = 0; i < vecred.size(); i++){
+			if(collision(player, this.pawn.getPos(), vecred.get(i))){
+
+				vecall.add(vecred.get(i));
+			}//end if
+		}//end for loop
+
+		
+		return vecall;
+	}//end redFilt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }//end Player abstract class

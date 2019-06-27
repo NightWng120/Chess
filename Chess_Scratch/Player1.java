@@ -271,8 +271,8 @@ class Player1 extends Player{
 				}//end if
 			}//end for loop	
 
-		
-			
+			int i;
+			Vector<int[]> vecred;
 			if(MoveCheck(player2, pos, next, take)){
 				
 				take(next, player2);
@@ -280,9 +280,14 @@ class Player1 extends Player{
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
-				
 				player2.vecpos.clear();
 				x = 0;
+				vecred = redFilt(player2);
+				
+				for(i = 0; i < vecred.size(); i++){
+					System.out.println(Arrays.toString(vecred.get(i)));				
+				}//end for loop	
+				
 				return true;
 			}//end if	
 			else{

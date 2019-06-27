@@ -1,7 +1,7 @@
 import java.util.*;
 class Pawn extends Piece{
 
-	private boolean start;
+	public boolean start;
 	
 	public Pawn(boolean color){
 		this.start = true;
@@ -33,7 +33,6 @@ class Pawn extends Piece{
 					if(this.start) {
 						
 						if(dist == 1 || dist == 2){
-							this.start = false;
 							return true;
 	
 						}//end else if
@@ -84,7 +83,6 @@ class Pawn extends Piece{
 				if(this.start) {
 					
 					if(dist == 1 || dist == 2){
-						this.start = false;
 						return true;
 
 					}//end else if

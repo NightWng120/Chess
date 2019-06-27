@@ -70,7 +70,7 @@ public abstract class Player{
 
 	
 				if(collision(player,arP,next)){
-					
+					this.pawn.start = false;	
 					this.pawn.setPos(next);
 					return true;
 				}//end if

@@ -138,7 +138,8 @@ class Game{
 
         			loop = false;
         		}//end else if
-			
+			p1 = true;
+			p2 = true;
 		}//end while loop
 	}//end constructor
 

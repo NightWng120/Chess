@@ -4,8 +4,10 @@ public abstract class Player{
 	protected Pawn pawn;
 	protected Rook rook;
 	protected Knight knight;
+	protected King king;
 	protected boolean color;
 	protected Vector<int[]> vecpos;
+	protected Vector<int[]> vecfilt;
 /* ***NOTE***
 	You can make the array of piece positions by
 	using a 2d array and getPos() methods.
@@ -18,6 +20,7 @@ public abstract class Player{
 	public Player(boolean color){
 		this.vecpos = new Vector<int[]>();
 		this.color = color;
+		this.king = new King(this.color);
 		this.rook = new Rook(this.color);
 		this.knight = new Knight(this.color);
 		this.pawn = new Pawn(this.color);
@@ -28,13 +31,27 @@ public abstract class Player{
 		int[] arR = this.rook.getPos();
 		int[] arP = this.pawn.getPos();
 		
+		if(Arrays.equals(pos, this.king.getPos()){
+
+			if(collision(player, this.king.getPos(), next) && this.king.moveChoose(next, this.player.vecfilt)){
+
+				this.king.setPos(next);	
+				this.vecfilt = redFilt(player);
+				return true;
+			}//end if
+			else{
+				return false;
+			}//end else
+
+		}//end if		
+
 		if(Arrays.equals(pos, arK)){
 			
 			if(!Arrays.equals(next, arR) && !Arrays.equals(next, arP) && this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 					
 				if(collision(player,arK,next)){//collision method call
-					
 					this.knight.setPos(next);
+					this.vecfilt = redFilt(player);
 					return true;
 				}//end if
 
@@ -51,8 +68,8 @@ public abstract class Player{
 
 	
 				if(collision(player,arR,next)){
-					
 					this.rook.setPos(next);
+					this.vecfilt = redFilt(player);
 					return true;
 				}//end if
 
@@ -70,8 +87,10 @@ public abstract class Player{
 
 	
 				if(collision(player,arP,next)){
+					
 					this.pawn.start = false;	
 					this.pawn.setPos(next);
+					this.vecfilt = redFilt(player);
 					return true;
 				}//end if
 
@@ -110,7 +129,7 @@ public abstract class Player{
 		*/
 
 
-		if(Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos())){
+		if(Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos()) || Arrays.equals(next, this.king.getPos())){
 			return false;
 		}//end if
 
@@ -118,7 +137,85 @@ public abstract class Player{
 
 
 
+		/*
 
+			Still need to add king to player classes and rest of collision methdod.
+			Also need to remember that king moves based on opponent's filtered red spot vector.
+			Also also there needs to be a base vecfil case to work off of when the board is first
+			created.
+		*/
+
+
+		/*----------------------------------King if--------------------------*/
+		if(Arrays.equals(pos, this.king.getPos())){//If determines which piece has been selected
+			
+
+
+			if(this.king.slope(this.king.getPos(), this.rook.getPos()) == this.king.slope(this.king.getPos(), next)){	
+
+				if(this.king.dist(this.king.getPos(), this.rook.getPos()) < this.king.dist(this.king.getPos(), next)){
+
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			
+			if(this.king.slope(this.king.getPos(), arK) == this.rook.slope(arR, next)){//if determines if slopes are the same between other piece and next
+				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){//if determines if distance between piece is less than next
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(arR, arP) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, arP) < this.rook.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(arR, pArK) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, pArK) < this.rook.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(arR, pArR) == this.rook.slope(arR, next)){
+			
+				if(this.rook.dist(this.rook.getPos(), pArR) < this.rook.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.rook.slope(arR, pArP) == this.rook.slope(arR, next)){
+				if(this.rook.dist(arR, pArP) < this.rook.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+		}//end if
 		/*----------------------------------Rook if--------------------------*/
 		if(Arrays.equals(pos, this.rook.getPos())){//If determines which piece has been selected
 			
@@ -177,6 +274,8 @@ public abstract class Player{
 			}//end if
 
 		}//end if
+
+
 
 		/*----------------------Knight if--------------------------------*/
 		else if(Arrays.equals(pos, this.knight.getPos())){//No arguments for knight piece because of its moveset

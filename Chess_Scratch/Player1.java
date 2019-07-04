@@ -8,17 +8,38 @@ class Player1 extends Player{
 	private int[] arR;
 	private int[] arK;
 	private int[] arP;
+	private int[] arKi;
 
-	public Player1(boolean color){
+	public <J extends Player> Player1(boolean color){
 
 		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
 		
 		prePosfill();//Function that sets initial position of piece call
+		int i;
 		if(!color) {
 			this.vecpos.add(this.rook.getPos());
 			this.vecpos.add(this.knight.getPos());
 			this.vecpos.add(this.pawn.getPos());
+			this.vecpos.add(this.king.getPos());
+			for(i = 0; i < 16; i++) {
+			
+				this.vecfilt.add(Player.b[i]);
+			
+			}//end for loop
+			
+			
 		}//end if
+		
+		else if(color) {
+			for(i = 0; i < 16; i++) {
+				this.vecfilt.add(Player.w[i]);
+			
+			}//end for loop
+			
+			
+		}//end else if
+		
+		
 	}//end constructor
 
 
@@ -31,10 +52,10 @@ class Player1 extends Player{
 		int[] pos = new int[2];
 		int j;
 		int x = 0;/*Variable for determining if the loop has already been ran because of
-		a move that was inputted incorrectly*/
+		a move that was inputed incorrectly*/
 
 		boolean take;//Boolean that is true or false when a piece is or isn't taken		
-
+		String check = this.king.mate(player2.vecfilt);
 		String color = "NULLL"; //Stores color of player as a string
 		
 		if(this.color){
@@ -67,11 +88,18 @@ class Player1 extends Player{
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
+				this.vecpos.add(this.king.getPos());
 				
 			}//end if
 			
 			
 			print(ar);//Board print function
+			if(check.equals("c")) {
+				System.out.println("|-------------------------|");
+				System.out.println("|  Your King is in Check  |");
+				
+				
+			}//end if
 			System.out.println("|-------------------------|");
 			System.out.println("|   Player 1 - " + color + "      |");
 			System.out.println("|-------------------------|");
@@ -271,25 +299,75 @@ class Player1 extends Player{
 				}//end if
 			}//end for loop	
 
-			int i;
-			Vector<int[]> vecred;
+			
 			if(MoveCheck(player2, pos, next, take)){
 				
-				take(next, player2);
-				this.vecpos.clear();
-				this.vecpos.add(this.rook.getPos());
-				this.vecpos.add(this.knight.getPos());
-				this.vecpos.add(this.pawn.getPos());
-				player2.vecpos.clear();
-				x = 0;
-				vecred = redFilt(player2);
+				if(check.equals("c")) {
+					
+					player2.redFilt(this, false);
+					check = this.king.mate(player2.vecfilt);
+					if(check.contentEquals("c")) {
+						
+						
+						continue;
+						
+					}//end if
+					
+					else {
+						
+						take(next, player2);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						player2.vecpos.clear();
+						this.vecfilt.clear();
+						this.vecfilt = redFilt(player2, false);
+						x = 0;
+						
+						return true;
+						
+						
+					}//end else
+				}//end if
 				
-				for(i = 0; i < vecred.size(); i++){
-					System.out.println(Arrays.toString(vecred.get(i)));				
-				}//end for loop	
+				else if(check.equals("s")) {
+					
+					System.out.println("|--------Stalemate--------|");
+					loop = false;
+				}//end else if
 				
-				return true;
+				else if(check.equals("m")) {
+					
+					System.out.println("|-------------------------|");
+					System.out.println("|        Checkmate        |");
+					System.out.println("|-------------------------|");
+					System.out.println("|      Player 2 Wins!     |");
+					System.out.println("|-------------------------|");
+					loop = false;
+				}//end else if
+				
+				else {
+
+					take(next, player2);
+					this.vecpos.clear();
+					this.vecpos.add(this.rook.getPos());
+					this.vecpos.add(this.knight.getPos());
+					this.vecpos.add(this.pawn.getPos());
+					this.vecpos.add(this.king.getPos());
+					player2.vecpos.clear();
+					this.vecfilt.clear();
+					this.vecfilt = redFilt(player2, false);
+					x = 0;
+					
+					return true;
+				}//end else
 			}//end if	
+			
+			
+			
+			
 			else{
 				
 				System.out.println("***Invalid Move***");
@@ -347,6 +425,8 @@ class Player1 extends Player{
 			this.arK = this.knight.getPos();
 			this.pawn.setPos(ar[1][3]);
 			this.arP = this.pawn.getPos();
+			this.king.setPos(ar[0][3]);
+			this.arKi = this.king.getPos();
 		}//end if
 
 		else if(!this.color){
@@ -356,6 +436,8 @@ class Player1 extends Player{
 			this.arK = this.knight.getPos();
 			this.pawn.setPos(ar[6][4]);
 			this.arP = this.pawn.getPos();
+			this.king.setPos(ar[7][4]);
+			this.arKi = this.king.getPos();
 
 		}//end else if
 	}//end prePosfill
@@ -378,6 +460,11 @@ class Player1 extends Player{
 			int p[] = {5, 9};
 			player2.pawn.setPos(p);
 		}//end else if
+		else if(Arrays.equals(next, player2.king.getPos())){
+			int p[] = {4, 9};
+			player2.king.setPos(p);
+		}//end else if
+		
 
 	}//end take
 	public void posFill(String[][] arr, Player2 player2){/*Function body for function that determines whether piece has moved or not; 
@@ -386,7 +473,7 @@ class Player1 extends Player{
 		int[] arR = this.rook.getPos();
 		int[] arK = this.knight.getPos();
 		int[] arP = this.knight.getPos();
-		
+		int[] arKi = this.king.getPos();
 
 
 
@@ -424,11 +511,24 @@ class Player1 extends Player{
 		else{
 			arr[this.pawn.getPosX()][this.pawn.getPosY()] = this.pawn.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
+		
+		if(!Arrays.equals(this.arKi, arKi)){//If checks if position has changed
+			arr[this.arKi[0]][this.arKi[1]] = " ";
+			arr[this.king.getPosX()][this.king.getPosY()] = this.king.getName();
+			this.arKi = this.king.getPos();
+			/*Updates board and previous variable if it has*/
+		}//end if
+		
+		else{
+			arr[this.king.getPosX()][this.king.getPosY()] = this.king.getName();//Updates board when game starts and no change to previous has been made
+		}//end else
+
 
 
 		arr[player2.rook.getPosX()][player2.rook.getPosY()] = player2.rook.getName();
 		arr[player2.knight.getPosX()][player2.knight.getPosY()] = player2.knight.getName();
 		arr[player2.pawn.getPosX()][player2.pawn.getPosY()] = player2.pawn.getName();
+		arr[player2.king.getPosX()][player2.king.getPosY()] = player2.king.getName();
 		
 		/*Setting player2 positions on board*/
 

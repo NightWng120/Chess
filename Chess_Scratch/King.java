@@ -34,13 +34,13 @@ class King extends Piece{
 		double dist = dist(this.position, next);
 		int i;
 
-		if(slope == 1 || slope == 100){
+		if(Math.abs(slope) == 1){
 
 			if(dist < 1.5 && dist > 1.3){
 				
-				for(i = 0; i < vecred.size(); i++){
+				for(i = 0; i < vecfilt.size(); i++){
 					
-					if(Arrays.equal(vecfilt.get(i), next)){
+					if(Arrays.equals(vecfilt.get(i), next)){
 						return false;
 
 					}//end if
@@ -50,20 +50,39 @@ class King extends Piece{
 			}//end if
 
 			else{
-
+ 
 				return false;
 			}//end else
 
 		}//end if
+		
+		else if(slope == 0 || slope == 100) {
+			
+			if(dist == 1) {
+				
+				for(i = 0; i < vecfilt.size(); i++){
+					
+					if(Arrays.equals(vecfilt.get(i), next)){
+						return false;
+
+					}//end if
+
+				}//end for loop
+				return true;
+			}//end if
+			
+			else return false;
+			
+			
+		}//end else if
 
 		else{
-			return false
+			return false;
 		}//end else
 
-		return true;
 	}//end moveChoose
 
-	public Vector<int[]> RedSpot(){
+	public Vector<int[]> RedSpot(Vector<int[]> vecfilt){
 
 		int[] ar[][] = {{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0}},{{0,1},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1}},{{0,2},{1,2},{2,2},{3,2},{4,2},{5,2},{6,2},{7,2}}
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
@@ -76,7 +95,7 @@ class King extends Piece{
 
 			for(j = 0; j < 8; j++){
 				
-				if(moveChoose(ar[i][j])){
+				if(moveChoose(ar[i][j], vecfilt)){
 					
 					vecred.add(ar[i][j]);
 				
@@ -93,11 +112,36 @@ class King extends Piece{
 	}//end redSpot
 
 
-	public boolean mate(Vector<int[]> vecred){
-
-
+	public String mate(Vector<int[]> vecfilt){
+		int i;
+		Vector<int[]> vectemp = RedSpot(vecfilt);
+	
+			
+		for(i = 0; i < vecfilt.size(); i++) {
+				
+			if(Arrays.equals(this.position, vecfilt.get(i))) {
+					
+				if(vectemp.isEmpty()) {
+					
+					return "m";
+					
+				}//end if
+				
+				else {
+					
+					return "c";
+				}//end else
+					
+			}//end if
+			
+		}//end for loop
+				
 		
-
+			
+		return "";
+			
+		
+		
 	}//end mate
 
 

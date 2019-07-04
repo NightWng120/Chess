@@ -56,8 +56,8 @@ class Game{
 					
 	        		else if(userin.equals("black") || userin.equals("Black")){
 	        			
-	                	player1 = new Player1(false);
-						player2 = new Player2(true);
+						player1 = new Player1(true);
+						player2 = new Player2(false);
 						
 						while(p1 && p2){
 							
@@ -93,8 +93,8 @@ class Game{
 					
 					if(userin.equals("white") || userin.equals("White")){
 						
-	                	player2 = new Player2(true);
-						player1 = new Player1(false);
+						player2 = new Player2(false);
+						player1 = new Player1(true);
 						
 						while(p1 && p2){
 							
@@ -107,7 +107,7 @@ class Game{
 					
 	        		else if(userin.equals("black") || userin.equals("Black")){
 	        			
-            			player2 = new Player2(false);
+						player2 = new Player2(false);
 						player1 = new Player1(true);
 						
 						while(p1 && p2){

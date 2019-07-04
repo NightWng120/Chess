@@ -8,18 +8,24 @@ class Player2 extends Player{
 	private int[] arR;
 	private int[] arK;
 	private int[] arP;
+	private int[] arKi;
 
-	public Player2(boolean color){
+	public <J extends Player> Player2(boolean color){
 
 		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
 		
 		prePosfill();//Function that sets initial position of piece call
-		
 		if(!color) {
 			this.vecpos.add(this.rook.getPos());
 			this.vecpos.add(this.knight.getPos());
 			this.vecpos.add(this.pawn.getPos());
+			this.vecpos.add(this.king.getPos());
+			
+			
+			
 		}//end if
+		
+		
 	}//end constructor
 
 
@@ -36,7 +42,7 @@ class Player2 extends Player{
 				a move that was inputted incorrectly*/
 
 		boolean take;//Boolean that is true or false when a piece is or isn't taken		
-		
+		String check = this.king.mate(player1.vecfilt);
 		String color = "NULLL"; //Stores color of player as a string
 		
 		if(this.color){
@@ -73,6 +79,12 @@ class Player2 extends Player{
 			}//end if
 			
 			print(ar);//Board print function
+			if(check.equals("c")) {
+				System.out.println("|-------------------------|");
+				System.out.println("|  Your King is in Check  |");
+				
+				
+			}//end if
 			System.out.println("|-------------------------|");
 			System.out.println("|   Player 2 - " + color + "      |");
 			System.out.println("|-------------------------|");
@@ -273,16 +285,72 @@ class Player2 extends Player{
 			
 			if(MoveCheck(player1, pos, next, take)){
 				
-				take(next, player1);
-				this.vecpos.clear();
-				this.vecpos.add(this.rook.getPos());
-				this.vecpos.add(this.knight.getPos());
-				this.vecpos.add(this.pawn.getPos());
+				if(check.equals("c")) {
+					
+					player1.redFilt(this, false);
+					check = this.king.mate(player1.vecfilt);
+					if(check.contentEquals("c")) {
+						
+						
+						continue;
+						
+					}//end if
+					
+					else {
+						
+						take(next, player1);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						player1.vecpos.clear();
+						this.vecfilt.clear();
+						this.vecfilt = redFilt(player1, false);
+						x = 0;
+						
+						return true;
+						
+						
+					}//end else
+				}//end if
 				
-				player1.vecpos.clear();
-				x = 0;
-				return true;
+				else if(check.equals("s")) {
+					
+					System.out.println("|--------Stalemate--------|");
+					loop = false;
+				}//end else if
+				
+				else if(check.equals("m")) {
+					
+					System.out.println("|-------------------------|");
+					System.out.println("|        Checkmate        |");
+					System.out.println("|-------------------------|");
+					System.out.println("|      Player 2 Wins!     |");
+					System.out.println("|-------------------------|");
+					loop = false;
+				}//end else if
+				
+				else {
+
+					take(next, player1);
+					this.vecpos.clear();
+					this.vecpos.add(this.rook.getPos());
+					this.vecpos.add(this.knight.getPos());
+					this.vecpos.add(this.pawn.getPos());
+					this.vecpos.add(this.king.getPos());
+					player1.vecpos.clear();
+					this.vecfilt.clear();
+					this.vecfilt = redFilt(player1, false);
+					x = 0;
+					
+					return true;
+				}//end else
 			}//end if	
+			
+			
+			
+			
 			else{
 				
 				System.out.println("***Invalid Move***");
@@ -294,9 +362,6 @@ class Player2 extends Player{
 				
 
 		}//end while loop
-		
-
-
 
 		return false;
 
@@ -331,17 +396,19 @@ class Player2 extends Player{
 		,{{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},{{0,4},{1,4},{2,4},{3,4},{4,4},{5,4},{6,4},{7,4}},{{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}}
 		,{{0,6},{1,6},{2,6},{3,6},{4,6},{5,6},{6,6},{7,6}},{{0,7},{1,7},{2,7},{3,7},{4,7},{5,7},{6,7},{7,7}}};
 		/*Array of position arrays for every position on the board*/		
-			
+		
 		if(this.color){
-
+	
 			this.rook.setPos(ar[0][7]);//Piece position setting
 			this.arR = this.rook.getPos();//Previous position assignment
 			this.knight.setPos(ar[0][6]);
 			this.arK = this.knight.getPos();
 			this.pawn.setPos(ar[1][3]);
 			this.arP = this.pawn.getPos();
+			this.king.setPos(ar[0][3]);
+			this.arKi = this.king.getPos();
 		}//end if
-
+	
 		else if(!this.color){
 			this.rook.setPos(ar[7][0]);
 			this.arR = this.rook.getPos();
@@ -349,29 +416,35 @@ class Player2 extends Player{
 			this.arK = this.knight.getPos();
 			this.pawn.setPos(ar[6][4]);
 			this.arP = this.pawn.getPos();
-
+			this.king.setPos(ar[7][4]);
+			this.arKi = this.king.getPos();
+	
 		}//end else if
 	}//end prePosfill
 	public void take(int[] next, Player1 player1){
-		
 		/*Function determines what opposing piece the selected piece is taking
 	 	 *when the inputed next position is the same as the position as an
 	 	 *opposing piece. It then sets the position of the opposing piece 
 	 	 *to a space outside of the board*/
-		
+
 		if(Arrays.equals(next, player1.rook.getPos())){
-			int r[] = {7,8};
+			int r[] = {7,9};
 			player1.rook.setPos(r);
 		}//end if
 		else if(Arrays.equals(next, player1.knight.getPos())){
-			int k[] = {6,8};
+			int k[] = {6,9};
 			player1.knight.setPos(k);
 
 		}//end else if
 		else if(Arrays.equals(next, player1.pawn.getPos())){
-			int p[] = {5,8};
+			int p[] = {5, 9};
 			player1.pawn.setPos(p);
 		}//end else if
+		else if(Arrays.equals(next, player1.king.getPos())){
+			int p[] = {4, 9};
+			player1.king.setPos(p);
+		}//end else if
+		
 
 	}//end take
 	public void posFill(String[][] arr, Player1 player1){/*Function body for function that determines whether piece has moved or not; 
@@ -380,7 +453,7 @@ class Player2 extends Player{
 		int[] arR = this.rook.getPos();
 		int[] arK = this.knight.getPos();
 		int[] arP = this.knight.getPos();
-		
+		int[] arKi = this.king.getPos();
 
 
 
@@ -418,11 +491,24 @@ class Player2 extends Player{
 		else{
 			arr[this.pawn.getPosX()][this.pawn.getPosY()] = this.pawn.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
+		
+		if(!Arrays.equals(this.arKi, arKi)){//If checks if position has changed
+			arr[this.arKi[0]][this.arKi[1]] = " ";
+			arr[this.king.getPosX()][this.king.getPosY()] = this.king.getName();
+			this.arKi = this.king.getPos();
+			/*Updates board and previous variable if it has*/
+		}//end if
+		
+		else{
+			arr[this.king.getPosX()][this.king.getPosY()] = this.king.getName();//Updates board when game starts and no change to previous has been made
+		}//end else
+
 
 
 		arr[player1.rook.getPosX()][player1.rook.getPosY()] = player1.rook.getName();
 		arr[player1.knight.getPosX()][player1.knight.getPosY()] = player1.knight.getName();
 		arr[player1.pawn.getPosX()][player1.pawn.getPosY()] = player1.pawn.getName();
+		arr[player1.king.getPosX()][player1.king.getPosY()] = player1.king.getName();
 	}//end posFill
 
 }//end Player1 class

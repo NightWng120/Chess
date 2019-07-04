@@ -8,6 +8,11 @@ public abstract class Player{
 	protected boolean color;
 	protected Vector<int[]> vecpos;
 	protected Vector<int[]> vecfilt;
+	protected static int[][] w = {{0,1},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1},
+		 	{0,2},{1,2},{2,2},{3,2},{4,2},{5,2},{6,2},{7,2}};
+	
+	protected static int[][] b = {{0,6},{1,6},{2,6},{3,6},{4,6},{5,6},{6,6},{7,6}, 
+			{0,5},{1,5},{2,5},{3,5},{4,5},{5,5},{6,5},{7,5}};
 /* ***NOTE***
 	You can make the array of piece positions by
 	using a 2d array and getPos() methods.
@@ -19,11 +24,16 @@ public abstract class Player{
 */
 	public Player(boolean color){
 		this.vecpos = new Vector<int[]>();
+		this.vecfilt = new Vector<int[]>();
 		this.color = color;
 		this.king = new King(this.color);
 		this.rook = new Rook(this.color);
 		this.knight = new Knight(this.color);
 		this.pawn = new Pawn(this.color);
+	
+		
+		
+		
 	}//end constructor
 		
 	public <J extends Player> boolean MoveCheck(J player, int[] pos, int[] next, boolean take){
@@ -31,12 +41,12 @@ public abstract class Player{
 		int[] arR = this.rook.getPos();
 		int[] arP = this.pawn.getPos();
 		
-		if(Arrays.equals(pos, this.king.getPos()){
+		if(Arrays.equals(pos, this.king.getPos())){
 
-			if(collision(player, this.king.getPos(), next) && this.king.moveChoose(next, this.player.vecfilt)){
+			if(collision(player, this.king.getPos(), next) && this.king.moveChoose(next, player.vecfilt)){
 
 				this.king.setPos(next);	
-				this.vecfilt = redFilt(player);
+				this.vecfilt = redFilt(player, false);
 				return true;
 			}//end if
 			else{
@@ -47,11 +57,11 @@ public abstract class Player{
 
 		if(Arrays.equals(pos, arK)){
 			
-			if(!Arrays.equals(next, arR) && !Arrays.equals(next, arP) && this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
+			if(this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 					
 				if(collision(player,arK,next)){//collision method call
 					this.knight.setPos(next);
-					this.vecfilt = redFilt(player);
+					this.vecfilt = redFilt(player, false);
 					return true;
 				}//end if
 
@@ -63,13 +73,13 @@ public abstract class Player{
 		}//end if
 		else if(Arrays.equals(pos, arR)){
 
-			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arP) && this.rook.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
+			if(this.rook.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 
 
 	
 				if(collision(player,arR,next)){
 					this.rook.setPos(next);
-					this.vecfilt = redFilt(player);
+					this.vecfilt = redFilt(player, false);
 					return true;
 				}//end if
 
@@ -81,7 +91,7 @@ public abstract class Player{
 		
 		else if(Arrays.equals(pos, arP)){
 
-			if(!Arrays.equals(next, arK) && !Arrays.equals(next, arR) && this.pawn.moveChoose(next, take)){
+			if(this.pawn.moveChoose(next, take)){
 
 
 
@@ -90,7 +100,7 @@ public abstract class Player{
 					
 					this.pawn.start = false;	
 					this.pawn.setPos(next);
-					this.vecfilt = redFilt(player);
+					this.vecfilt = redFilt(player, false);
 					return true;
 				}//end if
 
@@ -137,14 +147,7 @@ public abstract class Player{
 
 
 
-		/*
-
-			Still need to add king to player classes and rest of collision methdod.
-			Also need to remember that king moves based on opponent's filtered red spot vector.
-			Also also there needs to be a base vecfil case to work off of when the board is first
-			created.
-		*/
-
+		
 
 		/*----------------------------------King if--------------------------*/
 		if(Arrays.equals(pos, this.king.getPos())){//If determines which piece has been selected
@@ -164,8 +167,8 @@ public abstract class Player{
 			}//end if
 
 			
-			if(this.king.slope(this.king.getPos(), arK) == this.rook.slope(arR, next)){//if determines if slopes are the same between other piece and next
-				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){//if determines if distance between piece is less than next
+			if(this.king.slope(this.king.getPos(), arK) == this.king.slope(this.king.getPos(), next)){//if determines if slopes are the same between other piece and next
+				if(this.king.dist(this.king.getPos(),arK) < this.king.dist(this.king.getPos(), next)){//if determines if distance between piece is less than next
 					state = false;
 				}//end if
 				else{
@@ -174,8 +177,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(arR, arP) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, arP) < this.rook.dist(arR, next)){
+			if(this.king.slope(this.king.getPos(), arP) == this.king.slope(this.king.getPos(), next)){
+				if(this.king.dist(this.king.getPos(), arP) < this.king.dist(this.king.getPos(), next)){
 					state = false;
 				}//end if
 				else{
@@ -184,8 +187,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(arR, pArK) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, pArK) < this.rook.dist(arR, next)){
+			if(this.king.slope(this.king.getPos(), pArK) == this.king.slope(this.king.getPos(), next)){
+				if(this.king.dist(this.king.getPos(), pArK) < this.king.dist(this.king.getPos(), next)){
 					state = false;
 				}//end if
 				else{
@@ -194,9 +197,9 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(arR, pArR) == this.rook.slope(arR, next)){
+			if(this.king.slope(this.king.getPos(), pArR) == this.king.slope(this.king.getPos(), next)){
 			
-				if(this.rook.dist(this.rook.getPos(), pArR) < this.rook.dist(arR, next)){
+				if(this.king.dist(this.king.getPos(), pArR) < this.king.dist(this.king.getPos(), next)){
 					state = false;
 				}//end if
 				else{
@@ -205,8 +208,8 @@ public abstract class Player{
 
 			}//end if
 
-			if(this.rook.slope(arR, pArP) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, pArP) < this.rook.dist(arR, next)){
+			if(this.king.slope(this.king.getPos(), pArP) == this.king.slope(this.king.getPos(), next)){
+				if(this.king.dist(this.king.getPos(), pArP) < this.king.dist(this.king.getPos(), next)){
 					state = false;
 				}//end if
 				else{
@@ -221,6 +224,18 @@ public abstract class Player{
 			
 
 
+
+			if(this.rook.slope(this.rook.getPos(), this.king.getPos()) == this.rook.slope(this.rook.getPos(), next)){	
+
+				if(this.rook.dist(this.rook.getPos(), this.king.getPos()) < this.rook.dist(this.rook.getPos(), next)){
+
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
 
 			if(this.rook.slope(arR, arK) == this.rook.slope(arR, next)){//if determines if slopes are the same between other piece and next
 				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){//if determines if distance between piece is less than next
@@ -291,6 +306,18 @@ public abstract class Player{
 
 
 
+			if(this.pawn.slope(this.pawn.getPos(), this.king.getPos()) == this.pawn.slope(this.pawn.getPos(), next)){	
+
+				if(this.pawn.dist(this.pawn.getPos(), this.king.getPos()) < this.pawn.dist(this.pawn.getPos(), next)){
+
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
 			if(this.pawn.slope(arP, arK) == this.pawn.slope(arP, next)){
 				if(this.pawn.dist(arP, arK) < this.pawn.dist(arP, next)){
 					state = false;
@@ -348,7 +375,7 @@ public abstract class Player{
 
 		return state;
 	}//end Collision
-	public <J extends Player> Vector<int[]> redFilt(J player){
+	public <J extends Player> Vector<int[]> redFilt(J player, boolean black){
 		
 		Vector<int[]> vecred;
 		Vector<int[]> vecall = new Vector<int[]>();
@@ -380,7 +407,20 @@ public abstract class Player{
 				vecall.add(vecred.get(i));
 			}//end if
 		}//end for loop
-
+		
+		
+		if(!black) {
+			vecred.clear();
+			vecred = this.king.RedSpot(player.vecfilt);
+			
+			for(i = 0; i < vecred.size(); i++){
+				if(collision(player, this.king.getPos(), vecred.get(i))){
+	
+					vecall.add(vecred.get(i));
+				}//end if
+			}//end for loop
+			
+		}//end if
 		
 		return vecall;
 	}//end redFilt

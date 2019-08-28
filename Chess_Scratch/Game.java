@@ -42,6 +42,7 @@ class Game{
 					if(userin.equals("white") || userin.equals("White")){
 	                	
 						//Object assignment
+
 						player1 = new Player1(true);
 						player2 = new Player2(false);
 						

@@ -17,6 +17,7 @@ public abstract class Piece{
 		
 	public void setPos(int[] pos){
 		this.position = pos.clone();
+		
 	}//end setPos 
 	public int[] getPos(){
 

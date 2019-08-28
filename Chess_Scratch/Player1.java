@@ -303,11 +303,11 @@ class Player1 extends Player{
 			if(MoveCheck(player2, pos, next, take)){
 				
 				if(check.equals("c")) {
-					
+					take(next,player2);
 					player2.redFilt(this, false);
 					check = this.king.mate(player2.vecfilt);
 					if(check.contentEquals("c")) {
-						
+						player2.setPrev(next);
 						setPrev(pos);
 						continue;
 						
@@ -315,7 +315,6 @@ class Player1 extends Player{
 					
 					else {
 						
-						take(next, player2);
 						this.vecpos.clear();
 						this.vecpos.add(this.rook.getPos());
 						this.vecpos.add(this.knight.getPos());

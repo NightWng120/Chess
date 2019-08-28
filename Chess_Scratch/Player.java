@@ -42,7 +42,7 @@ public abstract class Player{
 		int[] arP = this.pawn.getPos();
 		
 		if(Arrays.equals(pos, this.king.getPos())){
-
+			kingFilt(player);
 			if(collision(player, this.king.getPos(), next) && this.king.moveChoose(next, player.vecfilt)){
 
 				this.king.setPos(next);	
@@ -409,25 +409,36 @@ public abstract class Player{
 		}//end for loop
 		
 		
-		if(!black) {
-			vecred.clear();
-			vecred = this.king.RedSpot(player.vecfilt);
-			
-			for(i = 0; i < vecred.size(); i++){
-				if(collision(player, this.king.getPos(), vecred.get(i))){
-	
-					vecall.add(vecred.get(i));
-				}//end if
-			}//end for loop
-			
-		}//end if
-		
 		return vecall;
 	}//end redFilt
+	
+	public <J extends Player> void kingFilt(J player){
+
+		Vector<int[]> vecMe = new Vector<int[]>();
+		Vector<int[]> vecThem = new Vector<int[]>();
+		int i;
+		int j;
+		
+		vecMe = this.king.RedSpot(player.vecfilt);
+		vecThem = player.king.RedSpot(this.vecfilt);
+
+		for(i = 0; i < vecMe.size() ; i++){
 
 
+			for(j = 0; j < vecThem.size(); j++){
+				if(Arrays.equals(vecMe.get(i), vecThem.get(j))){
+					this.vecfilt.add(vecMe.get(i));
+					player.vecfilt.add(vecThem.get(j));
+				}//end if
+				
+			}//end for loop
+			
+		}//end for loop
+
+	}//end kingFilt
 
 
+	
 
 
 

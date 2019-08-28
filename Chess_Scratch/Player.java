@@ -383,7 +383,7 @@ public abstract class Player{
 
 		vecred = this.knight.redSpot();
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.knight.getPos(), vecred.get(i))){
+			if(collision(player, this.knight.getPos(), vecred.get(i)) && this.knight.alive){
 				vecall.add(vecred.get(i));
 			}//end if
 			
@@ -393,7 +393,7 @@ public abstract class Player{
 		vecred = this.rook.redSpot();
 		
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.rook.getPos(), vecred.get(i))){
+			if(collision(player, this.rook.getPos(), vecred.get(i)) && this.rook.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if
@@ -402,7 +402,7 @@ public abstract class Player{
 		vecred = this.pawn.RedSpot();
 		
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.pawn.getPos(), vecred.get(i))){
+			if(collision(player, this.pawn.getPos(), vecred.get(i)) && this.pawn.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if

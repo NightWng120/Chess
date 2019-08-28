@@ -5,19 +5,28 @@ public abstract class Piece{
 	protected boolean color; //This is the color of the piece where 'true' is white and 'false' is black
 	protected int[] position; //This is the position of the piece on the chess board
 	protected String name;
+	protected boolean alive;
 	
 	public Piece(){
 		position = new int[2];
 		position[0] = 0;
 		position[1] = 0;
+		alive = true;
 
 	}//end constructor
 
 	public abstract boolean MoveChoose(int[] next);
 		
 	public void setPos(int[] pos){
-		this.position = pos.clone();
 		
+		if(pos[1] > 7) {
+			this.position = pos.clone();
+			alive = false;
+			
+		}//end if
+		else {
+			this.position = pos.clone();
+		}//end else
 	}//end setPos 
 	public int[] getPos(){
 

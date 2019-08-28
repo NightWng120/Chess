@@ -304,7 +304,8 @@ class Player1 extends Player{
 				
 				if(check.equals("c")) {
 					take(next,player2);
-					player2.redFilt(this, false);
+					player2.vecfilt.clear();
+					player2.vecfilt = player2.redFilt(this, false);
 					check = this.king.mate(player2.vecfilt);
 					if(check.contentEquals("c")) {
 						player2.setPrev(next);

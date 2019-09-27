@@ -22,6 +22,7 @@ class Pawn extends Piece{
 		return dumb;
 	}//end MoveChoose
 	public boolean moveChoose(int[] next, boolean take){
+
 		double slope = slope(this.position, next);
 		double dist = dist(this.position, next);
 		if(!take){

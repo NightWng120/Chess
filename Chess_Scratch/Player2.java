@@ -301,11 +301,7 @@ class Player2 extends Player{
 					
 					else {
 						
-						this.vecpos.clear();
-						this.vecpos.add(this.rook.getPos());
-						this.vecpos.add(this.knight.getPos());
-						this.vecpos.add(this.pawn.getPos());
-						this.vecpos.add(this.king.getPos());
+						
 						player1.vecpos.clear();
 						this.vecfilt.clear();
 						this.vecfilt = redFilt(player1, false);

@@ -1,0 +1,3 @@
+@echo off
+echo Deleting files...
+del ".gitignore" /s /f /q

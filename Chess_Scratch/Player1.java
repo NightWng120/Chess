@@ -316,11 +316,7 @@ class Player1 extends Player{
 					
 					else {
 						
-						this.vecpos.clear();
-						this.vecpos.add(this.rook.getPos());
-						this.vecpos.add(this.knight.getPos());
-						this.vecpos.add(this.pawn.getPos());
-						this.vecpos.add(this.king.getPos());
+						
 						player2.vecpos.clear();
 						this.vecfilt.clear();
 						this.vecfilt = redFilt(player2, false);
@@ -448,16 +444,15 @@ class Player1 extends Player{
 	 	 *to a space outside of the board*/
 
 		if(Arrays.equals(next, player2.rook.getPos())){
-			int r[] = null;
-			player2.rook.setPos(r);
+			int r[] = {7, 9};			player2.rook.setPos(r);
 		}//end if
 		else if(Arrays.equals(next, player2.knight.getPos())){
-			int k[] = null;
+			int k[] = {6, 9};
 			player2.knight.setPos(k);
 
 		}//end else if
 		else if(Arrays.equals(next, player2.pawn.getPos())){
-			int p[] = null;
+			int p[] = {5, 9};
 			player2.pawn.setPos(p);
 		}//end else if
 		

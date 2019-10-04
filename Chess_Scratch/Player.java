@@ -67,7 +67,7 @@ public abstract class Player{
 			
 			if(this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 					
-				if(collision(player,arK,next) && pieceLock(player, this.knight)){//collision method call
+				if(collision(player,arK,next) && pieceLock(player, this.knight, next)){//collision method call
 					
 					this.vecpos.remove(arK);
 
@@ -90,7 +90,7 @@ public abstract class Player{
 
 
 	
-				if(collision(player,arR,next) &&  pieceLock(player, this.rook)){
+				if(collision(player,arR,next) &&  pieceLock(player, this.rook, next)){
 					
 					this.vecpos.remove(arR);
 
@@ -114,7 +114,7 @@ public abstract class Player{
 
 
 	
-				if(collision(player,arP,next) && pieceLock(player, this.rook)){
+				if(collision(player,arP,next) && pieceLock(player, this.pawn, next)){
 					
 					this.pawn.start = false;
 					this.vecpos.remove(arP);
@@ -447,51 +447,46 @@ public abstract class Player{
 	}//end Collision
 	
 	
-	public <J extends Player, K extends Piece> boolean pieceLock(J player, K piece) {//determines if a piece is lodged between it's king an an opposing piece
+	public <J extends Player, K extends Piece> boolean pieceLock(J player, K piece, int[] next) {//determines if a piece is lodged between it's king an an opposing piece
 		
 		int i;
-		
+		double slope = player.rook.slope(player.rook.getPos(), piece.getPos());
 		
 		if(player.rook.slope(player.rook.getPos(), piece.getPos()) == player.rook.slope(player.rook.getPos(), this.king.getPos())){
 			
-			if(!player.collision(this, player.rook.getPos(), this.king.getPos())) {
-
-				for(i = 0; i < this.vecpos.size(); i++) {
-					if(piece.dist(piece.getPos(), this.vecpos.get(i))%10 == 0 && piece.dist(piece.getPos(), this.vecpos.get(i)) < piece.dist(piece.getPos(), this.king.getPos())
-							&& piece.dist(piece.getPos(), player.vecpos.get(i))%10 == 0 && piece.dist(piece.getPos(), player.vecpos.get(i)) < piece.dist(piece.getPos(), player.rook.getPos())) {
-					
-						return true;
-						
-					}//end if
-				}//end for loop
-				
-				return false;
-					
-			}//end if
-					
-		}//end if
-		
-		
-		
-		if(player.pawn.slope(player.pawn.getPos(), piece.getPos()) == player.pawn.slope(player.pawn.getPos(), this.king.getPos())){
-			
-			if(!player.collision(this, player.pawn.getPos(), this.king.getPos())) {
-
-				for(i = 0; i < this.vecpos.size(); i++) {
-					if(piece.dist(piece.getPos(), this.vecpos.get(i))%10 == 0 && piece.dist(piece.getPos(), this.vecpos.get(i)) < piece.dist(piece.getPos(), this.king.getPos())
-							&& piece.dist(piece.getPos(), player.vecpos.get(i))%10 == 0 && piece.dist(piece.getPos(), player.vecpos.get(i)) < piece.dist(piece.getPos(), player.pawn.getPos())) {
-					
-							
-						return false;
-							
-						
-					}//end if
-					
-				}//end for loop
+			if(Arrays.equals(player.rook.getPos(), next)) {
 				return true;
-				
 			}//end if
+			
+			else if(!player.collision(this, player.rook.getPos(), this.king.getPos())) {
+
+				
+				if(player.rook.dist(player.rook.getPos(), this.king.getPos()) > player.rook.dist(player.rook.getPos(), piece.getPos()) && 
+						player.rook.dist(player.rook.getPos(), this.king.getPos()) > player.rook.dist(this.king.getPos(), piece.getPos())) {
+					
+					for(i = 0; i < this.vecpos.size(); i++) {
+						
+						if(player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(player.rook.getPos(), this.vecpos.get(i)) || 
+								player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(this.king.getPos(), this.vecpos.get(i)) || 
+									player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(player.rook.getPos(), player.vecpos.get(i)) || 
+										player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(this.king.getPos(), player.vecpos.get(i))) {
+							
+							if(player.rook.slope(player.rook.getPos(), this.vecpos.get(i)) == slope || player.rook.slope(player.rook.getPos(), player.vecpos.get(i)) == slope) {	
+								return false;
+							}//end if
+							
+						}//end if
+						
+					}//end for loop
+				
+				}//end if
+			}//end if
+					
 		}//end if
+		
+		
+		
+		
 		
 		
 		

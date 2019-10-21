@@ -9,21 +9,37 @@ class Player2 extends Player{
 	private int[] arK;
 	private int[] arP;
 	private int[] arKi;
-
+	private int[] arB;
 	public <J extends Player> Player2(boolean color){
 
 		super(color);/*This function passes the argument of this constructor to the abstract class's constructor */
 		
 		prePosfill();//Function that sets initial position of piece call
+		int i;
 		if(!color) {
 			this.vecpos.add(this.rook.getPos());
 			this.vecpos.add(this.knight.getPos());
 			this.vecpos.add(this.pawn.getPos());
 			this.vecpos.add(this.king.getPos());
+			this.vecpos.add(this.bishop.getPos());
+			for(i = 0; i < 16; i++) {
 			
+				this.vecfilt.add(Player.b[i]);
+			
+			}//end for loop
 			
 			
 		}//end if
+		
+		else if(color) {
+			for(i = 0; i < 16; i++) {
+				this.vecfilt.add(Player.w[i]);
+			
+			}//end for loop
+			
+			
+		}//end else if
+		
 		
 		
 	}//end constructor
@@ -337,6 +353,7 @@ class Player2 extends Player{
 					this.vecpos.add(this.knight.getPos());
 					this.vecpos.add(this.pawn.getPos());
 					this.vecpos.add(this.king.getPos());
+					this.vecpos.add(this.bishop.getPos());
 					player1.vecpos.clear();
 					this.vecfilt.clear();
 					this.vecfilt = redFilt(player1, false);
@@ -396,7 +413,7 @@ class Player2 extends Player{
 		/*Array of position arrays for every position on the board*/		
 		
 		if(this.color){
-	
+
 			this.rook.setPos(ar[0][7]);//Piece position setting
 			this.arR = this.rook.getPos();//Previous position assignment
 			this.knight.setPos(ar[0][6]);
@@ -405,8 +422,10 @@ class Player2 extends Player{
 			this.arP = this.pawn.getPos();
 			this.king.setPos(ar[0][3]);
 			this.arKi = this.king.getPos();
+			this.bishop.setPos(ar[0][5]);
+			this.arB = this.bishop.getPos();
 		}//end if
-	
+
 		else if(!this.color){
 			this.rook.setPos(ar[7][0]);
 			this.arR = this.rook.getPos();
@@ -416,6 +435,9 @@ class Player2 extends Player{
 			this.arP = this.pawn.getPos();
 			this.king.setPos(ar[7][4]);
 			this.arKi = this.king.getPos();
+			this.bishop.setPos(ar[7][2]);
+			this.arB = this.bishop.getPos();
+
 	
 		}//end else if
 	}//end prePosfill
@@ -439,6 +461,13 @@ class Player2 extends Player{
 			player1.pawn.setPos(p);
 		}//end else if
 		
+else if(Arrays.equals(next, player1.bishop.getPos())) {
+			
+			int b[] = {4,8};
+			player1.bishop.setPos(b);
+			
+		}//end else if
+		
 
 	}//end take
 	public void posFill(String[][] arr, Player1 player1){/*Function body for function that determines whether piece has moved or not; 
@@ -448,6 +477,7 @@ class Player2 extends Player{
 		int[] arK = this.knight.getPos();
 		int[] arP = this.knight.getPos();
 		int[] arKi = this.king.getPos();
+		int[] arB = this.bishop.getPos();
 
 
 
@@ -496,6 +526,16 @@ class Player2 extends Player{
 		else{
 			arr[this.king.getPosX()][this.king.getPosY()] = this.king.getName();//Updates board when game starts and no change to previous has been made
 		}//end else
+		
+		if(!Arrays.equals(this.arB, arB)){//If checks if position has changed
+			arr[this.arB[0]][this.arB[1]] = " ";
+			arr[this.bishop.getPosX()][this.bishop.getPosY()] = this.bishop.getName();
+			this.arB = this.bishop.getPos();
+			/*Updates board and previous variable if it has*/
+		}//end if
+		else{
+			arr[this.bishop.getPosX()][this.bishop.getPosY()] = this.bishop.getName();//Updates board when game starts and no change to previous has been made
+		}//end else
 
 
 
@@ -503,19 +543,25 @@ class Player2 extends Player{
 		arr[player1.knight.getPosX()][player1.knight.getPosY()] = player1.knight.getName();
 		arr[player1.pawn.getPosX()][player1.pawn.getPosY()] = player1.pawn.getName();
 		arr[player1.king.getPosX()][player1.king.getPosY()] = player1.king.getName();
+		arr[player1.bishop.getPosX()][player1.bishop.getPosY()] = player1.bishop.getName();
+
+		
 	}//end posFill
 	public void setPrev(int[] pos){
-                 if(Arrays.equals(this.arR, pos)){
-                         this.rook.setPos(this.arR);
-                 }//end if
-                 else if(Arrays.equals(this.arK,pos)){
+		if(Arrays.equals(this.arR, pos)){
+			this.rook.setPos(this.arR);
+		}//end if
+		else if(Arrays.equals(this.arK,pos)){
 
-                         this.knight.setPos(this.arK);
-                 }//end else if
-                 else if(Arrays.equals(this.arP, pos)){
+			this.knight.setPos(this.arK);
+		}//end else if
+		else if(Arrays.equals(this.arP, pos)){
 
-                         this.pawn.setPos(this.arP);
-                 }//end else if
-
+			this.pawn.setPos(this.arP);
+		}//end else if
+		else if(Arrays.equals(this.arB, pos)) {
+			
+			this.bishop.setPos(this.arB);
+		}//end else if
          }//end setPrev
 }//end Player1 class

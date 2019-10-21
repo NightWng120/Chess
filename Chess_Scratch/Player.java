@@ -5,6 +5,7 @@ public abstract class Player{
 	protected Rook rook;
 	protected Knight knight;
 	protected King king;
+	protected Bishop bishop;
 	protected boolean color;
 	protected Vector<int[]> vecpos;
 	protected Vector<int[]> vecfilt;
@@ -30,6 +31,7 @@ public abstract class Player{
 		this.rook = new Rook(this.color);
 		this.knight = new Knight(this.color);
 		this.pawn = new Pawn(this.color);
+		this.bishop = new Bishop(this.color);
 	
 		
 		
@@ -127,12 +129,38 @@ public abstract class Player{
 				}//end if
 
 			}//end if
+			
+			
 			else{
 
 				return false;
 			}//end else
 
 
+		}//end else if
+		
+		else if(Arrays.equals(pos, this.bishop.getPos())){
+
+			if(this.bishop.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
+
+
+	
+				if(collision(player,this.bishop.getPos(),next) &&  pieceLock(player, this.bishop, next)){
+					
+					this.vecpos.remove(this.bishop.getPos());
+
+					this.bishop.setPos(next);
+					this.vecpos.add(this.bishop.getPos());
+
+					this.vecfilt = redFilt(player, false);
+					return true;
+				}//end if
+
+			}//end if
+			
+			else{
+				return false;
+			}//end else
 		}//end else if
 
 		return false;
@@ -161,7 +189,7 @@ public abstract class Player{
 		*/
 
 
-		if(Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos()) || Arrays.equals(next, this.king.getPos())){
+		if(Arrays.equals(next, this.bishop.getPos()) || Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos()) || Arrays.equals(next, this.king.getPos())){
 			return false;
 		}//end if
 
@@ -248,6 +276,78 @@ public abstract class Player{
 			}//end if
 
 		}//end if
+		
+		/*---------------------Bishop if--------------------------------*/
+		if(Arrays.equals(pos, this.bishop.getPos())){//If determines which piece has been selected
+			
+
+
+
+			if(this.bishop.slope(this.bishop.getPos(), this.king.getPos()) == this.bishop.slope(this.bishop.getPos(), next)){	
+
+				if(this.bishop.dist(this.bishop.getPos(), this.king.getPos()) < this.bishop.dist(this.bishop.getPos(), next)){
+
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.bishop.slope(arR, arK) == this.bishop.slope(arR, next)){//if determines if slopes are the same between other piece and next
+				if(this.bishop.dist(arR,arK) < this.bishop.dist(arR, next)){//if determines if distance between piece is less than next
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.bishop.slope(arR, arP) == this.bishop.slope(arR, next)){
+				if(this.bishop.dist(arR, arP) < this.bishop.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.bishop.slope(arR, pArK) == this.bishop.slope(arR, next)){
+				if(this.bishop.dist(arR, pArK) < this.bishop.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.bishop.slope(arR, pArR) == this.bishop.slope(arR, next)){
+			
+				if(this.bishop.dist(this.bishop.getPos(), pArR) < this.bishop.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+			if(this.bishop.slope(arR, pArP) == this.bishop.slope(arR, next)){
+				if(this.bishop.dist(arR, pArP) < this.bishop.dist(arR, next)){
+					state = false;
+				}//end if
+				else{
+					state = true;
+				}//end else
+
+			}//end if
+
+		}//end if
+
 
 
 
@@ -524,6 +624,15 @@ public abstract class Player{
 		
 		for(i = 0; i < vecred.size(); i++){
 			if(collision(player, this.pawn.getPos(), vecred.get(i)) && this.pawn.alive){
+
+				vecall.add(vecred.get(i));
+			}//end if
+		}//end for loop
+		
+		vecred.clear();
+		vecred = this.bishop.redSpot();
+		for(i = 0; i < vecred.size(); i++){
+			if(collision(player, this.bishop.getPos(), vecred.get(i)) && this.bishop.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if

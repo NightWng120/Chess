@@ -97,6 +97,10 @@ class Player1 extends Player{
 			
 			
 			print(ar);//Board print function
+			
+
+
+
 			if(check.equals("c")) {
 				System.out.println("|-------------------------|");
 				System.out.println("|  Your King is in Check  |");
@@ -268,7 +272,10 @@ class Player1 extends Player{
 						case 'H':
 							next[0] = 7;
 							break;
-        
+							
+						default:
+							System.out.println("***Invalid Input***");
+							continue;
         
         
         
@@ -313,6 +320,14 @@ class Player1 extends Player{
 					if(check.contentEquals("c")) {
 						player2.setPrev(next);
 						setPrev(pos);
+						this.vecfilt.clear();
+						this.vecfilt = redFilt(player2, false);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						this.vecpos.add(this.bishop.getPos());
 						continue;
 						
 					}//end if
@@ -323,6 +338,12 @@ class Player1 extends Player{
 						player2.vecpos.clear();
 						this.vecfilt.clear();
 						this.vecfilt = redFilt(player2, false);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						this.vecpos.add(this.bishop.getPos());
 						x = 0;
 						
 						return true;
@@ -357,8 +378,7 @@ class Player1 extends Player{
 					this.vecpos.add(this.king.getPos());
 					this.vecpos.add(this.bishop.getPos());
 					player2.vecpos.clear();
-					this.vecfilt.clear();
-					this.vecfilt = redFilt(player2, false);
+					
 					x = 0;
 					
 					return true;

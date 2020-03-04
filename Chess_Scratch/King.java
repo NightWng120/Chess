@@ -114,7 +114,7 @@ class King extends Piece{
 
 	public String mate(Vector<int[]> vecfilt){
 		int i;
-		Vector<int[]> vectemp = RedSpot(vecfilt);
+		Vector<int[]> vectemp = vecfilt;
 	
 			
 		for(i = 0; i < vecfilt.size(); i++) {

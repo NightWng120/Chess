@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.*;
 public abstract class Player{
 	
 	protected Pawn pawn;
@@ -46,15 +47,13 @@ public abstract class Player{
 
 		if(Arrays.equals(pos, this.king.getPos())){
 			kingFilt(player);
-			if(collision(player, this.king.getPos(), next) && this.king.moveChoose(next, player.vecfilt)){
+			if(collision(player, king, next) && this.king.moveChoose(next, player.vecfilt)){
 				
-				System.out.println(this.vecpos.size());
 				vecpos.remove(this.king.getPos());
-				System.out.println(this.vecpos.size());
 
 				this.king.setPos(next);	
 				this.vecpos.add(this.king.getPos());
-
+				this.vecfilt.clear();
 				this.vecfilt = redFilt(player, false);
 				
 				return true;
@@ -69,12 +68,13 @@ public abstract class Player{
 			
 			if(this.knight.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
 					
-				if(collision(player,arK,next) && pieceLock(player, this.knight, next)){//collision method call
+				if(collision(player,knight,next) && pieceLock(player, this.knight, next)){//collision method call
 					
 					this.vecpos.remove(arK);
 
 					this.knight.setPos(next);
 					this.vecpos.add(this.knight.getPos());
+					this.vecfilt.clear();
 
 					this.vecfilt = redFilt(player, false);
 					return true;
@@ -92,12 +92,13 @@ public abstract class Player{
 
 
 	
-				if(collision(player,arR,next) &&  pieceLock(player, this.rook, next)){
+				if(collision(player,rook,next) &&  pieceLock(player, this.rook, next)){
 					
 					this.vecpos.remove(arR);
 
 					this.rook.setPos(next);
 					this.vecpos.add(this.rook.getPos());
+					this.vecfilt.clear();
 
 					this.vecfilt = redFilt(player, false);
 					return true;
@@ -116,13 +117,14 @@ public abstract class Player{
 
 
 	
-				if(collision(player,arP,next) && pieceLock(player, this.pawn, next)){
+				if(collision(player,pawn,next) && pieceLock(player, this.pawn, next)){
 					
 					this.pawn.start = false;
 					this.vecpos.remove(arP);
 
 					this.pawn.setPos(next);
 					this.vecpos.add(this.pawn.getPos());
+					this.vecfilt.clear();
 
 					this.vecfilt = redFilt(player, false);
 					return true;
@@ -141,16 +143,17 @@ public abstract class Player{
 		
 		else if(Arrays.equals(pos, this.bishop.getPos())){
 
-			if(this.bishop.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputted next move is valid
+			if(this.bishop.MoveChoose(next)){//If statement  checks if arrays are the same and if the inputed next move is valid
 
 
 	
-				if(collision(player,this.bishop.getPos(),next) &&  pieceLock(player, this.bishop, next)){
+				if(collision(player,bishop,next) &&  pieceLock(player, this.bishop, next)){
 					
 					this.vecpos.remove(this.bishop.getPos());
 
 					this.bishop.setPos(next);
 					this.vecpos.add(this.bishop.getPos());
+					this.vecfilt.clear();
 
 					this.vecfilt = redFilt(player, false);
 					return true;
@@ -166,391 +169,53 @@ public abstract class Player{
 		return false;
 	}//end MoveCheck
 	
-	public <J extends Player> boolean collision(J player, int[] pos, int[] next){
+	public <J extends Player, K extends Piece> boolean collision(J player, K piece, int[] next){
 	/*This method determines if the selected piece has a slope that is the same as another piece on
 	  the board and the selected move position. If the slope is the same and the distance between the
 	  other piece on the board is and the selected piece is less than the distance between the selected 
 	  next position and the next piece, then the method returns false. Otherwise, it returns true
 	*/
-		int[] arKi = this.king.getPos();
-		int[] arK = this.knight.getPos();
-		int[] arR = this.rook.getPos();
-		int[] arP = this.pawn.getPos();
-		int[] pArP = player.pawn.getPos();
-		int[] pArK = player.knight.getPos();
-		int[] pArR = player.rook.getPos();
-		/*Debugger's Corner*/
-
-		boolean state = true;
-		/*I used a boolean variable here as a catch all
-		  so that I can check every piece for collision
-		  in case of a situation where there are multiple cases
-		  meeting the criteria for a false method return 
-		*/
-
+		
+		
 
 		if(Arrays.equals(next, this.bishop.getPos()) || Arrays.equals(next, this.rook.getPos()) || Arrays.equals(next, this.knight.getPos()) || Arrays.equals(next, this.pawn.getPos()) || Arrays.equals(next, this.king.getPos())){
 			return false;
 		}//end if
-
-
-
-
-
 		
+		for(int i = 0; i < player.vecpos.size(); i++) {
+			if(isBetween(piece.getPos(),next,player.vecpos.get(i)) &&  !Arrays.equals(player.vecpos.get(i), piece.getPos())){	
 
-		/*----------------------------------King if--------------------------*/
-		if(Arrays.equals(pos, this.king.getPos())){//If determines which piece has been selected
-			
-
-				state = true;
+				if(Arrays.equals(next, player.vecpos.get(i))) {
+					
+					return true;
+					
+				}//end if
+	
+					return false;
+				
+					
+					
+			}//end if
+					
+				
+		}//end for loop
 		
-		}//end if
-		/*----------------------------------Rook if--------------------------*/
-		if(Arrays.equals(pos, this.rook.getPos())){//If determines which piece has been selected
-			
+		for(int i = 0; i < this.vecpos.size(); i++) {
+			if(isBetween(piece.getPos(),next,this.vecpos.get(i)) &&  !Arrays.equals(this.vecpos.get(i), piece.getPos())){	
 
-
-
-			if(this.rook.slope(this.rook.getPos(), this.king.getPos()) == this.rook.slope(this.rook.getPos(), next)){	
-
-				if(this.rook.dist(this.rook.getPos(), this.king.getPos()) < this.rook.dist(this.rook.getPos(), next)){
-
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
+						return false;
+					
+					
 			}//end if
+		}//end for loop
 
-			if(this.rook.slope(arR, arK) == this.rook.slope(arR, next)){//if determines if slopes are the same between other piece and next
-				if(this.rook.dist(arR,arK) < this.rook.dist(arR, next)){//if determines if distance between piece is less than next
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.rook.slope(arR, arP) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, arP) < this.rook.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.rook.slope(arR, pArK) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, pArK) < this.rook.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.rook.slope(arR, pArR) == this.rook.slope(arR, next)){
-			
-				if(this.rook.dist(this.rook.getPos(), pArR) < this.rook.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.rook.slope(arR, pArP) == this.rook.slope(arR, next)){
-				if(this.rook.dist(arR, pArP) < this.rook.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-		}//end if
-		
-		/*---------------------Bishop if--------------------------------*/
-		if(Arrays.equals(pos, this.bishop.getPos())){//If determines which piece has been selected
-			
-
-
-
-			if(this.bishop.slope(this.bishop.getPos(), this.king.getPos()) == this.bishop.slope(this.bishop.getPos(), next)){	
-
-				if(this.bishop.dist(this.bishop.getPos(), this.king.getPos()) < this.bishop.dist(this.bishop.getPos(), next)){
-
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.bishop.slope(arR, arK) == this.bishop.slope(arR, next)){//if determines if slopes are the same between other piece and next
-				if(this.bishop.dist(arR,arK) < this.bishop.dist(arR, next)){//if determines if distance between piece is less than next
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.bishop.slope(arR, arP) == this.bishop.slope(arR, next)){
-				if(this.bishop.dist(arR, arP) < this.bishop.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.bishop.slope(arR, pArK) == this.bishop.slope(arR, next)){
-				if(this.bishop.dist(arR, pArK) < this.bishop.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.bishop.slope(arR, pArR) == this.bishop.slope(arR, next)){
-			
-				if(this.bishop.dist(this.bishop.getPos(), pArR) < this.bishop.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-			if(this.bishop.slope(arR, pArP) == this.bishop.slope(arR, next)){
-				if(this.bishop.dist(arR, pArP) < this.bishop.dist(arR, next)){
-					state = false;
-				}//end if
-				else{
-					state = true;
-				}//end else
-
-			}//end if
-
-		}//end if
-
-
-
-
-		/*----------------------Knight if--------------------------------*/
-		else if(Arrays.equals(pos, this.knight.getPos())){//No arguments for knight piece because of its move set
-
-			state = true;
-
-
-
-		}//end if
-
-		/*----------------------Pawn if----------------------------------*/
-		else if(Arrays.equals(pos, arP)){
-
-
-
-			if(this.pawn.slope(arP, arKi) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arKi) < this.pawn.dist(arP, next) && arP[1] < arKi[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arKi) > this.pawn.dist(arP, next) && arP[1] > arKi[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-			if(this.pawn.slope(arP, arK) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arK) < this.pawn.dist(arP, next) && arP[1] < arK[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arK) > this.pawn.dist(arP, next) && arP[1] > arK[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-			if(this.pawn.slope(arP, arR) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arR) < this.pawn.dist(arP, next) && arP[1] < arR[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, arR) > this.pawn.dist(arP, next) && arP[1] > arR[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-			if(this.pawn.slope(arP, pArP) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArP) < this.pawn.dist(arP, next) && arP[1] < pArP[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArP) > this.pawn.dist(arP, next) && arP[1] > pArP[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-			if(this.pawn.slope(arP, pArR) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArR) < this.pawn.dist(arP, next) && arP[1] < pArR[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArR) > this.pawn.dist(arP, next) && arP[1] > pArR[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-			if(this.pawn.slope(arP, pArK) == this.pawn.slope(arP, next)){	
-
-				if(this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArK) < this.pawn.dist(arP, next) && arP[1] < pArK[1]){
-	
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end if
-					
-				else if(!this.pawn.color) {
-					
-					if(this.pawn.dist(arP, pArK) > this.pawn.dist(arP, next) && arP[1] > pArK[1]){
-
-						state = false;
-					}//end if
-					else{
-						state = true;
-					}//end else
-					
-				}//end else if
-
-
-			}//end if
-
-
-		}//end if
-		
-
-		return state;
+		return true;
 	}//end Collision
 	
 	
 	public <J extends Player, K extends Piece> boolean pieceLock(J player, K piece, int[] next) {//determines if a piece is lodged between it's king an an opposing piece
 		
 		int i;
-		double slope = player.rook.slope(player.rook.getPos(), piece.getPos());
 		
 		if(player.rook.slope(player.rook.getPos(), piece.getPos()) == player.rook.slope(player.rook.getPos(), this.king.getPos())){
 			
@@ -558,22 +223,17 @@ public abstract class Player{
 				return true;
 			}//end if
 			
-			else if(!player.collision(this, player.rook.getPos(), this.king.getPos())) {
+			else if(!player.collision(this, rook, this.king.getPos())) {
 
 				
-				if(player.rook.dist(player.rook.getPos(), this.king.getPos()) > player.rook.dist(player.rook.getPos(), piece.getPos()) && 
-						player.rook.dist(player.rook.getPos(), this.king.getPos()) > player.rook.dist(this.king.getPos(), piece.getPos())) {
+				if(isBetween(player.rook.getPos(), this.king.getPos(), piece.getPos())) {
 					
 					for(i = 0; i < this.vecpos.size(); i++) {
 						
-						if(player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(player.rook.getPos(), this.vecpos.get(i)) || 
-								player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(this.king.getPos(), this.vecpos.get(i)) || 
-									player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(player.rook.getPos(), player.vecpos.get(i)) || 
-										player.rook.dist(player.rook.getPos(), this.king.getPos()) < player.rook.dist(this.king.getPos(), player.vecpos.get(i))) {
+						if(isBetween(player.rook.getPos(), this.king.getPos(), piece.getPos()) && !isBetween(player.rook.getPos(), this.king.getPos(), this.vecpos.get(i)) && 
+								!isBetween(player.rook.getPos(), this.king.getPos(), player.vecpos.get(i))) {
 							
-							if(player.rook.slope(player.rook.getPos(), this.vecpos.get(i)) == slope || player.rook.slope(player.rook.getPos(), player.vecpos.get(i)) == slope) {	
 								return false;
-							}//end if
 							
 						}//end if
 						
@@ -581,6 +241,42 @@ public abstract class Player{
 				
 				}//end if
 			}//end if
+			
+			
+			
+			
+					
+		}//end if
+		
+		if(player.bishop.slope(player.bishop.getPos(), piece.getPos()) == player.bishop.slope(player.bishop.getPos(), this.king.getPos())){
+			
+			if(Arrays.equals(player.bishop.getPos(), next)) {
+				return true;
+			}//end if
+			
+			else if(!player.collision(this, bishop, this.bishop.getPos())) {
+
+				
+				if(player.bishop.dist(player.bishop.getPos(), this.king.getPos()) > player.bishop.dist(player.bishop.getPos(), piece.getPos()) && 
+						player.bishop.dist(player.bishop.getPos(), this.king.getPos()) > player.bishop.dist(this.king.getPos(), piece.getPos())) {
+					
+					for(i = 0; i < this.vecpos.size(); i++) {
+						
+						if(isBetween(player.bishop.getPos(), this.king.getPos(), piece.getPos()) && !isBetween(player.bishop.getPos(), this.king.getPos(), this.vecpos.get(i)) && 
+								!isBetween(player.bishop.getPos(), this.king.getPos(), player.vecpos.get(i))) {
+							
+								return false;
+							
+						}//end if
+						
+					}//end for loop
+				
+				}//end if
+			}//end if
+			
+			
+			
+			
 					
 		}//end if
 		
@@ -604,7 +300,7 @@ public abstract class Player{
 
 		vecred = this.knight.redSpot();
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.knight.getPos(), vecred.get(i)) && this.knight.alive){
+			if(this.knight.alive){
 				vecall.add(vecred.get(i));
 			}//end if
 			
@@ -614,7 +310,7 @@ public abstract class Player{
 		vecred = this.rook.redSpot();
 		
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.rook.getPos(), vecred.get(i)) && this.rook.alive){
+			if(collision(player, rook, vecred.get(i)) && this.rook.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if
@@ -623,7 +319,7 @@ public abstract class Player{
 		vecred = this.pawn.RedSpot();
 		
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.pawn.getPos(), vecred.get(i)) && this.pawn.alive){
+			if(collision(player, pawn, vecred.get(i)) && this.pawn.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if
@@ -632,7 +328,7 @@ public abstract class Player{
 		vecred.clear();
 		vecred = this.bishop.redSpot();
 		for(i = 0; i < vecred.size(); i++){
-			if(collision(player, this.bishop.getPos(), vecred.get(i)) && this.bishop.alive){
+			if(collision(player, bishop, vecred.get(i)) && this.bishop.alive){
 
 				vecall.add(vecred.get(i));
 			}//end if
@@ -666,6 +362,26 @@ public abstract class Player{
 		}//end for loop
 
 	}//end kingFilt
+	
+	public boolean isBetween(int[] pos, int[] next, int[] inter) {
+		
+		
+		BigDecimal bd1 = new BigDecimal(this.rook.dist(pos,inter));
+		BigDecimal bd2 = new BigDecimal(this.rook.dist(inter,next));
+		
+		BigDecimal bd3 = new BigDecimal(this.rook.dist(pos,next));
+		BigDecimal sum = bd1.add(bd2);
+		sum = sum.divide(BigDecimal.ONE, 2, RoundingMode.HALF_EVEN);
+		bd3 = bd3.divide(BigDecimal.ONE, 2, RoundingMode.HALF_EVEN);
+		
+		double together = sum.doubleValue();
+		double dist = bd3.doubleValue();
+		
+		
+		
+		
+		return together == dist;
+	}//end isBetween
 
 
 	

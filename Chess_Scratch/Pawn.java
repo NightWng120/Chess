@@ -23,6 +23,7 @@ class Pawn extends Piece{
 	}//end MoveChoose
 	public boolean moveChoose(int[] next, boolean take){
 
+
 		double slope = slope(this.position, next);
 		double dist = dist(this.position, next);
 		if(!take){
@@ -157,8 +158,8 @@ class Pawn extends Piece{
 
 			else if(!this.color){
 
-				double bigGay = Math.abs(slope);
-				if(bigGay == 1 && this.position[1] > next [1]){
+				
+				if(Math.abs(slope) == 1 && this.position[1] > next [1]){
 					
 					if(dist > 1.3 && dist < 1.5){
 						

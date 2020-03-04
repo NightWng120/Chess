@@ -91,6 +91,8 @@ class Player2 extends Player{
 				this.vecpos.add(this.rook.getPos());
 				this.vecpos.add(this.knight.getPos());
 				this.vecpos.add(this.pawn.getPos());
+				this.vecpos.add(this.king.getPos());
+				this.vecpos.add(this.bishop.getPos());
 				
 			}//end if
 			
@@ -266,6 +268,10 @@ class Player2 extends Player{
 						case 'H':
 							next[0] = 7;
 							break;
+							
+						default:
+							System.out.println("***Invalid Input***");
+							continue;
         
         
         
@@ -289,7 +295,7 @@ class Player2 extends Player{
 			
 			for(j = 0; j < player1.vecpos.size(); j++){//For loop runs for size of player1 position vector
 
-				if(Arrays.equals(next, player1.vecpos.get(j))){//If statement is true when jth player1 vector position is equal to inputted position
+				if(Arrays.equals(next, player1.vecpos.get(j))){//If statement is true when jth player1 vector position is equal to inputed position
 
 
 					take = true;
@@ -311,6 +317,14 @@ class Player2 extends Player{
 					if(check.contentEquals("c")) {
 						player1.setPrev(next);
 						setPrev(pos);
+						this.vecfilt.clear();
+						this.vecfilt = redFilt(player1, false);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						this.vecpos.add(this.bishop.getPos());						
 						continue;
 						
 					}//end if
@@ -321,6 +335,12 @@ class Player2 extends Player{
 						player1.vecpos.clear();
 						this.vecfilt.clear();
 						this.vecfilt = redFilt(player1, false);
+						this.vecpos.clear();
+						this.vecpos.add(this.rook.getPos());
+						this.vecpos.add(this.knight.getPos());
+						this.vecpos.add(this.pawn.getPos());
+						this.vecpos.add(this.king.getPos());
+						this.vecpos.add(this.bishop.getPos());
 						x = 0;
 						
 						return true;
@@ -333,6 +353,7 @@ class Player2 extends Player{
 					
 					System.out.println("|--------Stalemate--------|");
 					loop = false;
+					continue;
 				}//end else if
 				
 				else if(check.equals("m")) {
@@ -343,6 +364,7 @@ class Player2 extends Player{
 					System.out.println("|      Player 2 Wins!     |");
 					System.out.println("|-------------------------|");
 					loop = false;
+					continue;
 				}//end else if
 				
 				else {
@@ -355,8 +377,7 @@ class Player2 extends Player{
 					this.vecpos.add(this.king.getPos());
 					this.vecpos.add(this.bishop.getPos());
 					player1.vecpos.clear();
-					this.vecfilt.clear();
-					this.vecfilt = redFilt(player1, false);
+					
 					x = 0;
 					
 					return true;
@@ -461,7 +482,7 @@ class Player2 extends Player{
 			player1.pawn.setPos(p);
 		}//end else if
 		
-else if(Arrays.equals(next, player1.bishop.getPos())) {
+		else if(Arrays.equals(next, player1.bishop.getPos())) {
 			
 			int b[] = {4,8};
 			player1.bishop.setPos(b);

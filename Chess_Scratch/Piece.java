@@ -56,11 +56,17 @@ public abstract class Piece{
 			
 			slope = ((double)next[1] - (double)pos[1]) / ((double)next[0] - (double)pos[0]);
 			
-			if(slope == Double.POSITIVE_INFINITY || slope == Double.NEGATIVE_INFINITY) {
+			if(slope == Double.POSITIVE_INFINITY || slope == Double.NEGATIVE_INFINITY ) {
 				
 				slope = 100;
 				
 			}//end if
+			
+			else if( slope == Double.NaN) {
+				
+				slope = 0;
+				
+			}//end else if
 			
 			
 			return slope;

@@ -573,7 +573,8 @@ class Player1 extends Player{
 
 	}//end posFill
 
-	public void setPrev(int[] pos){
+	public void setPrev(int[] pos){/* This shit fuckin, puts the default postions into all of the
+						piece position vectors bruh*/
 		if(Arrays.equals(this.arR, pos)){
 			this.rook.setPos(this.arR);
 		}//end if
